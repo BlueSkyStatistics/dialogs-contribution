@@ -332,8 +332,7 @@ singleeventplot <- ggplot(filter(est1, {{selected.eventvar | safe}}=={{selected.
 	{{/if}}
     labs(x = "{{selected.timeaxislabel | safe}}", 
         y = "{{selected.incaxislabelsingle | safe}}",
-        title = "{{selected.titleboxsingle | safe}}") +
-		{{selected.BSkyThemes | safe}}		
+        title = "{{selected.titleboxsingle | safe}}") + {{selected.BSkyThemes | safe}}		
 
 {{if ((options.selected.cichkbox=="TRUE") & (options.selected.cistyle=="ribbon"))}}
 # addition of ribbon CIs (conditions are want CI and ribbon)
