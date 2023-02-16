@@ -1,5 +1,42 @@
 const nav = [
     {
+        "name": "Sample Size",
+        "tab": "sample_size",
+        "buttons": [
+            {
+                "name": "Precision",
+                "icon": "icon-confidence_interval",
+                "children": [
+                    "./SampleSize/PrecisionAUC",
+					"./SampleSize/PrecisionKappa",
+                    "./SampleSize/PrecisionCorrelation",
+					"./SampleSize/PrecisionMeanDiff",
+                    "./SampleSize/PrecisionICC",
+                    "./SampleSize/PrecisionOneMean",
+                    "./SampleSize/PrecisionOneProp",
+                    "./SampleSize/PrecisionOR",
+                    "./SampleSize/PrecisionRiskDifference",
+                    "./SampleSize/PrecisionRiskRatio"
+                ]
+            },
+            {
+                "name": "Tests",
+                "icon": "icon-sigma",
+                "children": [
+                    "./SampleSize/SampleSizeANOVA",
+                    "./SampleSize/SampleSizeCorrelation",
+					"./SampleSize/SampleSizeSurvivalCox",
+					"./SampleSize/SampleSizeOneMean",
+					"./SampleSize/SampleSizeOneProp",
+                    "./SampleSize/SampleSizeSurvivalTwoGroup",
+					"./SampleSize/SampleSizeTwoMeans",					
+					"./SampleSize/SampleSizePairedProp",                    
+					"./SampleSize/SampleSizeTwoProp"                    
+                ]
+            }        
+        ]
+    },
+    {
 		"name": "Datasets",
 		"tab": "Datasets",
 		"buttons": [
