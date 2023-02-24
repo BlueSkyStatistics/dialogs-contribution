@@ -1,11 +1,11 @@
 {
     "name": "@BlueSkyStatistics/dialogs/contribution",
-    "productName": "Contributed Mayo dialogs",
-    "description": "Mayo dialogs description",
+    "productName": "Contributed module",
+    "description": "Contributed dialogs",
     "keywords": [],
     "main": "nav.js",
-    "version": "1.0.1",
-    "author": "Mayo",
+    "version": "1.0.2",
+    "author": "MC",
     "scripts": {},
     "dependencies": {
         "squirrelly": "7.9.2"
