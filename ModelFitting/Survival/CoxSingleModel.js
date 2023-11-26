@@ -113,7 +113,25 @@ ggcoxdiagnostics({{selected.modelname | safe}})
 {{if (options.selected.forestplotbox=="TRUE")}}
 # forest plot option
 ggforest({{selected.modelname | safe}},data={{dataset.name}})
-{{/if}}            
+{{/if}}  
+
+
+#Setting attributes to support scoring
+attr(.GlobalEnv\${{selected.modelname | safe}},"eventVar") = "'{{selected.eventvar | safe }}'"
+attr(.GlobalEnv\${{selected.modelname | safe}},"followUpTimeVar") = "'{{selected.timevar | safe }}'"
+
+#Setting independent variables for clinicans
+attr(.GlobalEnv\${{selected.modelname | safe}},"indepvarCL") = paste(str_split("{{selected.destvars}}",fixed("+")),sep=",", collapse="")
+
+#Setting independent variables for machine learners (All variables including event and followup time need to be )
+BSkyIndepVars = str_split("{{selected.destvars}}",fixed("+"))
+BSkyIndepVars[[1]] = c(BSkyIndepVars[[1]], '{{selected.eventvar | safe }}', '{{selected.timevar | safe }}')
+attr(.GlobalEnv\${{selected.modelname | safe}},"indepvar") = paste(BSkyIndepVars,sep=",", collapse="")
+
+attr(.GlobalEnv\${{selected.modelname | safe}},"depvar") = "'{{selected.eventvar | safe }}'"
+#attr(.GlobalEnv\${{selected.modelname | safe}},"indepvar") = paste(str_split("{{selected.destvars}}",fixed("+")),sep=",", collapse="")
+attr(.GlobalEnv\${{selected.modelname | safe}},"classDepVar") = class({{dataset.name}}[, c("{{selected.eventvar | safe}}")])
+attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{dataset.name}}[, c("{{selected.eventvar | safe}}")], size = 2, replace = TRUE)
 `
         }
         var objects = {
