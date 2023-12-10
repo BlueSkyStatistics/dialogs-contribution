@@ -23,6 +23,7 @@ var localization = {
             body: `
 			See sample dataset in the install directory, the default location is at drive letter:&bsol;program files&bsol;BlueSky Statistics&bsol;10&bsol;Samples_and_Documents&bsol;Datasets_and_Demos&bsol;Regression_Cox&bsol;mockstudy_upd.RData. The variable Followup_time should be entered as the time to event or censor and the variable Event should be entered as the Events (1 = event, 0 = censor). Sex, age and bmi can be the independent variables. 
 			<br/>
+            The event variable must be numeric, factors are not allowed. If you have an event variable that is of type factor with 2 values for e.g. 0 and 1, convert it to numeric
 			This dataset is an updated version of the mockstudy dataset in the arsenal package.
 			<br/><br/>
             <b>Cox Proportional Hazards Model</b>
@@ -123,10 +124,11 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"followUpTimeVar") = "'{{selected
 #Setting independent variables for clinicans
 attr(.GlobalEnv\${{selected.modelname | safe}},"indepvarCL") = paste(str_split("{{selected.destvars}}",fixed("+")),sep=",", collapse="")
 
-#Setting independent variables for machine learners (All variables including event and followup time need to be )
+#Setting independent variables for machine learners (All variables including event and followup time need to be present in the data set
+#in order for the dataset to be scored
 BSkyIndepVars = str_split("{{selected.destvars}}",fixed("+"))
 BSkyIndepVars[[1]] = c(BSkyIndepVars[[1]], '{{selected.eventvar | safe }}', '{{selected.timevar | safe }}')
-attr(.GlobalEnv\${{selected.modelname | safe}},"indepvar") = paste(BSkyIndepVars,sep=",", collapse="")
+attr(.GlobalEnv\${{selected.modelname | safe}}, "indepvar") = paste(BSkyIndepVars,sep=",", collapse="")
 
 attr(.GlobalEnv\${{selected.modelname | safe}},"depvar") = "'{{selected.eventvar | safe }}'"
 #attr(.GlobalEnv\${{selected.modelname | safe}},"indepvar") = paste(str_split("{{selected.destvars}}",fixed("+")),sep=",", collapse="")

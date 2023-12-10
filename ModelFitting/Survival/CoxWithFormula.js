@@ -84,7 +84,7 @@ require(survival)
 require(broom)
 require(survminer)
 require(car)
-
+BSkyFormula = Surv({{selected.timevar | safe}},{{selected.eventvar | safe}}) ~ {{selected.modelterms | safe}}   
 # model fit and output
 {{selected.modelname | safe}}<-coxph(Surv({{selected.timevar | safe}},{{selected.eventvar | safe}}) ~ {{selected.modelterms | safe}}, data={{dataset.name}}, ties="{{selected.tiemethod | safe}}", weights={{selected.weightvar | safe}}, na.action=na.exclude)
 cox_summary<-t(glance({{selected.modelname | safe}}))
@@ -114,6 +114,19 @@ ggcoxdiagnostics({{selected.modelname | safe}})
 # forest plot option
 ggforest({{selected.modelname | safe}},data={{dataset.name}})
 {{/if}}
+
+#Setting attributes to support scoring
+attr(.GlobalEnv\${{selected.modelname | safe}},"eventVar") = "'{{selected.eventvar | safe }}'"
+attr(.GlobalEnv\${{selected.modelname | safe}},"followUpTimeVar") = "'{{selected.timevar | safe }}'"
+
+#Setting independent variables for clinicans
+attr(.GlobalEnv\${{selected.modelname | safe}},"indepvarCL") = paste ("'", paste (base::all.vars(BSkyFormula[-2]), collapse="','"), "'", sep="")
+#Setting independent variables for machine learners (All variables including event and followup time need to be present in the data set
+#in order for the dataset to be scored
+attr(.GlobalEnv\${{selected.modelname | safe}},"indepvar") = paste ("'", paste ( c(base::all.vars(BSkyFormula[-2]), '{{selected.eventvar | safe }}','{{selected.timevar | safe }}'), collapse="','"), "'", sep="")
+attr(.GlobalEnv\${{selected.modelname | safe}},"depvar") = "'{{selected.eventvar | safe }}'"
+attr(.GlobalEnv\${{selected.modelname | safe}},"classDepVar") = class({{dataset.name}}[, c("{{selected.eventvar | safe}}")])
+attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{dataset.name}}[, c("{{selected.eventvar | safe}}")], size = 2, replace = TRUE)
 `
         }
         var objects = {
