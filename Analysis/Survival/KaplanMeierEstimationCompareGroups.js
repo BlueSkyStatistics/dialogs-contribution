@@ -181,7 +181,7 @@ fit <- survfit(Surv({{selected.timevar | safe}},{{selected.eventvar | safe}}) ~ 
 
 # summaries
 
-kmsummary <- tableby({{selected.groupvar | safe}}~Surv({{selected.timevar | safe}},{{selected.eventvar | safe}}),data={{dataset.name}},surv.stats=c("N","Nmiss","Nevents","medSurv","medTime"))
+kmsummary <- tableby({{selected.groupvar | safe}}~Surv({{selected.timevar | safe}},{{selected.eventvar | safe}}),data={{dataset.name}},surv.stats=c("N","Nmiss","Nevents","medSurv","medTime"), digits.p = 4)
 BSkyFormat(as.data.frame(summary(kmsummary,text=TRUE)),singleTableOutputHeader="Survival Summary: Surv({{selected.timevar | safe}},{{selected.eventvar | safe}}) by {{selected.groupvar | safe}}")
 
 # p-values by different methods
