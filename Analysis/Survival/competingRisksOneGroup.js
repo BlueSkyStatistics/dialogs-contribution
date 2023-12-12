@@ -280,8 +280,8 @@ myplot <- ggplot(est1, aes(x = time, y = estimate, color = event_label)) +
     labs(x = "{{selected.timeaxislabel | safe}}", 
         y = "{{selected.incaxislabelall | safe}}",
         title = "{{selected.titleboxall | safe}}",
-        color = "{{selected.legendtitle | safe}}") +
-		{{selected.BSkyThemes | safe}}
+        color = "{{selected.legendtitle | safe}}")
+		
 
 {{if ((options.selected.cichkbox=="TRUE") & (options.selected.cistyle=="ribbon"))}}
 # addition of ribbon CIs (conditions are want CI and ribbon)
@@ -332,7 +332,7 @@ singleeventplot <- ggplot(filter(est1, {{selected.eventvar | safe}}=={{selected.
 	{{/if}}
     labs(x = "{{selected.timeaxislabel | safe}}", 
         y = "{{selected.incaxislabelsingle | safe}}",
-        title = "{{selected.titleboxsingle | safe}}") + {{selected.BSkyThemes | safe}}		
+        title = "{{selected.titleboxsingle | safe}}") 		
 
 {{if ((options.selected.cichkbox=="TRUE") & (options.selected.cistyle=="ribbon"))}}
 # addition of ribbon CIs (conditions are want CI and ribbon)

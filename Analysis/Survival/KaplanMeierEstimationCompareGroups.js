@@ -335,8 +335,7 @@ km_plot
                     label: localization.en.spectimes,
 					style: "ml-5 mb-3",
                     extraction: "TextAsIs",
-                    allow_spaces:true,
-                    type: "character",
+                    allow_spaces:true
                 })
             },	
             titlebox: {
