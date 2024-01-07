@@ -333,9 +333,10 @@ km_plot
                 el: new input(config, {
                     no: 'spectimes',
                     label: localization.en.spectimes,
-			style: "ml-5 mb-3",
+			        style: "ml-5 mb-3",
                     extraction: "TextAsIs",
-                    allow_spaces:true
+                    allow_spaces:true,
+                    type: "character"
                 })
             },	
             titlebox: {

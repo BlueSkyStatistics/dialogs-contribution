@@ -273,6 +273,7 @@ km_plot
 					style: "ml-5",
                     extraction: "TextAsIs",
                     allow_spaces:true,
+                    type:"character"
                 })
             },			
             titlebox: {
