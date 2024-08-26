@@ -259,10 +259,9 @@ tab1.final <- as.data.frame(summary(tab1, text=TRUE, {{selected.groupvarchkbox |
 {{if ((options.selected.stattestschkbox=="TRUE") & (options.selected.footnotechkbox=="TRUE"))}}
 # if want statistical test footnotes
 pval.tests <- unique(tests(tab1)$Method)
-pval.foot <- paste(paste0("(", 1:length(pval.tests), ")"), pval.tests, collapse="\n")
-BSkyFormat(tab1.final, perTableFooter=pval.foot, decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
+BSkyFormat(tab1.final, perTableFooter = paste(pval.tests,"\\n", "Confidence interval = {{selected.conflevel | safe}}"), decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
 {{#else}}
-BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
+BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.conflevel | safe}}",decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
 {{/if}}
 `
         };
