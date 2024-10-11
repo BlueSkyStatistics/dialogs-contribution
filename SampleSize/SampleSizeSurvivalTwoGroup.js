@@ -1,48 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Test Two Group Survival",
-        navigation: "Two Group Survival",
-		howtouse: "To compute sample size: specify power\nTo compute power: specify sample size",		
-		n: "Sample Size",
-		power: "Power (0-1)",
-		
-		propgrp1: "Proportion of Sample in Group 1 (0-1)",
-		propevent: "Proportion with the Event (0-1)",
-		hr: "Hazard Ratio, Group 1 vs Group 2",
-		rsquared: "R-squared between group and other covariates (0-1); enter 0 for unadjusted test",
-		siglevel: "Significance Level (0-1)",
-		alternativeopt: "Alternative Hypothesis",
-		twosided: "Two-Sided",
-		onesided: "One-Sided",		
-        help: {
-            title: "Sample Size, Test Two Group Survival",
-            r_help: "help(ssizeEpiCont.default, package ='powerSurvEpi')",
-            body: `
-This is an assessment of sample size for a two-sample test of survival.  It computes the sample size or power, when the user specifies the other one, given a hazard ratio to detect.
-The computations assume a Cox proportional hazards model.
-<br/><br/>
-<b>Sample Size:</b> Specify the total number of subjects
-<br/><br/>
-<b>Power:</b> Specify the desired power of the study, i.e. the probability that the test will reject the null hypothesis if the alternative hypothesis was true.
-<br/><br/>
-<b>Proportion of Sample in Group 1:</b> Specify the proportion of the total sample that is in group 1.  The proportion of the sample in group 2 will be one minus this quantity.
-<br/><br/>
-<b>Hazard Ratio, Group 1 vs Group 2:</b> Specify the desired hazard ratio to detect for group 1 relative to group 2
-<br/><br/>
-<b>Proportion with the Event:</b> Specify the expected proportion of the sample with the event (or one minus the censoring proportion).  If you specify a probability of 1, it assumes no censoring.
-<br/><br/>
-<b>R-squared between group and other covariates; enter 0 for unadjusted test:</b> Specify the r-squared value (squared multiple correlation), between the grouping variable and 
-all other covariates in the Cox model.  A value of 0 corresponds to an anadjusted test with no other covariates.
-<br/><br/>
-<b>Significance Level:</b> Specify the desired significance level (i.e. type I error) of the test
-<br/><br/>
-This uses the ssizeEpiCont.default and powerEpiCont.default functions in the powerSurvEpi package.  See triple dot menu>Help>R Function Help for more information.
-<br/><br/>
-<b>Required R Packages:</b> powerSurvEpi
-			`}
-    }
-}
+
 
 
 
@@ -53,10 +10,13 @@ This uses the ssizeEpiCont.default and powerEpiCont.default functions in the pow
 
 
 class SampleSizeSurvivalTwoGroup extends baseModal {
+    static dialogId = 'SampleSizeSurvivalTwoGroup'
+    static t = baseModal.makeT(SampleSizeSurvivalTwoGroup.dialogId)
+
     constructor() {
         var config = {
-            id: "SampleSizeSurvivalTwoGroup",
-            label: localization.en.title,
+            id: SampleSizeSurvivalTwoGroup.dialogId,
+            label: SampleSizeSurvivalTwoGroup.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -82,14 +42,14 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			howtouse: {
 				el: new preVar(config, {
 					no: "howtouse",
-					label: localization.en.howtouse, 
+					label: SampleSizeSurvivalTwoGroup.t('howtouse'), 
 					h:5
 				})
 			},
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: SampleSizeSurvivalTwoGroup.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -100,7 +60,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			power: {
 				el: new input(config, {
 					no: 'power',
-					label: localization.en.power,
+					label: SampleSizeSurvivalTwoGroup.t('power'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces:true,
@@ -111,7 +71,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			propgrp1: {
 				el: new input(config, {
 					no: 'propgrp1',
-					label: localization.en.propgrp1,
+					label: SampleSizeSurvivalTwoGroup.t('propgrp1'),
 					style: "mt-5",
 					required: true,
 					extraction: "TextAsIs",
@@ -124,7 +84,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			hr: {
 				el: new input(config, {
 					no: 'hr',
-					label: localization.en.hr,
+					label: SampleSizeSurvivalTwoGroup.t('hr'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -136,7 +96,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			propevent: {
 				el: new input(config, {
 					no: 'propevent',
-					label: localization.en.propevent,
+					label: SampleSizeSurvivalTwoGroup.t('propevent'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -148,7 +108,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			rsquared: {
 				el: new input(config, {
 					no: 'rsquared',
-					label: localization.en.rsquared,
+					label: SampleSizeSurvivalTwoGroup.t('rsquared'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -160,7 +120,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			siglevel: {
 				el: new input(config, {
 					no: 'siglevel',
-					label: localization.en.siglevel,
+					label: SampleSizeSurvivalTwoGroup.t('siglevel'),
 					placeholder: ".05",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -172,14 +132,14 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			},
 			alternativeopt: {
 				el: new labelVar(config, {
-					label: localization.en.alternativeopt, 
+					label: SampleSizeSurvivalTwoGroup.t('alternativeopt'), 
 					style: "mt-5", 
 					h:5
 				})
 			},
 			twosided: {
 				el: new radioButton(config, {
-					label: localization.en.twosided,
+					label: SampleSizeSurvivalTwoGroup.t('twosided'),
 					no: "altgrp",
 					increment: "twosided",
 					value: "2",
@@ -189,7 +149,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			}, 
 			onesided: {
 				el: new radioButton(config, {
-					label: localization.en.onesided,
+					label: SampleSizeSurvivalTwoGroup.t('onesided'),
 					no: "altgrp",
 					increment: "onesided",
 					value: "1",
@@ -204,16 +164,25 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 					objects.alternativeopt.el.content, objects.twosided.el.content, objects.onesided.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: SampleSizeSurvivalTwoGroup.t('navigation'),
                 icon: "icon-kaplanc",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SampleSizeSurvivalTwoGroup.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SampleSizeSurvivalTwoGroup.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new SampleSizeSurvivalTwoGroup().render()
+
+module.exports = {
+    render: () => new SampleSizeSurvivalTwoGroup().render()
+}

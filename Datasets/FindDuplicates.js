@@ -1,49 +1,14 @@
 
-var localization = {
-    en: {
-        title: "Find Duplicates",
-        navigation: "Find Duplicates",
-		keysnote: "NOTE: Specifying no key variables will result in a complete case duplicate search.  Specifying key variables will seach for duplicates by key variable values only.",
-		keyvarslabel: "Key Variables (optional)",
-		allduprowschecklabel: "Create dataset with all rows associated with the duplicates",
-		allduprowsnamelabel: "Dataset name",
-		alldatachecklabel: "Create dataset with original data and column indicating duplicates",
-		alldatanamelabel: "Dataset name",
-		dupvarnamelabel: "Duplicate variable name",
-		nodupdatachecklabel: "Create dataset with all duplicates removed",
-		nodupdatanamelabel: "Dataset name",
-        help: {
-            title: "Find Duplicates",
-            r_help: "help(duplicated, package = 'base')",
-            body: `
-This dialog will find duplicates either by complete cases or by key variables.  Complete case duplicates are equal for every value for every variable.  Duplicates using key 
-variables are duplicates defined only by equal values for specific variables, called "keys".  Duplicates are searched from the top to the bottom of the data set.  So, a 
-duplicate row means the values are equal to a previous row.  Summaries of the duplicates are provided.
-<br/><br/>
-<b>Key Variables:</b>  Specify optional key variables that define the duplicates.  If no key variables are selected, complete case duplicates will be searched for.
-<br/><br/>
-<b>Create dataset with all rows associated with the duplicates:</b>  This will create a dataset of all duplicate rows and the first instance of each row corresponding to 
-each duplicate.  The output dataset will be sorted by all the variables in the complete duplicate case and by the key variables in the key variable case.  The key variables 
-will also be moved to the beginning of the output data set.  The <b>Dataset name</b> field can be used to name this output data set.
-<br/><br/>
-<b>Create dataset with original data and column indicating duplicates:</b>  This will create a dataset including all the original data plus an additional column indicating 
-the duplicate rows (0=not duplicate, 1=duplicate).  The <b>Dataset name</b> field can be used to name this output data set.  The <b>Duplicate variable name</b> field can be used to name 
-this additional column.
-<br/><br/>
-<b>Create dataset with all duplicates removed:</b>  This will create a dataset that removes all the duplicate rows (either complete case or by key variables) where the 
-duplicates are searched from top to bottom in the data set.  This means all 2nd, 3rd, etc. instances of the rows will be removed.  The </b>Dataset name</b> field can be used to name 
-this output data set.
-<br/><br/>
-<b>Required R Packages:</b> dplyr, arsenal
-`}
-    }
-}
+
 
 class FindDuplicates extends baseModal {
+    static dialogId = 'FindDuplicates'
+    static t = baseModal.makeT(FindDuplicates.dialogId)
+
     constructor() {
         var config = {
-            id: "FindDuplicates",
-            label: localization.en.title,
+            id: FindDuplicates.dialogId,
+            label: FindDuplicates.t('title'),
 			splitProcessing: false,
             modalType: "two",
             RCode: `
@@ -114,14 +79,14 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             },
 			keysnote: {
 				el: new labelVar(config, {
-				label: localization.en.keysnote,
+				label: FindDuplicates.t('keysnote'),
 				style: "mt-3 mb-4",
 				h:5
 				})
 			},			
 			keyvars: {
 				el: new dstVariableList(config,{
-				label: localization.en.keyvarslabel,
+				label: FindDuplicates.t('keyvarslabel'),
 				no: "keyvars",
 				filter:"String|Numeric|Date|Logical|Ordinal|Nominal|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -129,7 +94,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
 			},				
             allduprowscheck: {
                 el: new checkbox(config, {
-                    label: localization.en.allduprowschecklabel,
+                    label: FindDuplicates.t('allduprowschecklabel'),
                     no: "allduprowscheck",
                     extraction: "Boolean",
                     newline: true,
@@ -139,7 +104,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             allduprowsname: {
                 el: new input(config, {
                     no: 'allduprowsname',
-                    label: localization.en.allduprowsnamelabel,
+                    label: FindDuplicates.t('allduprowsnamelabel'),
 					style: "ml-5",
                     placeholder: "allduprows",
                     type: "character",
@@ -149,7 +114,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             }, 
             alldatacheck: {
                 el: new checkbox(config, {
-                    label: localization.en.alldatachecklabel,
+                    label: FindDuplicates.t('alldatachecklabel'),
                     no: "alldatacheck",
                     extraction: "Boolean",
                     newline: true,
@@ -159,7 +124,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             alldataname: {
                 el: new input(config, {
                     no: 'alldataname',
-                    label: localization.en.alldatanamelabel,
+                    label: FindDuplicates.t('alldatanamelabel'),
 					style: "ml-5",
                     placeholder: "datadupvar",
                     type: "character",
@@ -170,7 +135,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             dupvarname: {
                 el: new input(config, {
                     no: 'dupvarname',
-                    label: localization.en.dupvarnamelabel,
+                    label: FindDuplicates.t('dupvarnamelabel'),
 					style: "ml-5",
                     placeholder: "duplicate",
                     type: "character",
@@ -180,7 +145,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             },
             nodupdatacheck: {
                 el: new checkbox(config, {
-                    label: localization.en.nodupdatachecklabel,
+                    label: FindDuplicates.t('nodupdatachecklabel'),
                     no: "nodupdatacheck",
                     extraction: "Boolean",
                     newline: true,
@@ -190,7 +155,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             nodupdataname: {
                 el: new input(config, {
                     no: 'nodupdataname',
-                    label: localization.en.nodupdatanamelabel,
+                    label: FindDuplicates.t('nodupdatanamelabel'),
 					style: "ml-5",
                     placeholder: "nodupdata",
                     type: "character",
@@ -209,14 +174,20 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
 					objects.nodupdatacheck.el.content, objects.nodupdataname.el.content
             ],
             nav: {
-                name: localization.en.navigation,
+                name: FindDuplicates.t('navigation'),
                 icon: "icon-paired",
 				positionInNav: 3,
                 modal: config.id
             }
         }
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: FindDuplicates.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: FindDuplicates.t('help.body')
+        }
+;
     }
 	
 	
@@ -252,4 +223,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
 	
 	
 }
-module.exports.item = new FindDuplicates().render()
+
+module.exports = {
+    render: () => new FindDuplicates().render()
+}

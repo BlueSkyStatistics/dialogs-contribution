@@ -1,44 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Test Two Paired Proportions",
-        navigation: "Two Paired Proportions",
-		howtouse: "To compute sample size (number of pairs): specify power\nTo compute power: specify sample size (number of pairs)",
-		n: "Sample Size (number of pairs)",
-		power: "Power (0-1)",
-		
-		pdisc: "Discordant Pairs Proportion (PD) (0-1)",
-		pdiff: "Difference in Proportions, must be between -PD and PD",
-		siglevel: "Significance Level (0-1)",
-		alternativeopt: "Alternative Hypothesis",
-		twosided: "Two-Sided",
-		onesided: "One-Sided",
-        help: {
-            title: "Sample Size, Test Two Paired Proportions",
-            r_help: "help(qnorm, package ='stats')",
-            body: `
-This is an assessment of sample size for a paired test of proportions using McNemar's Test.  It computes the sample size (number of pairs) or power when the user 
-specifies the other.  The computations use a normal approximation conditional on the proportion of discordant pairs.  See Connor R. J. 1987. Sample size for testing 
-differences in proportions for the paired-sample design. Biometrics 43(1):207-211.
-<br/><br/>
-<b>Sample Size (number of pairs):</b> Specify the sample size in the study.  This is the number of subjects that will provide binary outcome values at both time points
-in a pre vs post design or the number of pairs in a matched subject (e.g. matched case-control) design. 
-<br/><br/>
-<b>Power:</b> Specify the desired power of the study, i.e. the probability that the test will reject the null hypothesis if the alternative hypothesis was true.
-<br/><br/>
-<b>Discordant Pairs Proportion:</b> Specify the expected proportion of pairs that will disagree, e.g. 'yes'/'no' or 'no'/'yes' responses, out of the total number of pairs
-<br/><br/>
-<b>Difference in Proportions:</b> Specify the difference in outcome proportions (i.e. proportion that are 'yes') that is desired to detect.  For example, in a matched case-control
-study this is the difference between the proportion of cases that are 'yes' and the proportion of controls that are 'yes'. 
-<br/><br/>
-<b>Significance Level:</b> Specify the desired significance level (i.e. type I error) of the test
-<br/><br/>
-<b>Alternative Hypothesis:</b> Specify whether the test is two-sided or one-sided
-<br/><br/>
-<b>Required R Packages:</b> stats
-			`}
-    }
-}
+
 
 
 
@@ -49,10 +10,13 @@ study this is the difference between the proportion of cases that are 'yes' and 
 
 
 class SampleSizeTwoPairedProp extends baseModal {
+    static dialogId = 'SampleSizeTwoPairedProp'
+    static t = baseModal.makeT(SampleSizeTwoPairedProp.dialogId)
+
     constructor() {
         var config = {
-            id: "SampleSizeTwoPairedProp",
-            label: localization.en.title,
+            id: SampleSizeTwoPairedProp.dialogId,
+            label: SampleSizeTwoPairedProp.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -90,14 +54,14 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			howtouse: {
 				el: new preVar(config, {
 					no: "howtouse",
-					label: localization.en.howtouse, 
+					label: SampleSizeTwoPairedProp.t('howtouse'), 
 					h:5
 				})
 			},
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: SampleSizeTwoPairedProp.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -108,7 +72,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			power: {
 				el: new input(config, {
 					no: 'power',
-					label: localization.en.power,
+					label: SampleSizeTwoPairedProp.t('power'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces:true,
@@ -119,7 +83,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			pdisc: {
 				el: new input(config, {
 					no: 'pdisc',
-					label: localization.en.pdisc,
+					label: SampleSizeTwoPairedProp.t('pdisc'),
 					style: "mt-5",
 					required: true,
 					placeholder: "",
@@ -133,7 +97,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			pdiff: {
 				el: new input(config, {
 					no: 'pdiff',
-					label: localization.en.pdiff,
+					label: SampleSizeTwoPairedProp.t('pdiff'),
 					required: true,
 					placeholder: "",
 					extraction: "TextAsIs",
@@ -146,7 +110,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			siglevel: {
 				el: new input(config, {
 					no: 'siglevel',
-					label: localization.en.siglevel,
+					label: SampleSizeTwoPairedProp.t('siglevel'),
 					placeholder: ".05",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -158,14 +122,14 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			},
 			alternativeopt: {
 				el: new labelVar(config, {
-					label: localization.en.alternativeopt, 
+					label: SampleSizeTwoPairedProp.t('alternativeopt'), 
 					style: "mt-5", 
 					h:5
 				})
 			},
 			twosided: {
 				el: new radioButton(config, {
-					label: localization.en.twosided,
+					label: SampleSizeTwoPairedProp.t('twosided'),
 					no: "altgrp",
 					increment: "twosided",
 					value: "2",
@@ -175,7 +139,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 			}, 
 			onesided: {
 				el: new radioButton(config, {
-					label: localization.en.onesided,
+					label: SampleSizeTwoPairedProp.t('onesided'),
 					no: "altgrp",
 					increment: "onesided",
 					value: "1",
@@ -189,15 +153,24 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
 					objects.siglevel.el.content, objects.alternativeopt.el.content, objects.twosided.el.content, objects.onesided.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: SampleSizeTwoPairedProp.t('navigation'),
                 icon: "icon-pairedprop",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SampleSizeTwoPairedProp.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SampleSizeTwoPairedProp.t('help.body')
+        }
+;
     }
 	
 }
-module.exports.item = new SampleSizeTwoPairedProp().render()
+
+module.exports = {
+    render: () => new SampleSizeTwoPairedProp().render()
+}

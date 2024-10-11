@@ -1,154 +1,14 @@
 
-var localization = {
-    en: {
-        title: "Competing Risks, one group",
-        navigation: "Competing Risks, one group",
-        timevar: "Time to event or censor",
-        eventvar: "Events (0 = censor, 1 = event 1, 2 = event 2, ...)",
-        eventnum: "Event Code",
-        singleeventchkbox: "Plot for a Single Event",
-        printallest: "Estimate Table Including All Times",
-		printspecest: "Estimate Table for Specific Times",
-		spectimes: "Specify times as time1, time2, time3, etc. or as seq(1,5,by=1)",
-        styleoptions: "Style Options",
-        axisoptions: "Axis Options",
-		label12: "Click on the ? button on the top right of the dialog for details on sample datasets and the data format supported.",
-        titleboxall: "Plot Title (all events plot)",
-        titleboxsingle: "Plot Title (single event plot)",
-		plottitlesizelabel: "Plot Title Size (5-50)",
-        themedropdown: "Plot Theme",
-        label1: "Legend (all events plot)",
-        legendpos : "Position",
-        legendtitle: "Title",
-        eventlabels: "Event Labels (specify labels separated by commas in order of event codes: e.g. 'Event 1', 'Event 2', etc; not censor code)",
-		legendfontsize: "Legend Labels Size (5-50)",
-        label2: "Number at Risk",
-        natriskchkbox: "Include Number at Risk",
-        risktableprop: "Risk Table Height(0-1)",
-		risktablevaluesize: "Risk Table Value Size (1-15)",
-		risktabletitlesize: "Risk Table Title Size (5-50)",
-		risktableaxislabelsize: "Risk Table Axis Label Size (5-50)",
-		risktableticklabelsize: "Risk Table Tick Label Size (5-50)",
-		risktableclean: "Remove Axes and Gridlines from Risk Table",
 
-        label3: "Line Options",
-        linesize: "Size (0-5)",
-        colorpalette: "Color Palette (all events plot)",
-        linecolor: "Color (single event plot)",
-        label4 : "Confidence Interval",
-        cichkbox : "include 95% CI",
-        labelblank:"",
-        cistyle : "Style",
-        citransparency : "Transparency (0-1)",
-		censorchkbox:"Include Censored Times",
-
-        label5: "Incidence Axis",
-        incaxislabelall:"Label (all events plot)",
-        incaxislabelsingle: "Label (single event plot)",
-        label6 : "Scale",
-        defbutton: "proportion",
-        pctbutton: "percent",
-        label7: "Axis Limits and Tick Mark Increments (0-1)",
-        incaxismin: "Minimum",
-        incaxismax: "Maximum",
-        incaxisinc: "Increment",
-
-        label8: "Time Axis",
-        timeaxislabel: "Label",
-        label9: "Axis Limits and Tick Mark Increments",
-        timeaxismin: "Minimum",
-        timeaxismax: "Maximum",
-        timeaxisinc: "Increment",
-        label10: "Note: Maximum can be specified without Increment being specified. Increment cannot be specified without Maximum being specified.",
-
-		axislabelsize: "Axis Label Size (5-50)",
-		ticklabelsize: "Axis Tick Mark Label Size (5-50)",
-		
-        help: {
-            title: "Competing Risks, One Group",
-            r_help: "help(survfit, package = 'survival')",
-            body: `
-			See sample dataset in the install directory, the default location is at drive letter:\\program files\\BlueSky Statistics\\10\\Samples_and_Documents\\Datasets_and_Demos\\Survival\\melanoma_upd.RData. The variable time should be entered as the time to event or censor and the variable death should be entered as the Events.<br/>			
-            This dataset is an updated version of the melanoma dataset in the MASS package.
-            <br/>
-            <br/>
-            A competing risk is an event whose occurrence precludes the occurrence of the primary event of interest.  Doing a standard Kaplan-Meier analysis in such cases is biased and overestimates event risk.  This dialog is used to estimate the cumulative risk of having the primary event after the start of follow-up for that event (or time zero), when one or more competing risks are present.  The sum of the cumulative incidences for each event equals the cumulative incidence for any event.  Subjects need to be at risk for all events starting at time zero.  Cumulative incidence plots for all events (separate curves for each event on the same plot), and optionally for a specific event by itself, are provided. 
-            <br/>
-            An introduction to the topic of competing risks can be found in "Introduction to the Analysis of Survival Data in the Presence of Competing Risks" by Peter Austin, et. al., Circulation, 2016; 133:601-609. 
-            <br/>
-            <br/>
-            <b>Time to event or censor:</b> For each subject, the length of time to the first event, if an event occurred, or last follow-up for events, if no events occurred.
-            <br/><br/>
-            <b>Events:</b> Numeric indicator of which event occurred (1=event 1, 2=event 2, etc.) or when no events occurred (0=censor) for each subject
-            <br/><br/>
-            <b>Plot for a Single Event:</b> Whether you want to plot the cumulative incidence for a specific event by itself.  The <b>Event Code</b> corresponds to the event that will be plotted.
-            <br/><br/>
-            <b>Estimate Table Including All Times:</b> Option to include a table listing the cumulative incidence probabilities and 95% confidence intervals for every observed time in the dataset
-            <br/>
-            <br/>
-			<b>Estimate Table for Specific Times:</b> Option to include a table that has the survival estimate probabilities for a user-selected set of times.
-			<br/><br/>
-			<b>Specify times as time1, time2, time3, etc. or as seq(1,5,by=1):</b> These are the specific times that will be included in the table for specific times.  They can be specified individually with commas, or as a sequence of evenly-spaced values.
-			<br/><br/>
-            Tables are output with the sample size, the number of subjects with each event, the restricted mean time in state, and the median follow-up time.  The median follow-up time is computed using the reverse Kaplan-Meier estimator, which treats true events as censored observations and true censored observations as events.  Thus, the "event" in this estimator is "following the subjects for as long as the study could".
-            <br/>
-            A table of cumulative incidence estimates is provided at each observed time in the dataset, with 95% confidence intervals. 
-            <br/>
-            <br/>
-            <b>Required R Packages:</b> survival, broom, survminer, dplyr, forcats, arsenal, ggthemes, ggsci, RColorBrewer, scales
-            <br/>
-            <br/>
-            <br/>
-            <b>Style Options</b>
-            <br/>
-            <br/>
-            <b>Plot Title (all events plot):</b> Title of the plot displaying all events; delete all text for no title
-            <br/><br/>
-            <b>Plot Title (single event plot):</b> Title of the plot displaying the selected single event; delete all text for no title
-			<br/><br/>
-			<b>Plot Title Size:</b> Size of the plot titles.
-			<br/><br/>
-            <b>Plot Theme:</b> General style of the plot
-            <br/><br/>
-            <b>Legend options:</b>
-            <br/>
-            The <b>Position</b> option controls the location of the legend (top, bottom, left, right).  The <b>Title</b> is the title of the legend.  To remove the title, remove all text from the textbox.  <b>Event Labels</b> are used to show text for each numeric event code instead of the codes.  If you specify any labels, all events must be labeled.
-			The <b>Legend Labels Size</b> option controls the size of all text contained in the legend.
-            <br/>
-            <br/>
-            <b>Number at Risk:</b>
-			<br/>
-			Optionally, include a table for the number of subjects still at risk over time at the bottom of the plots.  The <b>Risk Table Height</b> controls the proportion of the plotting area that the table will take up.
-			The <b>Risk Table Value Size</b> controls the size of the numbers at risk. The <b>Risk Table Title Size</b> controls the size of the title for the number at risk table.
-			The <b>Risk Table Axis Label Size</b> controls the size of the axis labels. 
-			The <b>Risk Table Tick Label Size</b> controls the size of the tick mark labels. If it's desired to remove all axes and gridlines 
-			from the number at risk table, the <b>Remove Axes and Gridlines from Risk Table</b> option can be checked.  This will only include the numbers at risk in the table.           
-            <br/><br/>
-            <b>Line Options:</b>
-            <br/>
-            <b>Size</b> controls the thickness. The <b>Color</b> options control the color palette used for the lines in the all events plot and the color of the line in the single event plot.  Color schemes mimicing scientific journals are also provided.  One can optionally include a 95% confidence interval for the estimates in either a <b>ribbon</b> (shaded area) or <b>step</b> (line) format.  <b>Transparency</b> controls how dark the ribbon is and is ignored when the step option is selected.
-			<br/><br/>
-			<b>Include Censored Times:</b> Censored times (when subjects become no longer at risk for the events) can be included as a rug near the time axis of both plots. This is more useful in smaller datasets or in cases of smaller numbers of censored subjects.
-            <br/><br/><br/>
-			<b>Axis Options</b>
-            <br/>
-            <br/>
-            The <b>Label</b> option specifies the text label for the axis.  The <b>Axis Limits</b> specifies the minimum and maximum values of the axis.  The <b>Tick Mark Increments</b> option controls the spacing of the tick marks on the axis.  The increments on the time axis also control the times for the optional number at risk table.
-            <br/>
-            The incidence axis <b>Scale</b> option specifies whether you want the estimates to be on a proportion (0-1) or percent (0-100) scale.
-			<br/><br/>
-			<b>Axis Label Size:</b>  This controls the size of both the incidence and time axis label sizes.
-			<br/><br/>
-			<b>Axis Tick Mark Label Size:</b>  This controls the size of both the incidence and time axis tick mark label sizes.				
-`}
-    }
-}
 
 class competingRisksOneGroup extends baseModal {
+    static dialogId = 'competingRisksOneGroup'
+    static t = baseModal.makeT(competingRisksOneGroup.dialogId)
+
     constructor() {
         var config = {
-            id: "competingRisksOneGroup",
-            label: localization.en.title,
+            id: competingRisksOneGroup.dialogId,
+            label: competingRisksOneGroup.t('title'),
             modalType: "two",
             RCode: `
 require(survival)
@@ -365,7 +225,7 @@ singleeventplot
             },
             timevar: {
                 el: new dstVariable(config, {
-                    label: localization.en.timevar,
+                    label: competingRisksOneGroup.t('timevar'),
                     no: "timevar",
                     filter: "Numeric|Scale",
                     extraction: "NoPrefix|UseComma",
@@ -374,7 +234,7 @@ singleeventplot
             },
             eventvar: {
                 el: new dstVariable(config, {
-                    label: localization.en.eventvar,
+                    label: competingRisksOneGroup.t('eventvar'),
                     no: "eventvar",
                     filter: "Numeric|Scale",
                     required: true,
@@ -384,7 +244,7 @@ singleeventplot
 
             singleeventchkbox: {
                 el: new checkbox(config, {
-                    label: localization.en.singleeventchkbox,
+                    label: competingRisksOneGroup.t('singleeventchkbox'),
                     no: "singleeventchkbox",
                     extraction: "Boolean",
                     style: "mt-3"
@@ -393,7 +253,7 @@ singleeventplot
             eventnum: {
                 el: new inputSpinner(config, {
                     no: 'eventnum',
-                    label: localization.en.eventnum,
+                    label: competingRisksOneGroup.t('eventnum'),
                     min: 1,
                     max: 100,
                     ml: 4,
@@ -404,7 +264,7 @@ singleeventplot
             },
             printallest: {
                 el: new checkbox(config, {
-                    label: localization.en.printallest,
+                    label: competingRisksOneGroup.t('printallest'),
                     no: "printallest",
                     extraction: "Boolean",
                     style: "mt-3"
@@ -412,7 +272,7 @@ singleeventplot
             },
             printspecest: {
                 el: new checkbox(config, {
-                    label: localization.en.printspecest,
+                    label: competingRisksOneGroup.t('printspecest'),
                     no: "printspecest",
                     extraction: "Boolean",
 					newline: true
@@ -421,7 +281,7 @@ singleeventplot
             spectimes: {
                 el: new input(config, {
                     no: 'spectimes',
-                    label: localization.en.spectimes,
+                    label: competingRisksOneGroup.t('spectimes'),
 					style: "ml-5 mb-3",
                     extraction: "TextAsIs",
                     allow_spaces:true,
@@ -431,7 +291,7 @@ singleeventplot
             titleboxall: {
                 el: new input(config, {
                     no: 'titleboxall',
-                    label: localization.en.titleboxall,
+                    label: competingRisksOneGroup.t('titleboxall'),
                     placeholder: "Competing Risks Estimates for All Events",
                     extraction: "TextAsIs",
                     value: "Competing Risks Estimates for All Events",
@@ -442,7 +302,7 @@ singleeventplot
             titleboxsingle: {
                 el: new input(config, {
                     no: 'titleboxsingle',
-                    label: localization.en.titleboxsingle,
+                    label: competingRisksOneGroup.t('titleboxsingle'),
                     placeholder: "Competing Risks Estimates for a Single Event",
                     style: "mt-2 mb-3",
                     extraction: "TextAsIs",
@@ -454,7 +314,7 @@ singleeventplot
 			plottitlesize: {
 				el: new inputSpinner(config,{
 				no: 'plottitlesize',
-				label: localization.en.plottitlesizelabel,
+				label: competingRisksOneGroup.t('plottitlesizelabel'),
 				style: "mt-3",
 				min: 5,
 				max: 50,
@@ -466,7 +326,7 @@ singleeventplot
             themedropdown: {
                 el: new comboBox(config, {
                     no: 'themedropdown',
-                    label: localization.en.themedropdown,
+                    label: competingRisksOneGroup.t('themedropdown'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["theme_base()", "theme_bw()", "theme_calc()",
@@ -480,11 +340,11 @@ singleeventplot
                     default: "theme_survminer()"
                 })
             },
-            label1: { el: new labelVar(config, { label: localization.en.label1, h: 5, style:"mt-3" }) },
+            label1: { el: new labelVar(config, { label: competingRisksOneGroup.t('label1'), h: 5, style:"mt-3" }) },
             legendpos: {
                 el: new comboBox(config, {
                     no: 'legendpos',
-                    label: localization.en.legendpos,
+                    label: competingRisksOneGroup.t('legendpos'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["top", "bottom", "left", "right"],
@@ -495,7 +355,7 @@ singleeventplot
             legendtitle: {
                 el: new input(config, {
                     no: 'legendtitle',
-                    label: localization.en.legendtitle,
+                    label: competingRisksOneGroup.t('legendtitle'),
                     placeholder: "Event",
                     ml: 4,
                     extraction: "TextAsIs",
@@ -508,7 +368,7 @@ singleeventplot
             eventlabels: {
                 el: new input(config, {
                     no: 'eventlabels',
-                    label: localization.en.eventlabels,
+                    label: competingRisksOneGroup.t('eventlabels'),
                     placeholder: "",
                     ml: 4,
                     extraction: "TextAsIs",
@@ -521,7 +381,7 @@ singleeventplot
 			legendfontsize: {
 				el: new inputSpinner(config,{
 				no: 'legendfontsize',
-				label: localization.en.legendfontsize,
+				label: competingRisksOneGroup.t('legendfontsize'),
 				style: "ml-2",
 				min: 5,
 				max: 50,
@@ -531,10 +391,10 @@ singleeventplot
 				})
 			}, 			
 
-            label2: { el: new labelVar(config, { label: localization.en.label2, h: 5, style:"mt-3" }) },
+            label2: { el: new labelVar(config, { label: competingRisksOneGroup.t('label2'), h: 5, style:"mt-3" }) },
             natriskchkbox: {
                 el: new checkbox(config, {
-                    label: localization.en.natriskchkbox,
+                    label: competingRisksOneGroup.t('natriskchkbox'),
                     no: "natriskchkbox",
                     extraction: "Boolean",
                     style:"ml-4"
@@ -543,7 +403,7 @@ singleeventplot
             risktableprop: {
                 el: new advancedSlider(config, {
                     no: "risktableprop",
-                    label: localization.en.risktableprop,
+                    label: competingRisksOneGroup.t('risktableprop'),
 					style: "ml-4 mt-3",
                     min: 0,
                     max: 1,
@@ -555,7 +415,7 @@ singleeventplot
 			risktablevaluesize: {
 				el: new inputSpinner(config,{
 				no: 'risktablevaluesize',
-				label: localization.en.risktablevaluesize,
+				label: competingRisksOneGroup.t('risktablevaluesize'),
 				style: "mt-3 ml-2",
 				min: 1,
 				max: 15,
@@ -567,7 +427,7 @@ singleeventplot
 			risktabletitlesize: {
 				el: new inputSpinner(config,{
 				no: 'risktabletitlesize',
-				label: localization.en.risktabletitlesize,
+				label: competingRisksOneGroup.t('risktabletitlesize'),
 				style: "ml-2",
 				min: 5,
 				max: 50,
@@ -579,7 +439,7 @@ singleeventplot
 			risktableaxislabelsize: {
 				el: new inputSpinner(config,{
 				no: 'risktableaxislabelsize',
-				label: localization.en.risktableaxislabelsize,
+				label: competingRisksOneGroup.t('risktableaxislabelsize'),
 				style: "ml-2",
 				min: 5,
 				max: 50,
@@ -591,7 +451,7 @@ singleeventplot
 			risktableticklabelsize: {
 				el: new inputSpinner(config,{
 				no: 'risktableticklabelsize',
-				label: localization.en.risktableticklabelsize,
+				label: competingRisksOneGroup.t('risktableticklabelsize'),
 				style: "ml-2 mb-3",
 				min: 5,
 				max: 50,
@@ -602,7 +462,7 @@ singleeventplot
 			},			
             risktableclean: {
                 el: new checkbox(config, {
-                    label: localization.en.risktableclean,
+                    label: competingRisksOneGroup.t('risktableclean'),
                     no: "risktableclean",
                     extraction: "Boolean",
                     newline: true,
@@ -610,11 +470,11 @@ singleeventplot
                 })
             },            
 
-            label3: { el: new labelVar(config, { label: localization.en.label3, h: 5 }) },
+            label3: { el: new labelVar(config, { label: competingRisksOneGroup.t('label3'), h: 5 }) },
             linesize: {
                 el: new advancedSlider(config, {
                     no: "linesize",
-                    label: localization.en.linesize,
+                    label: competingRisksOneGroup.t('linesize'),
                     min: 0,
                     max: 5,
                     step: 0.5,
@@ -626,7 +486,7 @@ singleeventplot
             colorpalette: {
                 el: new comboBox(config, {
                     no: 'colorpalette',
-                    label: localization.en.colorpalette,
+                    label: competingRisksOneGroup.t('colorpalette'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["hue", "grey", "Greys", "Set1", "Set2", "Dark2", "npg", "aaas", "nejm", "lancet", "jama", "jco"],
@@ -637,7 +497,7 @@ singleeventplot
             linecolor: {
                 el: new comboBox(config, {
                     no: 'linecolor',
-                    label: localization.en.linecolor,
+                    label: competingRisksOneGroup.t('linecolor'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["black", "blue", "red", "green", "purple", "cyan", "magenta"],
@@ -646,20 +506,20 @@ singleeventplot
                 })
             },   
             
-            label4: { el: new labelVar(config, { label: localization.en.label4, h: 5, style:"mt-3 ml-4" }) },
+            label4: { el: new labelVar(config, { label: competingRisksOneGroup.t('label4'), h: 5, style:"mt-3 ml-4" }) },
             cichkbox: {
                 el: new checkbox(config, {
-                    label: localization.en.cichkbox,
+                    label: competingRisksOneGroup.t('cichkbox'),
                     no: "cichkbox",
                     extraction: "Boolean",
                     style: "ml-5"
                 })
             },        
-            labelblank : { el: new labelVar(config, {label: localization.en.labelblank, h: 1,}) }, 
+            labelblank : { el: new labelVar(config, {label: competingRisksOneGroup.t('labelblank'), h: 1,}) }, 
             cistyle: {
                 el: new comboBox(config, {
                     no: 'cistyle',
-                    label: localization.en.cistyle,
+                    label: competingRisksOneGroup.t('cistyle'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["ribbon", "step"],
@@ -671,7 +531,7 @@ singleeventplot
             citransparency: {
                 el: new advancedSlider(config, {
                     no: "citransparency",
-                    label: localization.en.citransparency,
+                    label: competingRisksOneGroup.t('citransparency'),
                     min: 0,
                     max: 1,
                     step: 0.1,
@@ -682,18 +542,18 @@ singleeventplot
             },
             censorchkbox: {
                 el: new checkbox(config, {
-                    label: localization.en.censorchkbox,
+                    label: competingRisksOneGroup.t('censorchkbox'),
                     no: "censorchkbox",
                     extraction: "Boolean",
                     style:"mt-3"
                 })
             }, 			
             
-            label5: { el: new labelVar(config, { label: localization.en.label5, h: 5 }) },
+            label5: { el: new labelVar(config, { label: competingRisksOneGroup.t('label5'), h: 5 }) },
             incaxislabelall: {
                 el: new input(config, {
                     no: 'incaxislabelall',
-                    label: localization.en.incaxislabelall,
+                    label: competingRisksOneGroup.t('incaxislabelall'),
                     placeholder: "Probability",
                     ml: 4,
                     extraction: "TextAsIs",
@@ -705,7 +565,7 @@ singleeventplot
             incaxislabelsingle: {
                 el: new input(config, {
                     no: 'incaxislabelsingle',
-                    label: localization.en.incaxislabelsingle,
+                    label: competingRisksOneGroup.t('incaxislabelsingle'),
                     placeholder: "Probability",
                     ml: 4,
                     extraction: "TextAsIs",
@@ -715,10 +575,10 @@ singleeventplot
                 })
             },  
             
-            label6: { el: new labelVar(config, { label: localization.en.label6, style: "mt-3 ml-3", h: 6 }) },
+            label6: { el: new labelVar(config, { label: competingRisksOneGroup.t('label6'), style: "mt-3 ml-3", h: 6 }) },
             defbutton: {
                 el: new radioButton(config, {
-                    label: localization.en.defbutton,
+                    label: competingRisksOneGroup.t('defbutton'),
                     no: "scalebox",
                     increment: "defbutton",
                     syntax: "waiver()",
@@ -729,7 +589,7 @@ singleeventplot
             },
             pctbutton: {
                 el: new radioButton(config, {
-                    label: localization.en.pctbutton,
+                    label: competingRisksOneGroup.t('pctbutton'),
                     no: "scalebox",
                     increment: "pctbutton",
                     syntax: "percent",
@@ -738,12 +598,12 @@ singleeventplot
                     style:"ml-3"
                 })
             },   
-            label7: { el: new labelVar(config, { label: localization.en.label7, style: "mt-3 ml-3", h: 6 }) },
+            label7: { el: new labelVar(config, { label: competingRisksOneGroup.t('label7'), style: "mt-3 ml-3", h: 6 }) },
 
             incaxismin: {
                 el: new inputSpinner(config, {
                     no: 'incaxismin',
-                    label: localization.en.incaxismin,
+                    label: competingRisksOneGroup.t('incaxismin'),
                     min: 0,
                     max: 1,
                     ml: 4,
@@ -756,7 +616,7 @@ singleeventplot
             incaxismax: {
                 el: new inputSpinner(config, {
                     no: 'incaxismax',
-                    label: localization.en.incaxismax,
+                    label: competingRisksOneGroup.t('incaxismax'),
                     min: 0,
                     max: 1,
                     ml: 4,
@@ -769,7 +629,7 @@ singleeventplot
             incaxisinc: {
                 el: new inputSpinner(config, {
                     no: 'incaxisinc',
-                    label: localization.en.incaxisinc,
+                    label: competingRisksOneGroup.t('incaxisinc'),
                     min: 0,
                     max: 1,
                     ml: 4,
@@ -778,11 +638,11 @@ singleeventplot
                     extraction: "NoPrefix|UseComma"
                 })
             },                   
-            label8: { el: new labelVar(config, { label: localization.en.label8, style: "mt-3", h: 5 }) },
+            label8: { el: new labelVar(config, { label: competingRisksOneGroup.t('label8'), style: "mt-3", h: 5 }) },
             timeaxislabel: {
                 el: new input(config, {
                     no: 'timeaxislabel',
-                    label: localization.en.timeaxislabel,
+                    label: competingRisksOneGroup.t('timeaxislabel'),
                     placeholder: "Time",
                     ml: 4,
                     extraction: "TextAsIs",
@@ -791,11 +651,11 @@ singleeventplot
                     type: "character",
                 })
             }, 
-            label9: { el: new labelVar(config, { label: localization.en.label9, style: "mt-3 ml-4", h: 6 }) },
+            label9: { el: new labelVar(config, { label: competingRisksOneGroup.t('label9'), style: "mt-3 ml-4", h: 6 }) },
             timeaxismin: {
                 el: new input(config, {
                     no: 'timeaxismin',
-                    label: localization.en.timeaxismin,
+                    label: competingRisksOneGroup.t('timeaxismin'),
 					width: "w-25",
                     placeholder: "0",
                     ml: 5,
@@ -808,7 +668,7 @@ singleeventplot
             timeaxismax: {
                 el: new input(config, {
                     no: 'timeaxismax',
-                    label: localization.en.timeaxismax,
+                    label: competingRisksOneGroup.t('timeaxismax'),
 					width: "w-25",
                     placeholder: "",
                     ml: 5,
@@ -821,7 +681,7 @@ singleeventplot
             timeaxisinc: {
                 el: new input(config, {
                     no: 'timeaxisinc',
-                    label: localization.en.timeaxisinc,
+                    label: competingRisksOneGroup.t('timeaxisinc'),
 					width: "w-25",
                     placeholder: "",
                     ml: 5,
@@ -834,7 +694,7 @@ singleeventplot
 			axislabelsize: {
 				el: new inputSpinner(config,{
 				no: 'axislabelsize',
-				label: localization.en.axislabelsize,
+				label: competingRisksOneGroup.t('axislabelsize'),
 				style: "mt-5",
 				min: 5,
 				max: 50,
@@ -846,7 +706,7 @@ singleeventplot
 			ticklabelsize: {
 				el: new inputSpinner(config,{
 				no: 'ticklabelsize',
-				label: localization.en.ticklabelsize,
+				label: competingRisksOneGroup.t('ticklabelsize'),
 				min: 5,
 				max: 50,
 				step: 1,
@@ -854,10 +714,10 @@ singleeventplot
 				extraction: "NoPrefix|UseComma"
 				})
 			}, 				
-            label10: { el: new labelVar(config, { label: localization.en.label10, style: "mt-3 ml-4", h: 6 }) },  
+            label10: { el: new labelVar(config, { label: competingRisksOneGroup.t('label10'), style: "mt-3 ml-4", h: 6 }) },  
             label12: {
                 el: new labelVar(config, {
-                  label: localization.en.label12, 
+                  label: competingRisksOneGroup.t('label12'), 
                   style: "mt-3", 
                   h:5
                 })
@@ -867,7 +727,7 @@ singleeventplot
         var styleoptions = {
             el: new optionsVar(config, {
                 no: "styleoptions",
-                name: localization.en.styleoptions,
+                name: competingRisksOneGroup.t('styleoptions'),
                 content: [
                     objects.titleboxall.el,
                     objects.titleboxsingle.el,
@@ -903,7 +763,7 @@ singleeventplot
         var axisoptions = {
             el: new optionsVar(config, {
                 no: "axisoptions",
-                name: localization.en.axisoptions,
+                name: competingRisksOneGroup.t('axisoptions'),
                 content: [
                     objects.label5.el,
                     objects.incaxislabelall.el,
@@ -942,13 +802,22 @@ singleeventplot
             bottom: [styleoptions.el.content,
             axisoptions.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: competingRisksOneGroup.t('navigation'),
                 icon: "icon-competing-risk",
                 modal: config.id
             }
         }
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: competingRisksOneGroup.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: competingRisksOneGroup.t('help.body')
+        }
+;
     }
 }
-module.exports.item = new competingRisksOneGroup().render()
+
+module.exports = {
+    render: () => new competingRisksOneGroup().render()
+}

@@ -1,39 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, ANOVA",
-        navigation: "ANOVA",
-		howtouse: "To compute sample size: specify the group means and power\nTo compute power: specify sample size and the group means\nTo compute detectable variance of the group means: specify sample size and power",
-		numgrps: "Number of Groups",
-		n: "Sample Size per Group",		
-		grpmeans: "Group Means, specify as values separated by commas, e.g. 20, 25, 40",
-		power: "Power (0-1)",
 
-		sd: "Standard Deviation",
-		siglevel: "Significance Level (0-1)",
-        help: {
-            title: "Sample Size, ANOVA",
-            r_help: "help(power.anova.test, package ='stats')",
-            body: `
-This is an assessment of sample size for a balanced one-way ANOVA.  It computes the sample size, power, or difference in means (calculated as the variance between the means) when the user 
-specifies the other two.
-<br/><br/>
-<b>Number of Groups:</b> Specify the number of groups in the study
-<br/><br/>
-<b>Sample Size per Group:</b> Specify the number of subjects in each group
-<br/><br/>
-<b>Group Means:</b> Specify the means in each group that you want to be able to detect.  At least one mean has to be different than the others.
-<br/><br/>
-<b>Power:</b> Specify the desired power of the study, i.e. the probability that the test will reject the null hypothesis if the alternative hypothesis was true.
-<br/><br/>
-<b>Standard Deviation:</b> Specify the standard deviation of the outcome.  This is assumed to be the same across the groups.
-<br/><br/>
-<b>Significance Level:</b> Specify the desired significance level (i.e. type I error) of the test
-<br/><br/>
-<b>Required R Packages:</b> stats
-			`}
-    }
-}
 
 
 
@@ -44,10 +10,13 @@ specifies the other two.
 
 
 class SampleSizeANOVA extends baseModal {
+    static dialogId = 'SampleSizeANOVA'
+    static t = baseModal.makeT(SampleSizeANOVA.dialogId)
+
     constructor() {
         var config = {
-            id: "SampleSizeANOVA",
-            label: localization.en.title,
+            id: SampleSizeANOVA.dialogId,
+            label: SampleSizeANOVA.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -63,14 +32,14 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			howtouse: {
 				el: new preVar(config, {
 					no: "howtouse",
-					label: localization.en.howtouse, 
+					label: SampleSizeANOVA.t('howtouse'), 
 					h:5
 				})
 			},
 			numgrps: {
 				el: new inputSpinner(config, {
 					no: 'numgrps',
-					label: localization.en.numgrps,
+					label: SampleSizeANOVA.t('numgrps'),
 					style: "mt-5",
 					min: 2,
 					max: 10000,
@@ -82,7 +51,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: SampleSizeANOVA.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -94,7 +63,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			grpmeans: {
 				el: new input(config, {
 					no: 'grpmeans',
-					label: localization.en.grpmeans,
+					label: SampleSizeANOVA.t('grpmeans'),
 					type: "character",
 					allow_spaces: true,
 					value: "20, 25, 40",
@@ -106,7 +75,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			power: {
 				el: new input(config, {
 					no: 'power',
-					label: localization.en.power,
+					label: SampleSizeANOVA.t('power'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces:true,
@@ -118,7 +87,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			sd: {
 				el: new input(config, {
 					no: 'sd',
-					label: localization.en.sd,
+					label: SampleSizeANOVA.t('sd'),
 					style: "mt-5",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -130,7 +99,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			siglevel: {
 				el: new input(config, {
 					no: 'siglevel',
-					label: localization.en.siglevel,
+					label: SampleSizeANOVA.t('siglevel'),
 					placeholder: ".05",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -146,14 +115,20 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 					objects.sd.el.content, objects.siglevel.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: SampleSizeANOVA.t('navigation'),
                 icon: "icon-variance",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SampleSizeANOVA.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SampleSizeANOVA.t('help.body')
+        }
+;
     }
 
 	prepareExecution(instance) {
@@ -180,4 +155,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 
 	
 }
-module.exports.item = new SampleSizeANOVA().render()
+
+module.exports = {
+    render: () => new SampleSizeANOVA().render()
+}

@@ -1,47 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Test Two Means",
-        navigation: "Two Means",
-		howtouse: "To compute sample size: specify both group means and power\nTo compute power: specify both group means and sample size\nTo compute detectable mean difference: specify sample size and power",
-		n: "Sample Size",
-		power: "Power (0-1)",
-		meangrp1: "Treatment Group Mean",
-		meangrp2: "Control Group Mean",
 
-		ratio: "Treatment vs Control Sample Size Ratio",
-		sd: "Standard Deviation",
-		siglevel: "Significance Level (0-1)",
-		alternativeopt: "Alternative Hypothesis",
-		twosided: "Two-Sided",
-		onesided: "One-Sided",
-        help: {
-            title: "Sample Size, Test Two Means",
-            r_help: "help(epi.sscompc, package ='epiR')",
-            body: `
-This is an assessment of sample size for a two-sample t-test of means.  It computes the sample size, power, or mean difference (delta) when the user 
-specifies the other two.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Power:</b> Specify the desired power of the study, i.e. the probability that the test will reject the null hypothesis if the alternative hypothesis was true.
-<br/><br/>
-<b>Treatment Group Mean:</b> Specify the mean for the treatment group
-<br/><br/>
-<b>Control Group Mean:</b> Specify the mean for the control group
-<br/><br/>
-<b>Treatment vs Control Sample Size Ratio:</b> Specify the desired ratio of the sample sizes (treatment N divided by control N). A ratio of 1 means equal sample sizes.
-<br/><br/>
-<b>Standard Deviation:</b> Estimate of the pooled standard deviation of the groups
-<br/><br/>
-<b>Significance Level:</b> Specify the desired significance level (i.e. type I error) of the test
-<br/><br/>
-<b>Alternative Hypothesis:</b> Specify whether the test is two-sided or one-sided
-<br/><br/>
-<b>Required R Packages:</b> epiR
-			`}
-    }
-}
 
 
 
@@ -52,10 +10,13 @@ specifies the other two.
 
 
 class SampleSizeTwoMeans extends baseModal {
+    static dialogId = 'SampleSizeTwoMeans'
+    static t = baseModal.makeT(SampleSizeTwoMeans.dialogId)
+
     constructor() {
         var config = {
-            id: "SampleSizeTwoMeans",
-            label: localization.en.title,
+            id: SampleSizeTwoMeans.dialogId,
+            label: SampleSizeTwoMeans.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -73,14 +34,14 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			howtouse: {
 				el: new preVar(config, {
 					no: "howtouse",
-					label: localization.en.howtouse, 
+					label: SampleSizeTwoMeans.t('howtouse'), 
 					h:5
 				})
 			},
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: SampleSizeTwoMeans.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -91,7 +52,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			power: {
 				el: new input(config, {
 					no: 'power',
-					label: localization.en.power,
+					label: SampleSizeTwoMeans.t('power'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces:true,
@@ -102,7 +63,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			meangrp1: {
 				el: new input(config, {
 					no: 'meangrp1',
-					label: localization.en.meangrp1,
+					label: SampleSizeTwoMeans.t('meangrp1'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -114,7 +75,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			meangrp2: {
 				el: new input(config, {
 					no: 'meangrp2',
-					label: localization.en.meangrp2,
+					label: SampleSizeTwoMeans.t('meangrp2'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -126,7 +87,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			ratio: {
 				el: new input(config, {
 					no: 'ratio',
-					label: localization.en.ratio,
+					label: SampleSizeTwoMeans.t('ratio'),
 					style: "mt-5",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -139,7 +100,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			sd: {
 				el: new input(config, {
 					no: 'sd',
-					label: localization.en.sd,
+					label: SampleSizeTwoMeans.t('sd'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces: true,
@@ -150,7 +111,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			siglevel: {
 				el: new input(config, {
 					no: 'siglevel',
-					label: localization.en.siglevel,
+					label: SampleSizeTwoMeans.t('siglevel'),
 					placeholder: ".05",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -162,14 +123,14 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			},
 			alternativeopt: {
 				el: new labelVar(config, {
-					label: localization.en.alternativeopt, 
+					label: SampleSizeTwoMeans.t('alternativeopt'), 
 					style: "mt-5", 
 					h:5
 				})
 			},
 			twosided: {
 				el: new radioButton(config, {
-					label: localization.en.twosided,
+					label: SampleSizeTwoMeans.t('twosided'),
 					no: "altgrp",
 					increment: "twosided",
 					value: "2",
@@ -179,7 +140,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 			}, 
 			onesided: {
 				el: new radioButton(config, {
-					label: localization.en.onesided,
+					label: SampleSizeTwoMeans.t('onesided'),
 					no: "altgrp",
 					increment: "onesided",
 					value: "1",
@@ -193,14 +154,20 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 					objects.ratio.el.content, objects.sd.el.content, objects.siglevel.el.content, objects.alternativeopt.el.content, objects.twosided.el.content, objects.onesided.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: SampleSizeTwoMeans.t('navigation'),
                 icon: "icon-t2",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SampleSizeTwoMeans.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SampleSizeTwoMeans.t('help.body')
+        }
+;
     }
 
 
@@ -267,4 +234,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
 		
 	
 }
-module.exports.item = new SampleSizeTwoMeans().render()
+
+module.exports = {
+    render: () => new SampleSizeTwoMeans().render()
+}

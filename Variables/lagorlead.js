@@ -1,38 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Lag or Lead Variable",
-        navigation: "Lag or Lead Variable",
-        varnamelabel: "New Variable Name (no spaces)",
-        lagleadvarlabel: "Variable to Lag / Lead",
-        groupbyvarslabel: "Variables to Group By",
-        typelabel: "Lag or Lead",
-		laglabel: "Lag",
-		leadlabel: "Lead",
-		positionlabel: "Number of Positions",
-        help: {
-            title: "Lag or Lead Variable",
-            r_help: "help(lag, package ='dplyr')",
-            body: `
-This creates a new variable that finds the previous (lag) or next (lead) value in an existing variable based on the row position.
-<br/><br/>
-<b>New Variable Name:</b> Variable name to store the lagged or leading values
-<br/><br/>
-<b>Variable to Lag / Lead:</b> Specify the existing variable to extract the lagged or leading values from
-<br/><br/>
-<b>Variables to Group By (optional):</b> Specify the variables to group by.  If variables are specified here, the lagged and lead 
-values will be obtained only within groups defined by these variables.  If no variables are specified here, the lagged and leading values 
-will be obtained based on the entire column specified in Variable to Lag / Lead.  Typically, values should be sorted by the grouping variables 
-prior to doing a lag or lead.
-<br/><br/>
-<b>Lag or Lead:</b> Choose whether you want to find the previous (lag) or next value (lead)
-<br/><br/>
-<b>Number of Positions:</b> Specify the number of positions to lag or lead by.  For example, a lagged value of 1 would extract the previous value and a lagged value of 2 would extract the value 2 positions previous.
-<br/><br/>
-<b>Required R Packages:</b> dplyr
-			`}
-    }
-}
+
 
 
 
@@ -43,10 +10,13 @@ prior to doing a lag or lead.
 
 
 class lagorlead extends baseModal {
+    static dialogId = 'lagorlead'
+    static t = baseModal.makeT(lagorlead.dialogId)
+
     constructor() {
         var config = {
-            id: "lagorlead",
-            label: localization.en.title,
+            id: lagorlead.dialogId,
+            label: lagorlead.t('title'),
 			splitProcessing: false,
             modalType: "two",
             RCode: `
@@ -64,7 +34,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             varname: {
                 el: new input(config, {
                     no: 'varname',
-                    label: localization.en.varnamelabel,
+                    label: lagorlead.t('varnamelabel'),
 					style: "mb-3",					
                     placeholder: "lagleadvar",
                     required: true,
@@ -76,7 +46,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             },
             lagleadvar: {
                 el: new dstVariable(config, {
-                    label: localization.en.lagleadvarlabel,
+                    label: lagorlead.t('lagleadvarlabel'),
                     no: "lagleadvar",
                     filter: "String|Numeric|Date|Logical|Ordinal|Nominal|Scale",
                     extraction: "NoPrefix|UseComma",
@@ -85,7 +55,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             },
             groupbyvars: {
                 el: new dstVariableList(config, {
-                    label: localization.en.groupbyvarslabel,
+                    label: lagorlead.t('groupbyvarslabel'),
                     no: "groupbyvars",
                     required: false,
                     filter: "String|Numeric|Date|Logical|Ordinal|Nominal|Scale",
@@ -94,14 +64,14 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             },
 			typeradiolabel: {
 				el: new labelVar(config, {
-				label: localization.en.typelabel, 
+				label: lagorlead.t('typelabel'), 
 				style: "mt-3", 
 				h:5
 				})
 			},			
 			lag: {
 				el: new radioButton(config, {
-				label: localization.en.laglabel,
+				label: lagorlead.t('laglabel'),
 				no: "lagleadgrp",
 				increment: "lag",
 				value: "lag",
@@ -111,7 +81,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
 			}, 
 			lead: {
 				el: new radioButton(config, {
-				label: localization.en.leadlabel,
+				label: lagorlead.t('leadlabel'),
 				no: "lagleadgrp",
 				increment: "lead",
 				value: "lead",
@@ -122,7 +92,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             position: {
                 el: new input(config, {
                     no: 'position',
-                    label: localization.en.positionlabel,
+                    label: lagorlead.t('positionlabel'),
 					style: "mt-3",
 					width: "w-25",					
                     required: true,
@@ -138,14 +108,23 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             right: [objects.varname.el.content, objects.lagleadvar.el.content, objects.groupbyvars.el.content, objects.typeradiolabel.el.content, objects.lag.el.content,
 					objects.lead.el.content, objects.position.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: lagorlead.t('navigation'),
                 icon: "icon-lag",
 				positionInNav: 8,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: lagorlead.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: lagorlead.t('help.body')
+        }
+;
     }
 }
-module.exports.item = new lagorlead().render()
+
+module.exports = {
+    render: () => new lagorlead().render()
+}

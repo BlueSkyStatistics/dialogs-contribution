@@ -1,47 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Precision of an Odds Ratio",
-        navigation: "Odds Ratio",
-		howtouse: "Specify either the sample size or the confidence interval width and the other will be computed",
-		n1: "Group 1 Sample Size",
-		width: "Confidence Interval Width",
-		ratio: "Ratio of Group 2 to Group 1 Sample Size",
-		prop1: "Group 1 Outcome Proportion",
-		prop2: "Group 2 Outcome Proportion",		
-		conflevel: "Confidence Level (0-1)",
-		method: "Confidence Interval Method",
-        help: {
-            title: "Sample Size, Precision of an Odds Ratio",
-            r_help: "help(prec_or, package ='presize')",
-            body: `
-This is an assessment of sample size for an odds ratio based on confidence interval width.  It computes the sample size or the confidence interval width when the user 
-specifies the other.
-<br/><br/>
-<b>Group 1 Sample Size:</b> Specify the number of subjects in group 1
-<br/><br/>
-<b>Confidence Interval Width:</b> Specify the confidence interval width desired.  The width of a confidence interval is a measure of precision of an estimate and is the upper bound minus the lower bound.
-<br/><br/>
-<b>Ratio of Group 2 to Group 1 Sample Size:</b> Specify the ratio of the group 2 sample size to the group 1 sample size.  A value of 1 means equal sample sizes.
-<br/><br/>
-<b>Group 1 Outcome Proportion:</b> Specify the proportion of subjects in group 1 with the 'positive' outcome
-<br/><br/>
-<b>Group 2 Outcome Proportion:</b> Specify the proportion of subjects in group 2 with the 'positive' outcome
-<br/><br/>
-Note that the odds ratio will correspond to the odds of the 'positive' outcome in group 1 relative to the odds of the 'positive' outcome in group 2.
-<br/><br/>
-<b>Confidence Level:</b> Specify the desired level of the confidence interval
-<br/><br/>
-<b>Confidence Interval Method:</b> Specify the type of adjusted confidence interval to use. Woolf (woolf), Gart (gart), and Independence-smoothed logit (indip_smooth) belong to 
-a general family of adjusted confidence intervals, adding 0 (woolf) to each cell, 0.5 (gart) to each cell, or an adjustment for each cell based on observed data 
-(independence-smoothed). In gart and indip_smooth, estimate of the CI is not possible if p1 = 0, in which case the OR becomes 0, but the lower level of the CI is > 0. Further, 
-if p1 = 1 and p2 < 1, or if p1 > 0 and p2 = 0, the OR becomes ∞, but the upper limit of the CI is finite. For the approximate intervals, gart and indip_smooth are the recommended 
-intervals (Fagerland et al. 2011).
-<br/><br/>
-<b>Required R Packages:</b> presize
-			`}
-    }
-}
+
 
 
 
@@ -52,10 +10,13 @@ intervals (Fagerland et al. 2011).
 
 
 class PrecisionOR extends baseModal {
+    static dialogId = 'PrecisionOR'
+    static t = baseModal.makeT(PrecisionOR.dialogId)
+
     constructor() {
         var config = {
-            id: "PrecisionOR",
-            label: localization.en.title,
+            id: PrecisionOR.dialogId,
+            label: PrecisionOR.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -69,7 +30,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         var objects = {
 			howtouse: {
 				el: new labelVar(config, {
-					label: localization.en.howtouse, 
+					label: PrecisionOR.t('howtouse'), 
 					style: "mb-3", 
 					h:8
 				})
@@ -77,7 +38,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			n1: {
 				el: new input(config, {
 					no: 'n1',
-					label: localization.en.n1,
+					label: PrecisionOR.t('n1'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -90,7 +51,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			width: {
 				el: new input(config, {
 					no: 'width',
-					label: localization.en.width,
+					label: PrecisionOR.t('width'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -103,7 +64,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			ratio: {
 				el: new input(config, {
 					no: 'ratio',
-					label: localization.en.ratio,
+					label: PrecisionOR.t('ratio'),
 					style: "mt-5",
 					required: true,
 					extraction: "TextAsIs",
@@ -116,7 +77,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			prop1: {
 				el: new input(config, {
 					no: 'prop1',
-					label: localization.en.prop1,
+					label: PrecisionOR.t('prop1'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -128,7 +89,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			prop2: {
 				el: new input(config, {
 					no: 'prop2',
-					label: localization.en.prop2,
+					label: PrecisionOR.t('prop2'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -140,7 +101,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			conflevel: {
 				el: new input(config, {
 					no: 'conflevel',
-					label: localization.en.conflevel,
+					label: PrecisionOR.t('conflevel'),
 					placeholder: ".95",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -153,7 +114,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			method: {
 				el: new comboBox(config, {
 					no: "method",
-					label: localization.en.method,
+					label: PrecisionOR.t('method'),
 					multiple: false,
 					extraction: "NoPrefix|UseComma",
 					options: ["indip_smooth", "gart", "woolf"],
@@ -166,16 +127,25 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 					objects.ratio.el.content, objects.prop1.el.content, objects.prop2.el.content, objects.conflevel.el.content, objects.method.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: PrecisionOR.t('navigation'),
                 icon: "icon-or",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: PrecisionOR.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: PrecisionOR.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new PrecisionOR().render()
+
+module.exports = {
+    render: () => new PrecisionOR().render()
+}

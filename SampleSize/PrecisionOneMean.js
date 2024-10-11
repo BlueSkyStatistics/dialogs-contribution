@@ -1,36 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Precision of a Mean",
-        navigation: "One Mean",
-		howtouse: "Specify either the sample size or the confidence interval width and the other will be computed",
-		n: "Sample Size",
-		width: "Confidence Interval Width",
-		mean: "Mean",
-		sd: "Standard Deviation",
-		conflevel: "Confidence Level (0-1)",
-        help: {
-            title: "Sample Size, Precision of a Mean",
-            r_help: "help(prec_mean, package ='presize')",
-            body: `
-This is an assessment of sample size for one mean based on confidence interval width.  It computes the sample size or the confidence interval width when the user 
-specifies the other.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Confidence Interval Width:</b> Specify the confidence interval width desired.  The width of a confidence interval is a measure of precision of an estimate and is the upper bound minus the lower bound.
-<br/><br/>
-<b>Mean:</b> Specify the expected mean value
-<br/><br/>
-<b>Standard Deviation:</b> Specify the standard deviation of the outcome
-<br/><br/>
-<b>Confidence Level:</b> Specify the desired level of the confidence interval
-<br/><br/>
-<br/><br/>
-<b>Required R Packages:</b> presize
-			`}
-    }
-}
+
 
 
 
@@ -41,10 +10,13 @@ specifies the other.
 
 
 class PrecisionOneMean extends baseModal {
+    static dialogId = 'PrecisionOneMean'
+    static t = baseModal.makeT(PrecisionOneMean.dialogId)
+
     constructor() {
         var config = {
-            id: "PrecisionOneMean",
-            label: localization.en.title,
+            id: PrecisionOneMean.dialogId,
+            label: PrecisionOneMean.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -58,7 +30,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         var objects = {
 			howtouse: {
 				el: new labelVar(config, {
-					label: localization.en.howtouse, 
+					label: PrecisionOneMean.t('howtouse'), 
 					style: "mb-3", 
 					h:8
 				})
@@ -66,7 +38,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: PrecisionOneMean.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -79,7 +51,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			width: {
 				el: new input(config, {
 					no: 'width',
-					label: localization.en.width,
+					label: PrecisionOneMean.t('width'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -92,7 +64,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			mean: {
 				el: new input(config, {
 					no: 'mean',
-					label: localization.en.mean,
+					label: PrecisionOneMean.t('mean'),
 					style: "mt-5",
 					required: true,
 					extraction: "TextAsIs",
@@ -105,7 +77,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			sd: {
 				el: new input(config, {
 					no: 'sd',
-					label: localization.en.sd,
+					label: PrecisionOneMean.t('sd'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -117,7 +89,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			conflevel: {
 				el: new input(config, {
 					no: 'conflevel',
-					label: localization.en.conflevel,
+					label: PrecisionOneMean.t('conflevel'),
 					placeholder: ".95",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -133,16 +105,25 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 					objects.mean.el.content, objects.sd.el.content, objects.conflevel.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: PrecisionOneMean.t('navigation'),
                 icon: "icon-t1",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: PrecisionOneMean.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: PrecisionOneMean.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new PrecisionOneMean().render()
+
+module.exports = {
+    render: () => new PrecisionOneMean().render()
+}

@@ -1,46 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Reorder Factor Levels Manually",
-        navigation: "Reorder Manually",
-        reordervarlabel: "Factor to Reorder",
-        levelslabel: "Specify Factor Levels to Move (with quotes): e.g. 'level 1', 'level 2', etc.",
-		placelabel: "Where to Place Levels",
-		firstlabel: "First",
-		lastlabel: "Last",
-		newoverwritelabel: "Create New or Overwrite Existing Variable",
-		newvarlabel: "New Variable",
-		overwritevarlabel: "Overwrite Variable",
-		newvarnamelabel: "New Variable Name (no spaces / special characters)",
-        help: {
-            title: "Reorder Factor Levels Manually",
-            r_help: "help(fct_relevel, package ='forcats')",
-            body: `
-This is used to specify one or more factor levels that you want to place first or last in the sort order.  This can be useful for models, 
-as the first factor level becomes the reference group for parameter estimates when using reference cell coding.  They can also be useful in 
-plotting as the sort order is used to display the categories.
-<br/><br/>
-<b>Factor to Reorder:</b> factor you want re-ordered
-<br/><br/>
-<b>Specify Factor Levels to Move (with quotes): </b> These are the factor levels you want to reorder.  
-Only existing levels will be reordered.  If you specify a non-existent level, a warning will be output, but any existing levels will be ordered in the 
-way you specified.  View the levels in the Variables tab of the data grid to see the current levels and sort order or go to Variables > Factor Levels > Display.  
-Note that specifying all existing factor levels will reorder all levels, regardless of whether you select "First" or "Last" for level placement.
-<br/><br/>
-<b>Where to place levels:</b> Selecting "First" will place the specified levels first in the sort order.  Selecting "Last" will place the specified 
-levels last in the sort order.
-<br/><br/>
-<b>Create new or overwrite existing variable:</b> Controls whether you want to create a new variable with a new name or overwrite the existing variable. The 
-new variable name cannot contain special characters like #, $, %, &, (, ), =, etc.  Underscores, "_", are allowed.
-<br/><br/>
-<b>Examples:</b>  Assume you have a four level factor with labels "a", "b", "c", "d" with a sort order of "a","b","c","d" (first to last). Specifying "d" as 
-first in the sort order would create a factor with a sort order of "d", "a", "b", "c".   Specifying "b", "a" as last in the sort order would create a factor 
-with a sort order of "c","d","b","a".  Specifying "b","c","d","a" (i.e. all levels) would create a factor with a sort order of "b","c","d","a".
-<br/><br/>  
-<b>Required R Packages:</b> dplyr, forcats
-			`}
-    }
-}
+
 
 
 
@@ -51,10 +10,13 @@ with a sort order of "c","d","b","a".  Specifying "b","c","d","a" (i.e. all leve
 
 
 class FactorLevelManualReorder extends baseModal {
+    static dialogId = 'FactorLevelManualReorder'
+    static t = baseModal.makeT(FactorLevelManualReorder.dialogId)
+
     constructor() {
         var config = {
-            id: "FactorLevelManualReorder",
-            label: localization.en.title,
+            id: FactorLevelManualReorder.dialogId,
+            label: FactorLevelManualReorder.t('title'),
 			splitProcessing: false,
             modalType: "two",
             RCode: `
@@ -77,7 +39,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             content_var: { el: new srcVariableList(config, {action: "move"}) },
 			reordervar: {
 				el: new dstVariable(config, {
-				label: localization.en.reordervarlabel,
+				label: FactorLevelManualReorder.t('reordervarlabel'),
 				no: "reordervar",
 				filter: "Numeric|Ordinal|Nominal",
 				extraction: "NoPrefix|UseComma",
@@ -87,7 +49,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             levels: {
                 el: new input(config, {
                     no: 'levels',
-                    label: localization.en.levelslabel,
+                    label: FactorLevelManualReorder.t('levelslabel'),
                     required: true,
 					allow_spaces: true,
                     type: "character",
@@ -97,14 +59,14 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             },
 			placegrplabel: {
 				el: new labelVar(config, {
-				label: localization.en.placelabel, 
+				label: FactorLevelManualReorder.t('placelabel'), 
 				style: "mt-4", 
 				h:5
 				})
 			},			
 			first: {
 				el: new radioButton(config, {
-				label: localization.en.firstlabel,
+				label: FactorLevelManualReorder.t('firstlabel'),
 				no: "placegrp",
 				increment: "first",
 				value: "",
@@ -115,7 +77,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
 			}, 
 			last: {
 				el: new radioButton(config, {
-				label: localization.en.lastlabel,
+				label: FactorLevelManualReorder.t('lastlabel'),
 				no: "placegrp",
 				increment: "last",
 				value: "",
@@ -126,14 +88,14 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
 			},
 			vargrplabel: {
 				el: new labelVar(config, {
-				label: localization.en.newoverwritelabel, 
+				label: FactorLevelManualReorder.t('newoverwritelabel'), 
 				style: "mt-4", 
 				h:5
 				})
 			},	
 			newvar: {
 				el: new radioButton(config, {
-				label: localization.en.newvarlabel,
+				label: FactorLevelManualReorder.t('newvarlabel'),
 				no: "vargrp",
 				increment: "newvar",
 				value: "new",
@@ -144,7 +106,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
 			}, 
 			overwritevar: {
 				el: new radioButton(config, {
-				label: localization.en.overwritevarlabel,
+				label: FactorLevelManualReorder.t('overwritevarlabel'),
 				no: "vargrp",
 				increment: "overwrite",
 				value: "overwrite",
@@ -155,7 +117,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             newvarname: {
                 el: new input(config, {
                     no: 'newvarname',
-                    label: localization.en.newvarnamelabel,
+                    label: FactorLevelManualReorder.t('newvarnamelabel'),
 					ml: 3,
                     required: false,
 					allow_spaces: false,
@@ -171,13 +133,22 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
 					objects.placegrplabel.el.content, objects.first.el.content, objects.last.el.content, 
 					objects.vargrplabel.el.content, objects.newvar.el.content, objects.newvarname.el.content, objects.overwritevar.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: FactorLevelManualReorder.t('navigation'),
                 icon: "icon-reorder_manually",
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: FactorLevelManualReorder.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: FactorLevelManualReorder.t('help.body')
+        }
+;
     }
 }
-module.exports.item = new FactorLevelManualReorder().render()
+
+module.exports = {
+    render: () => new FactorLevelManualReorder().render()
+}

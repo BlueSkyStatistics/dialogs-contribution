@@ -1,44 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Precision of a Mean Difference",
-        navigation: "Difference of Means",
-		howtouse: "Specify either the sample size or the confidence interval width and the other will be computed",
-		n1: "Group 1 Sample Size",
-		width: "Confidence Interval Width",
-		ratio: "Ratio of Group 2 to Group 1 Sample Size",
-		meandiff: "Mean Difference",
-		sd1: "Group 1 Standard Deviation",
-		sd2: "Group 2 Standard Deviation",		
-		conflevel: "Confidence Level (0-1)",
-		variance: "Variance Assumption",
-        help: {
-            title: "Sample Size, Precision of a Mean Difference",
-            r_help: "help(prec_meandiff, package ='presize')",
-            body: `
-This is an assessment of sample size for a difference of means based on confidence interval width.  It computes the sample size or the confidence interval width when the user 
-specifies the other.
-<br/><br/>
-<b>Group 1 Sample Size:</b> Specify the number of subjects in group 1
-<br/><br/>
-<b>Confidence Interval Width:</b> Specify the confidence interval width desired.  The width of a confidence interval is a measure of precision of an estimate and is the upper bound minus the lower bound.
-<br/><br/>
-<b>Ratio of Group 2 to Group 1 Sample Size:</b> Specify the ratio of the group 2 sample size to the group 1 sample size.  A value of 1 means equal sample sizes.
-<br/><br/>
-<b>Mean Difference:</b> Specify the expected difference in group means 
-<br/><br/>
-<b>Group 1 Standard Deviation:</b> Specify the standard deviation of the outcome in group 1
-<br/><br/>
-<b>Group 2 Standard Deviation:</b> Specify the standard deviation of the outcome in group 2
-<br/><br/>
-<b>Confidence Level:</b> Specify the desired level of the confidence interval
-<br/><br/>
-<b>Variance Assumption:</b> Specify whether the group variances are assumed to be equal or unequal.  Specifying equal variances uses a pooled common estimate of the variance.
-<br/><br/>
-<b>Required R Packages:</b> presize
-			`}
-    }
-}
+
 
 
 
@@ -49,10 +10,13 @@ specifies the other.
 
 
 class PrecisionMeanDiff extends baseModal {
+    static dialogId = 'PrecisionMeanDiff'
+    static t = baseModal.makeT(PrecisionMeanDiff.dialogId)
+
     constructor() {
         var config = {
-            id: "PrecisionMeanDiff",
-            label: localization.en.title,
+            id: PrecisionMeanDiff.dialogId,
+            label: PrecisionMeanDiff.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -66,7 +30,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         var objects = {
 			howtouse: {
 				el: new labelVar(config, {
-					label: localization.en.howtouse, 
+					label: PrecisionMeanDiff.t('howtouse'), 
 					style: "mb-3", 
 					h:8
 				})
@@ -74,7 +38,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			n1: {
 				el: new input(config, {
 					no: 'n1',
-					label: localization.en.n1,
+					label: PrecisionMeanDiff.t('n1'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -87,7 +51,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			width: {
 				el: new input(config, {
 					no: 'width',
-					label: localization.en.width,
+					label: PrecisionMeanDiff.t('width'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -100,7 +64,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			ratio: {
 				el: new input(config, {
 					no: 'ratio',
-					label: localization.en.ratio,
+					label: PrecisionMeanDiff.t('ratio'),
 					style: "mt-5",
 					required: true,
 					extraction: "TextAsIs",
@@ -113,7 +77,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			meandiff: {
 				el: new input(config, {
 					no: 'meandiff',
-					label: localization.en.meandiff,
+					label: PrecisionMeanDiff.t('meandiff'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -125,7 +89,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			sd1: {
 				el: new input(config, {
 					no: 'sd1',
-					label: localization.en.sd1,
+					label: PrecisionMeanDiff.t('sd1'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -137,7 +101,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			sd2: {
 				el: new input(config, {
 					no: 'sd2',
-					label: localization.en.sd2,
+					label: PrecisionMeanDiff.t('sd2'),
 					required: true,
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -149,7 +113,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			conflevel: {
 				el: new input(config, {
 					no: 'conflevel',
-					label: localization.en.conflevel,
+					label: PrecisionMeanDiff.t('conflevel'),
 					placeholder: ".95",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -162,7 +126,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			variance: {
 				el: new comboBox(config, {
 					no: "variance",
-					label: localization.en.variance,
+					label: PrecisionMeanDiff.t('variance'),
 					multiple: false,
 					extraction: "NoPrefix|UseComma",
 					options: ["equal", "unequal"],
@@ -175,16 +139,25 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 					objects.ratio.el.content, objects.meandiff.el.content, objects.sd1.el.content, objects.sd2.el.content, objects.conflevel.el.content, objects.variance.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: PrecisionMeanDiff.t('navigation'),
                 icon: "icon-t2",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: PrecisionMeanDiff.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: PrecisionMeanDiff.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new PrecisionMeanDiff().render()
+
+module.exports = {
+    render: () => new PrecisionMeanDiff().render()
+}

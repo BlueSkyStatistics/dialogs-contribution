@@ -1,42 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Test One Proportion",
-        navigation: "One Proportion",
-		howtouse: "Specify either sample size or power, and the other will be computed",
-		n: "Sample Size",
-		power: "Power (0-1)",
-		prop: "Alternative Proportion (0-1)",
-		prop0: "Null Proportion (0-1)",
-		
-		siglevel: "Significance Level (0-1)",
-		alternativeopt: "Alternative Hypothesis",
-		twosided: "Two-Sided",
-		onesided: "One-Sided",
-        help: {
-            title: "Sample Size, Test One Proportion",
-            r_help: "help(pnorm, package ='stats')",
-            body: `
-This is an assessment of sample size for a one-sample proportion test.  It computes the sample size or the power, when the user 
-specifies one of them.  The computation uses the formula as found in Chow S, Shao J, Wang H. Sample Size Calculations in Clinical Research (2008).  It uses a normal approximation with
-the standard deviation based on the alternative proportion.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Power:</b> Specify the desired power of the study, i.e. the probability that the test will reject the null hypothesis if the alternative hypothesis was true.
-<br/><br/>
-<b>Alternative Proportion (0-1):</b> Specify the proportion under the alternative hypothesis
-<br/><br/>
-<b>Null Proportion (0-1):</b> Specify the proportion under the null hypothesis
-<br/><br/>
-<b>Significance Level:</b> Specify the desired significance level (i.e. type I error) of the test
-<br/><br/>
-<b>Alternative Hypothesis:</b> Specify whether the test is two-sided or one-sided
-<br/><br/>
-<b>Required R Packages:</b> stats
-			`}
-    }
-}
+
 
 
 
@@ -47,10 +10,13 @@ the standard deviation based on the alternative proportion.
 
 
 class SampleSizeOneProp extends baseModal {
+    static dialogId = 'SampleSizeOneProp'
+    static t = baseModal.makeT(SampleSizeOneProp.dialogId)
+
     constructor() {
         var config = {
-            id: "SampleSizeOneProp",
-            label: localization.en.title,
+            id: SampleSizeOneProp.dialogId,
+            label: SampleSizeOneProp.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -112,7 +78,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
         var objects = {
 			howtouse: {
 				el: new labelVar(config, {
-					label: localization.en.howtouse, 
+					label: SampleSizeOneProp.t('howtouse'), 
 					style: "mb-3", 
 					h:8
 				})
@@ -120,7 +86,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: SampleSizeOneProp.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -132,7 +98,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 			power: {
 				el: new input(config, {
 					no: 'power',
-					label: localization.en.power,
+					label: SampleSizeOneProp.t('power'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces:true,
@@ -143,7 +109,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 			prop: {
 				el: new input(config, {
 					no: 'prop',
-					label: localization.en.prop,
+					label: SampleSizeOneProp.t('prop'),
 					required: true,
 					style: "mt-5",
 					placeholder: "",
@@ -157,7 +123,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 			prop0: {
 				el: new input(config, {
 					no: 'prop0',
-					label: localization.en.prop0,
+					label: SampleSizeOneProp.t('prop0'),
 					required: true,
 					placeholder: "",
 					extraction: "TextAsIs",
@@ -170,7 +136,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 			siglevel: {
 				el: new input(config, {
 					no: 'siglevel',
-					label: localization.en.siglevel,
+					label: SampleSizeOneProp.t('siglevel'),
 					placeholder: ".05",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -182,14 +148,14 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 			},
 			alternativeopt: {
 				el: new labelVar(config, {
-					label: localization.en.alternativeopt, 
+					label: SampleSizeOneProp.t('alternativeopt'), 
 					style: "mt-5", 
 					h:5
 				})
 			},
 			twosided: {
 				el: new radioButton(config, {
-					label: localization.en.twosided,
+					label: SampleSizeOneProp.t('twosided'),
 					no: "altgrp",
 					increment: "twosided",
 					value: "two.sided",
@@ -199,7 +165,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 			}, 
 			onesided: {
 				el: new radioButton(config, {
-					label: localization.en.onesided,
+					label: SampleSizeOneProp.t('onesided'),
 					no: "altgrp",
 					increment: "onesided",
 					value: "one.sided",
@@ -213,16 +179,25 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
 					objects.alternativeopt.el.content, objects.twosided.el.content, objects.onesided.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: SampleSizeOneProp.t('navigation'),
                 icon: "icon-p1",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SampleSizeOneProp.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SampleSizeOneProp.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new SampleSizeOneProp().render()
+
+module.exports = {
+    render: () => new SampleSizeOneProp().render()
+}

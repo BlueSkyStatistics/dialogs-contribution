@@ -1,194 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Compare Datasets",
-        navigation: "Compare Datasets",
-		in1label: "Select First Dataset",
-		in2label: "Select Second Dataset",
-		defcomplabel: "By default, the comparison is done row-by-row. See ID Options for more options.",
-		numtolcontrolslabel: "Numeric Variable Tolerances",
-		numabsolutelabel: "Unsigned numerical difference",
-		numpercentlabel: "Unsigned percent difference",
-		numtolvallabel: "Max value of difference (for percent should be 0-1)",
-		intasnumlabel: "Treat integer variables as numeric variables in comparisons",
-		facttolcontrolslabel: "Factor Variable Tolerances",
-		factnonelabel: "Compare both underlying levels and labels",
-		factlevelslabel: "Compare underlying levels only",
-		factlabelslabel: "Compare underlying labels only",
-		factascharlabel: "Treat factor variables as character variables in comparisons",
-		chartolcontrolslabel: "Character Variable Tolerances",
-		charnonelabel: "Treat text as-is",
-		charcaselabel: "Ignore differences in upper/lowercase",
-		chartrimlabel: "Ignore differences in leading/trailing whitespace",
-		charbothlabel: "Ignore differences in both case and whitespace",
-		varnametolcontrolslabel: "Variable Name Tolerances",
-		varnamenonelabel: "Treat variable names as-is",
-		varnamedotslabel: "Treat dots, underscores, and spaces equivalent in variable names",
-		varnamecaselabel: "Ignore upper/lowercase in variable names",
-		varnamebothlabel: "Ignore case and treat dots, underscores, and spaces equivalent in variable names",
-		idoptionslabel: "ID Options",
-		bylabel: "If common column names to merge on, enter column names with quotes separated by commas (e.g. 'country', 'region')",
-		bydifflabel: "If column names on which the merge is done are different in each dataset",
-		byxlabel: "Enter column names in the first dataset for the merge with quotes separated by commas (e.g. 'nations', 'location')",
-		byylabel: "Enter column names in the second dataset for the merge with quotes separated by commas (e.g. 'country', 'location')",		
-        help: {
-            title: "Compare Datasets",
-            r_help: "help(comparedf, package ='arsenal')",
-            body: `
-Compare two datasets and report any differences between them, much like SAS's PROC COMPARE procedure.
-<br/><br/><br/>
-<b>Numeric Variable Tolerance Options</b>
-<br/><br/>
-<b>Unsigned numerical difference (default)</b>
-<br/>
-Assess whether 2 values are different by taking the absolute value of the difference and testing if it is larger than the max value of difference value
-<br/>
-<b>Example:</b> age = 18.5 vs. age = 18.8
-<br/>
-difference = | 18.5 - 18.8 | = | -0.3 | = 0.3
-<br/><br/>
-<b>Unsigned percent difference</b>
-<br/>
-Assess whether 2 values are different by taking the absolute value of the percent difference and testing if it is larger than the max value of difference value
-<br/>
-<b>Example:</b> age = 18.5 vs. age = 18.8
-<br/>
-difference = | 18.5 - 18.8 | / 18.8 = | -0.3 | / 18.8 = 0.3 / 18.8 = 0.0160
-<br/><br/>
-<b>Max value of difference (blank by default)</b>
-<br/>
-If blank, values should be identical (as best detected by your system). Otherwise, enter a value > 0 that will be used to determine if the difference is large enough to be called different.
-<br/>
-<b>Example 1 with numerical difference:</b> age = 18.5 vs. age = 18.8 and max value = 0.2
-<br/>
-difference = | 18.5 - 18.8 | = | -0.3 | = 0.3 since 0.3 > 0.2, this would be flagged as different
-<br/><br/>
-<b>Example 2 with numerical difference:</b> age = 18.5 vs. age = 18.6 and max value = 0.2
-<br/>
-difference = | 18.5 - 18.6 | = | -0.1 | = 0.1 since 0.1 < 0.2, this would not be flagged as different
-<br/><br/>
-<b>Example 1 with percent difference:</b> age = 18.5 vs. age = 18.8 and max value = 0.01
-<br/>
-difference = | 18.5 - 18.8 | / 18.8 = | -0.3 | / 18.8 = 0.3 / 18.8 = 0.0160 since 0.016 > 0.01, this would be flagged as different
-<br/><br/>
-<b>Example 2 with percent difference:</b> age = 18.5 vs. age = 18.8 and max value = 0.01
-<br/>
-difference = | 18.5 - 18.6 | / 18.8 = | -0.1 | / 18.8 = 0.1 / 18.8 = 0.0005 since 0.0005 < 0.01, this would not be flagged as different
-<br/><br/>
-<b>Treat integer variables as numeric variables in comparisons</b>
-<br/>
-Should variables with class integer be compared to variables with class numeric? You may end up with variables of different classes when you read in data from external sources (like Excel)
-<br/>
-<b>Example:</b> age (integer) = c(18, 33, 45) vs. age (numeric) = c(18.6, 33.4, 45.1)
-<br/>
-If you want the values of these 2 variables compared between the data sets, check this box. By default, the system only compares numeric variables of the same class.
-<br/><br/><br/>
-<b>Factor Variable Tolerance Options</b>
-<br/><br/>
-<b>Compare both underlying levels and labels (default)</b>
-<br/>
-Compare both the stored values (1,2,3) and labels (mild, moderate, severe) between the variables
-<br/>
-<b>Example 1:</b> disease (1 = mild, 2 = moderate, 3 = severe) vs. disease (1 = mild, 2 = severe)
-<br/>
-These  2 variables would be considered different because the 2 = moderate in 1st variable but 2 = severe in the 2nd variable
-<br/><br/>
-<b>Example 2:</b> disease (1 = mild, 2 = moderate, 3 = severe) vs. disease (1 = mild, 2 = moderate, 3 = sev)
-<br/>
-These  2 variables would be considered different because the 3 = severe in 1st variable but 3 = sev in the 2nd variable
-<br/><br/>
-<b>Compare underlying levels only</b>
-<br/>
-Compare only the underlying levels (1,2,3) across factor variables
-<br/>
-<b>Example 1:</b> disease (1 = mild, 2 = moderate, 3 = severe) vs. disease (1 = mild, 2 = severe)
-<br/>
-These  2 variables would not be considered different because the underlying values 1,2,3 in the 1st variable are the same as the values 1,2 are in the 2nd variable.
-<br/><br/>
-<b>Example 2:</b> disease (1 = mild, 2 = moderate, 3 = severe) vs. disease (1 = mild, 2 = moderate, 3 = sev)
-<br/>
-These  2 variables would be considered different because the 3 = severe in 1st variable but 3 = sev in the 2nd variable
-<br/><br/>
-<b>Compare underlying labels only</b>
-<br/>
-Compare only the underlying labels (mild, moderate, severe) across factor variables
-<br/>
-<b>Example 1:</b> disease (1 = mild, 2 = moderate, 3 = severe) vs. disease (1 = mild, 2 = severe)
-<br/>
-These  2 variables would not be considered different because the labels are the same
-<br/><br/>
-<b>Example 2:</b> disease (1 = mild, 2 = moderate, 3 = severe) vs. disease (1 = mild, 2 = moderate, 3 = sev)
-<br/>
-These  2 variables would be considered different because the 3 = severe in 1st variable but 3 = sev in the 2nd variable so the labels are different
-<br/><br/>
-<b>Treat factor variables as character variables in comparisons</b>
-<br/>
-Check if factors should be converted to character variables using their labels for the comparison. You may end up with discrepant classes if you read data from different sources.
-<br/>
-<b>Example:</b> disease (factor with 1 = mild, 2 = moderate, 3 = severe) vs. disease (character with mild, moderate, severe)
-<br/>
-To compare these variables, check the box to convert the 1st variable to a character variable.
-<br/><br/><br/>
-<b>Character Variable Tolerance Options</b>
-<br/><br/>
-<b>Treat text as-is (default)</b>
-<br/>
-Text is compared exactly as presented including any differing spaces or upper/lowercase differences.
-<br/>
-<b>Example (note that . means a space):</b> name = John vs. name = john
-<br/>
-These would be different since J is different from j
-<br/><br/>
-<b>Ignore differences in upper/lowercase</b>
-<br/>
-Ignore case differences when doing the comparison
-<br/>
-<b>Example (note that . means a space):</b> name = John vs. name = john
-<br/>
-These would not be different since J is now not different from j
-<br/><br/>
-<b>Ignore differences in leading/trailing whitespace</b>
-<br/>
-Remove any leading/trailing whitespace before doing the comparison
-<br/>
-<b>Example (note that . means a space):</b> name = john vs. name = john...
-<br/>
-By default, john is different from john... but selecting this option would make john = john... because the ... would get removed prior to the comparison
-<br/><br/>
-<b>Ignore differences in both case and whitespace</b>
-<br/>
-Ignore both case and whitespace as described above
-<br/><br/><br/>
-<b>Variable Name Tolerance Options</b>
-<br/><br/>
-<b>Treat variable names as-is (default)</b>
-<br/>
-Upper/lowercase, spaces, dots, and underscores mean variables are different
-<br/>
-<b>Example:</b> Variable = Age would not be compared to Variable = age using this option
-<br/><br/>
-<b>Treat dots, underscores, and spaces equivalent in variable names</b>
-<br/>
-Ignore dots, underscores, and spaces in variable names
-<br/>
-<b>Example:</b> Variable = Age.dx would be compared to Age_dx if you select this option. By default, they would not be treated as the same variable
-<br/><br/>
-<b>Ignore upper/lowercase in variable names</b>
-<br/>
-Ignore differences in upper/lowercase in variable names
-<br/>
-<b>Example:</b> Variable = Age would be compared to Variable = age using this option
-<br/><br/>
-<b>Ignore case and treat dots, underscores, and spaces equivalent in variable names</b>
-<Br/>
-Ignore differences in dots, underscores, spaces, and upper/lowercase as described above
-<br/>
-<b>Example:</b> Variable = Age.dx would be compared to Variable = age_dx using this option
-<br/><br/>
-<b>Required R Packages:</b> arsenal
-			`}
-    }
-}
+
 
 
 
@@ -199,10 +10,13 @@ Ignore differences in dots, underscores, spaces, and upper/lowercase as describe
 
 
 class CompareDatasets extends baseModal {
+    static dialogId = 'CompareDatasets'
+    static t = baseModal.makeT(CompareDatasets.dialogId)
+
     constructor() {
         var config = {
-            id: "CompareDatasets",
-            label: localization.en.title,
+            id: CompareDatasets.dialogId,
+            label: CompareDatasets.t('title'),
 			splitProcessing: false,
             modalType: "two",
             RCode: `
@@ -272,7 +86,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			in1: {
 				el: new dstVariable(config, {
-				label: localization.en.in1label,
+				label: CompareDatasets.t('in1label'),
 				no: "in1",
 				filter: "Dataset",
 				extraction: "NoPrefix|UseComma",
@@ -281,7 +95,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			in2: {
 				el: new dstVariable(config, {
-				label: localization.en.in2label,
+				label: CompareDatasets.t('in2label'),
 				no: "in2",
 				filter: "Dataset",
 				extraction: "NoPrefix|UseComma",
@@ -290,21 +104,21 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			defcomplabel: {
 				el: new labelVar(config, {
-				label: localization.en.defcomplabel, 
+				label: CompareDatasets.t('defcomplabel'), 
 				style: "mt-4", 
 				h:5
 				})
 			},
 			numtolcontrolslabel: {
 				el: new labelVar(config, {
-				label: localization.en.numtolcontrolslabel, 
+				label: CompareDatasets.t('numtolcontrolslabel'), 
 				style: "mt-4", 
 				h:5
 				})
 			},
 			numabsolute: {
 				el: new radioButton(config, {
-				label: localization.en.numabsolutelabel,
+				label: CompareDatasets.t('numabsolutelabel'),
 				no: "TestRadioGroup",
 				style: "ml-3",
 				increment: "numabsolute",
@@ -315,7 +129,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			numpercent: {
 				el: new radioButton(config, {
-				label: localization.en.numpercentlabel,
+				label: CompareDatasets.t('numpercentlabel'),
 				no: "TestRadioGroup",
 				style: "ml-3",
 				increment: "numpercent",
@@ -327,7 +141,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			numtolval: {
 				el: new input(config, {
 				no: 'numtolval',
-				label: localization.en.numtolvallabel,
+				label: CompareDatasets.t('numtolvallabel'),
 				style: "ml-5 mt-1 mb-2",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -338,7 +152,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},	
 			intasnum: {
 				el: new checkbox(config, {
-				label: localization.en.intasnumlabel,
+				label: CompareDatasets.t('intasnumlabel'),
 				no: "intasnum",
 				style: "ml-5",
 				extraction: "Boolean"
@@ -346,14 +160,14 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			facttolcontrolslabel: {
 				el: new labelVar(config, {
-				label: localization.en.facttolcontrolslabel, 
+				label: CompareDatasets.t('facttolcontrolslabel'), 
 				style: "mt-3", 
 				h:5
 				})
 			},
 			factnone: {
 				el: new radioButton(config, {
-				label: localization.en.factnonelabel,
+				label: CompareDatasets.t('factnonelabel'),
 				no: "FactorGroup",
 				style: "ml-3",
 				increment: "factnone",
@@ -364,7 +178,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			factlevels: {
 				el: new radioButton(config, {
-				label: localization.en.factlevelslabel,
+				label: CompareDatasets.t('factlevelslabel'),
 				no: "FactorGroup",
 				style: "ml-3",
 				increment: "factlevels",
@@ -375,7 +189,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			factlabels: {
 				el: new radioButton(config, {
-				label: localization.en.factlabelslabel,
+				label: CompareDatasets.t('factlabelslabel'),
 				no: "FactorGroup",
 				style: "ml-3",
 				increment: "factlabels",
@@ -386,7 +200,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			factaschar: {
 				el: new checkbox(config, {
-				label: localization.en.factascharlabel,
+				label: CompareDatasets.t('factascharlabel'),
 				no: "factaschar",
 				style: "ml-5 mt-2",
 				extraction: "Boolean"
@@ -394,14 +208,14 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			chartolcontrolslabel: {
 				el: new labelVar(config, {
-				label: localization.en.chartolcontrolslabel, 
+				label: CompareDatasets.t('chartolcontrolslabel'), 
 				style: "mt-3", 
 				h:5
 				})
 			},
 			charnone: {
 				el: new radioButton(config, {
-				label: localization.en.charnonelabel,
+				label: CompareDatasets.t('charnonelabel'),
 				no: "CharacterGroup",
 				style: "ml-3",
 				increment: "charnone",
@@ -412,7 +226,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			charcase: {
 				el: new radioButton(config, {
-				label: localization.en.charcaselabel,
+				label: CompareDatasets.t('charcaselabel'),
 				no: "CharacterGroup",
 				style: "ml-3",
 				increment: "charcase",
@@ -423,7 +237,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			chartrim: {
 				el: new radioButton(config, {
-				label: localization.en.chartrimlabel,
+				label: CompareDatasets.t('chartrimlabel'),
 				no: "CharacterGroup",
 				style: "ml-3",
 				increment: "chartrim",
@@ -434,7 +248,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			charboth: {
 				el: new radioButton(config, {
-				label: localization.en.charbothlabel,
+				label: CompareDatasets.t('charbothlabel'),
 				no: "CharacterGroup",
 				style: "ml-3",
 				increment: "charboth",
@@ -445,14 +259,14 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			varnametolcontrolslabel: {
 				el: new labelVar(config, {
-				label: localization.en.varnametolcontrolslabel, 
+				label: CompareDatasets.t('varnametolcontrolslabel'), 
 				style: "mt-3", 
 				h:5
 				})
 			},
 			varnamenone: {
 				el: new radioButton(config, {
-				label: localization.en.varnamenonelabel,
+				label: CompareDatasets.t('varnamenonelabel'),
 				no: "VarNameGroup",
 				style: "ml-3",
 				increment: "varnamenone",
@@ -463,7 +277,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			varnamedots: {
 				el: new radioButton(config, {
-				label: localization.en.varnamedotslabel,
+				label: CompareDatasets.t('varnamedotslabel'),
 				no: "VarNameGroup",
 				style: "ml-3",
 				increment: "varnamedots",
@@ -474,7 +288,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},			
 			varnamecase: {
 				el: new radioButton(config, {
-				label: localization.en.varnamecaselabel,
+				label: CompareDatasets.t('varnamecaselabel'),
 				no: "VarNameGroup",
 				style: "ml-3",
 				increment: "varnamecase",
@@ -485,7 +299,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			varnameboth: {
 				el: new radioButton(config, {
-				label: localization.en.varnamebothlabel,
+				label: CompareDatasets.t('varnamebothlabel'),
 				no: "VarNameGroup",
 				style: "ml-3",
 				increment: "varnameboth",
@@ -496,7 +310,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			idoptionslabel: {
 				el: new labelVar(config, {
-				label: localization.en.idoptionslabel, 
+				label: CompareDatasets.t('idoptionslabel'), 
 				style: "mt-5", 
 				h:5
 				})
@@ -504,7 +318,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			by: {
 				el: new input(config, {
 				no: 'by',
-				label: localization.en.bylabel,
+				label: CompareDatasets.t('bylabel'),
 				extraction: "TextAsIs",
 				allow_spaces: true,
 				type: "character",
@@ -513,7 +327,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			},
 			bydifflabel: {
 				el: new labelVar(config, {
-				label: localization.en.bydifflabel,
+				label: CompareDatasets.t('bydifflabel'),
 				style: "mt-3",				
 				h:4
 				})
@@ -521,7 +335,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			byx: {
 				el: new input(config, {
 				no: 'byx',
-				label: localization.en.byxlabel,
+				label: CompareDatasets.t('byxlabel'),
 				style: "ml-3",
 				extraction: "TextAsIs",
 				allow_spaces: true,
@@ -532,7 +346,7 @@ print.summary.comparedf.bsky(temp.out.summary)
 			byy: {
 				el: new input(config, {
 				no: 'byy',
-				label: localization.en.byylabel,
+				label: CompareDatasets.t('byylabel'),
 				style: "ml-3",
 				extraction: "TextAsIs",
 				allow_spaces: true,
@@ -552,16 +366,25 @@ print.summary.comparedf.bsky(temp.out.summary)
 					objects.varnametolcontrolslabel.el.content, objects.varnamenone.el.content, objects.varnamedots.el.content, objects.varnamecase.el.content, objects.varnameboth.el.content,
 					objects.idoptionslabel.el.content, objects.by.el.content, objects.bydifflabel.el.content, objects.byx.el.content, objects.byy.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: CompareDatasets.t('navigation'),
                 icon: "icon-compare",
 				positionInNav: 1,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: CompareDatasets.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: CompareDatasets.t('help.body')
+        }
+;
     }
 	
 	
 }
-module.exports.item = new CompareDatasets().render()
+
+module.exports = {
+    render: () => new CompareDatasets().render()
+}

@@ -1,77 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Subset by Position",
-        navigation: "Subset By Position",
-		newdatasetlabel: "Specify New Dataset Name",
-        sortbyvarslabel: "Variables to Sort By First (Ascending Order)",		
-        groupbyvarslabel: "Groups to Subset Within",
-        subsettypelabel: "Subset Type",
-		firstnlabel: "First N Rows",
-		lastnlabel: "Last N Rows",
-		lowestnlabel: "Rows with Lowest N Values for a Variable",
-		highestnlabel: "Rows with Highest N Values for a Variable",
-		firstproplabel: "First Proportion of Rows",
-		lastproplabel: "Last Proportion of Rows",
-		lowestproplabel: "Rows within Lowest Percentile for a Variable",
-		highestproplabel: "Rows within Highest Percentile for a Variable",
-		nlabel: "N (positive keeps, negative removes)",
-		proplabel: "Proportion (positive keeps, negative removes)",
-		varlabel: "Variable",
-		tieslabel: "Include Tied Values",
-		rownumlabel: "Specify Row Numbers",
-		rownumboxlabel: "Numbers or ranges separated by commas (e.g. 1,3,5 or 20:30 or seq(2,10,by=2), positive keeps, negative removes)",
-        help: {
-            title: "Subset by Position",
-            r_help: "help(slice, package ='dplyr')",
-            body: `
-This subsets a dataset according to row position.
-<br/><br/>
-<b>Specify New Dataset Name:</b> Dataset name where the subsetted data will be stored
-<br/><br/>
-<b>Variables to Sort By First:</b> Variables used to sort the rows before any subsetting is undertaken.  This only will affect options that select the number of rows, e.g. 
-First/Last N Rows, First/Last Proportion of Rows, and Specify Row Numbers. It will always be in ascending order.
-<br/><br/>
-<b>Groups to Subset Within:</b> Specifying no variables will subset according to the row position of the entire dataset.  Specifying variables will subset according to the row position
-within groups defined by all combinations of values for the specified variables.
-<br/><br/>
-<b>Subset Type</b>
-<br/><br/>
-<b>First N Rows:</b> Keeps the first N rows of the dataset overall or within groups
-<br/><br/>
-<b>Last N Rows:</b> Keeps the last N rows of the dataset overall or within groups
-<br/><br/>
-<b>Rows with Lowest N Values for a Variable:</b> Keeps the rows that have the lowest ordered values for a specified variable overall or within groups. For example, specifying 10 would 
-keep the rows with the lowest 10 values for a variable.
-<br/><br/>
-<b>Rows with Highest N Values for a Variable:</b> Keeps the rows that have the highest ordered values for a specified variable overall or within groups. For example, specifying 10 would 
-keep the rows with the highest 10 values for a variable.
-<br/><br/>
-<b>First Proportion of Rows:</b> Keeps the rows in the top proportion of the dataset overall or within groups. For example, specifying .10 would keep the top 10% of the dataset 
-according to the total number of rows.
-<br/><br/> 
-<b>Last Proportion of Rows:</b> Keeps the rows in the bottom proportion of the dataset overall or within groups. For example, specifying .10 would keep the bottom 10% of the dataset 
-according to the total number of rows.
-<br/><br/>
-<b>Rows within Lowest Percentile for a Variable:</b> Keeps the rows in the lowest percentile for a specified variable, overall or within groups. For example, specifying .10 would 
-keep the lowest 10th percentile for a variable (minimum to the 10th percentile).
-<br/><br/>
-<b>Rows within Highest Percentile for a Variable:</b> Keeps the rows in the highest percentile for a specified variable, overall or within groups. For example, specifying .10 would 
-keep the highest 10th percentile for a variable (90th percentile to the maximum).
-<br/><br/>
-<b>Specify Row Numbers:</b> Keeps the exact numbered rows specified. For example, specifying 1,3,5 would keep the first, third, and fifth rows. Specifying 20:30 would keep rows 20 
-to 30.  Specifying seq(2,10,by=2) would keep the even numbered rows up to the 10th row.
-<br/><br/>
-<b>Include Tied Values:</b> Specifies whether tied values should be included or not.  For example, if you want the rows for the lowest 10 values of a variable and the 10th lowest 
-value appears more than once, including the tied values will keep all rows that equal the duplicated value. 
-<br/><br/>
-Note that specifying negative values for N or the proportion removes the corresponding rows from the dataset.  For example, specifying -10 for the First N Rows would remove 
-the first 10 rows.  Specifying -.10 for the First Proportion of Rows, would remove the first 10% of the rows.
-<br/><br/>
-<b>R Packages Required:</b> dplyr
-			`}
-    }
-}
+
 
 
 
@@ -82,10 +10,13 @@ the first 10 rows.  Specifying -.10 for the First Proportion of Rows, would remo
 
 
 class SubsetByPosition extends baseModal {
+    static dialogId = 'SubsetByPosition'
+    static t = baseModal.makeT(SubsetByPosition.dialogId)
+
     constructor() {
         var config = {
-            id: "SubsetByPosition",
-            label: localization.en.title,
+            id: SubsetByPosition.dialogId,
+            label: SubsetByPosition.t('title'),
 			splitProcessing: false,
             modalType: "two",
             RCode: `
@@ -164,7 +95,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			newdataset: {
 				el: new input(config, {
 				no: 'newdataset',
-				label: localization.en.newdatasetlabel,
+				label: SubsetByPosition.t('newdatasetlabel'),
 				extraction: "TextAsIs",
 				type: "character",
 				allow_spaces: false,
@@ -175,7 +106,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
             sortbyvars: {
                 el: new dstVariableList(config, {
-                    label: localization.en.sortbyvarslabel,
+                    label: SubsetByPosition.t('sortbyvarslabel'),
                     no: "sortbyvars",
                     filter: "String|Numeric|Date|Logical|Ordinal|Nominal|Scale",
                     extraction: "NoPrefix|UseComma",
@@ -184,17 +115,17 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
             },			
             groupbyvars: {
                 el: new dstVariableList(config, {
-                    label: localization.en.groupbyvarslabel,
+                    label: SubsetByPosition.t('groupbyvarslabel'),
                     no: "groupbyvars",
                     filter: "String|Numeric|Date|Logical|Ordinal|Nominal|Scale",
                     extraction: "NoPrefix|UseComma",
                     required: false
                 })
             },
-			subsettypelabel: { el: new labelVar(config, { label: localization.en.subsettypelabel, style: "mt-4",h: 5 }) },
+			subsettypelabel: { el: new labelVar(config, { label: SubsetByPosition.t('subsettypelabel'), style: "mt-4",h: 5 }) },
 			firstn: {
 				el: new radioButton(config, {
-				label: localization.en.firstnlabel,
+				label: SubsetByPosition.t('firstnlabel'),
 				no: "subsettypegrp",
 				increment: "firstn",
 				style: "mt-3",
@@ -206,7 +137,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			firstnn: {
 				el: new input(config, {
 				no: 'firstnn',
-				label: localization.en.nlabel,
+				label: SubsetByPosition.t('nlabel'),
 				value: "1",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -217,7 +148,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},			
 			lastn: {
 				el: new radioButton(config, {
-				label: localization.en.lastnlabel,
+				label: SubsetByPosition.t('lastnlabel'),
 				no: "subsettypegrp",
 				increment: "lastn",
 				style: "mt-5",
@@ -229,7 +160,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			lastnn: {
 				el: new input(config, {
 				no: 'lastnn',
-				label: localization.en.nlabel,
+				label: SubsetByPosition.t('nlabel'),
 				value: "1",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -240,7 +171,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},				
 			lowestn: {
 				el: new radioButton(config, {
-				label: localization.en.lowestnlabel,
+				label: SubsetByPosition.t('lowestnlabel'),
 				no: "subsettypegrp",
 				increment: "lowestn",
 				style: "mt-5",
@@ -252,7 +183,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			lowestnn: {
 				el: new input(config, {
 				no: 'lowestnn',
-				label: localization.en.nlabel,
+				label: SubsetByPosition.t('nlabel'),
 				value: "1",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -263,7 +194,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			lowestnvar: {
 				el: new dstVariable(config, {
-				label: localization.en.varlabel,
+				label: SubsetByPosition.t('varlabel'),
 				no: "lowestnvar",
 				filter: "Numeric|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -273,7 +204,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			lowestnties: {
 				el: new checkbox(config, {
-				label: localization.en.tieslabel,
+				label: SubsetByPosition.t('tieslabel'),
 				no: "lowestnties",
 				state: "checked",
 				style: "ml-5",
@@ -282,7 +213,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},			
 			highestn: {
 				el: new radioButton(config, {
-				label: localization.en.highestnlabel,
+				label: SubsetByPosition.t('highestnlabel'),
 				no: "subsettypegrp",
 				increment: "highestn",
 				style: "mt-5",
@@ -294,7 +225,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			highestnn: {
 				el: new input(config, {
 				no: 'highestnn',
-				label: localization.en.nlabel,
+				label: SubsetByPosition.t('nlabel'),
 				value: "1",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -305,7 +236,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			highestnvar: {
 				el: new dstVariable(config, {
-				label: localization.en.varlabel,
+				label: SubsetByPosition.t('varlabel'),
 				no: "highestnvar",
 				filter: "Numeric|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -315,7 +246,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			highestnties: {
 				el: new checkbox(config, {
-				label: localization.en.tieslabel,
+				label: SubsetByPosition.t('tieslabel'),
 				no: "highestnties",
 				state: "checked",
 				style: "ml-5",
@@ -324,7 +255,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},				
 			firstprop: {
 				el: new radioButton(config, {
-				label: localization.en.firstproplabel,
+				label: SubsetByPosition.t('firstproplabel'),
 				no: "subsettypegrp",
 				increment: "firstprop",
 				style: "mt-5",
@@ -336,7 +267,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			firstpropprop: {
 				el: new input(config, {
 				no: 'firstpropprop',
-				label: localization.en.proplabel,
+				label: SubsetByPosition.t('proplabel'),
 				value: ".10",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -347,7 +278,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},			
 			lastprop: {
 				el: new radioButton(config, {
-				label: localization.en.lastproplabel,
+				label: SubsetByPosition.t('lastproplabel'),
 				no: "subsettypegrp",
 				increment: "lastprop",
 				style: "mt-5",
@@ -359,7 +290,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			lastpropprop: {
 				el: new input(config, {
 				no: 'lastpropprop',
-				label: localization.en.proplabel,
+				label: SubsetByPosition.t('proplabel'),
 				value: ".10",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -370,7 +301,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			lowestprop: {
 				el: new radioButton(config, {
-				label: localization.en.lowestproplabel,
+				label: SubsetByPosition.t('lowestproplabel'),
 				no: "subsettypegrp",
 				increment: "lowestprop",
 				style: "mt-5",
@@ -382,7 +313,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			lowestpropprop: {
 				el: new input(config, {
 				no: 'lowestpropprop',
-				label: localization.en.proplabel,
+				label: SubsetByPosition.t('proplabel'),
 				value: ".10",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -393,7 +324,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			lowestpropvar: {
 				el: new dstVariable(config, {
-				label: localization.en.varlabel,
+				label: SubsetByPosition.t('varlabel'),
 				no: "lowestpropvar",
 				filter: "Numeric|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -403,7 +334,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			lowestpropties: {
 				el: new checkbox(config, {
-				label: localization.en.tieslabel,
+				label: SubsetByPosition.t('tieslabel'),
 				no: "lowestpropties",
 				state: "checked",
 				style: "ml-5",
@@ -412,7 +343,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},				
 			highestprop: {
 				el: new radioButton(config, {
-				label: localization.en.highestproplabel,
+				label: SubsetByPosition.t('highestproplabel'),
 				no: "subsettypegrp",
 				increment: "highestprop",
 				style: "mt-5",
@@ -424,7 +355,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			highestpropprop: {
 				el: new input(config, {
 				no: 'highestpropprop',
-				label: localization.en.proplabel,
+				label: SubsetByPosition.t('proplabel'),
 				value: ".10",
 				extraction: "TextAsIs",
 				type: "numeric",
@@ -435,7 +366,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			highestpropvar: {
 				el: new dstVariable(config, {
-				label: localization.en.varlabel,
+				label: SubsetByPosition.t('varlabel'),
 				no: "highestpropvar",
 				filter: "Numeric|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -445,7 +376,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},
 			highestpropties: {
 				el: new checkbox(config, {
-				label: localization.en.tieslabel,
+				label: SubsetByPosition.t('tieslabel'),
 				no: "highestpropties",
 				state: "checked",
 				style: "ml-5",
@@ -454,7 +385,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			},			
 			rownum: {
 				el: new radioButton(config, {
-				label: localization.en.rownumlabel,
+				label: SubsetByPosition.t('rownumlabel'),
 				no: "subsettypegrp",
 				increment: "rownum",
 				style: "mt-5",
@@ -466,7 +397,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 			rownumbox: {
 				el: new input(config, {
 				no: 'rownumbox',
-				label: localization.en.rownumboxlabel,
+				label: SubsetByPosition.t('rownumboxlabel'),
 				extraction: "TextAsIs",
 				type: "character",
 				allow_spaces: true,
@@ -488,13 +419,22 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
 					objects.highestprop.el.content, objects.highestpropprop.el.content, objects.highestpropvar.el.content, objects.highestpropties.el.content,
 					objects.rownum.el.content, objects.rownumbox.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: SubsetByPosition.t('navigation'),
                 icon: "icon-funnel-p",
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SubsetByPosition.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SubsetByPosition.t('help.body')
+        }
+;
     }
 }
-module.exports.item = new SubsetByPosition().render()
+
+module.exports = {
+    render: () => new SubsetByPosition().render()
+}

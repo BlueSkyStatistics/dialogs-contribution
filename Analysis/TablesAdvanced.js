@@ -1,152 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Table, Advanced",
-        navigation: "Table, Advanced",
-		notelabel: "NOTE: At least one variable must be specified in at least one of the below: ANOVA Test, Kruskal-Wallis Test, Median Test, Pearson's Chi-Square Test, Fisher's Exact Test, Ordinal Trend Test, or No Test",  
-		anovavarslabel: "Variables for ANOVA Test",
-		kwvarslabel: "Variables for Kruskal-Wallis Test",
-		medvarslabel: "Variables for Median Test",
-		chisqvarslabel: "Variables for Pearson's Chi-Square Test",
-		fishervarslabel: "Variables for Fisher's Exact Test",
-		ordvarslabel: "Variables for Ordinal Trend Test",
-		notestvarslabel: "Variables for No Test",
-		bygroupvarlabel: "Groups to Compare",
-		stratavarlabel: "Strata (optional)",
-		tabletitlelabel: "Table Title",
-		totalcolchkboxlabel: "Include total column",
-		groupvarchkboxlabel: "Include group variable name",
-		digitslabel: "Digits After Decimal",
-		contdigitslabel: "Continuous Values",
-		pctdigitslabel: "Percentages",
-		pvaluedigitslabel: "P-Values",
-		simplifylabel: "Simplify Multi-Row Variable Summaries to One Row (if possible)",
-		numericsimplifylabel: "Numeric Variables",
-		categorysimplifylabel: "Categorical Variables",
-		ordinalsimplifylabel: "Ordinal Variables",
-		datesimplifylabel: "Date Variables",
-		labelsimplifylabel: "Use Last Level in Label of Categorical Variables",
-		conflevellabel: "Confidence Level",
-		simchkboxlabel: "Simulate p-values for Pearson and Fisher",
-		simnumlabel: "Number of Simulations",
-		footnotechkboxlabel: "Test Names Footnote",
-		sampsizelabel: "Sample Size",
-		meanlabel: "Mean",
-		quantileslabel: "Quantiles",
-		otherlabel: "Other",
-		nmissanylabel: "Number Missing, if any",
-		nmissalwayslabel: "Number Missing, always",
-		meansdlabel: "Mean (SD)",
-		meancilabel: "Mean (CI)",
-		meanselabel: "Mean (SE)",
-		gmeanlabel: "Geometric Mean",
-		gmeansdlabel: "Geometric Mean (SD)",
-		gmeancilabel: "Geometric Mean (CI)",
-		trimmeancilabel: "Trimmed Mean (CI)",
-		trimpctlabel: "Specify Trimmed Mean Percent",
-		medianlabel: "Median",
-		medianq1q3label: "Median (25th %-ile, 75th %-ile)",
-		q1q3label: "(25th %-ile, 75th %-ile)",
-		iqrlabel: "Interquartile Range",
-		medianrangelabel: "Median (Range)",
-		medianmadlabel: "Median (Median Absolute Deviation)",
-		rangelabel: "Range",
-		minlabel: "Minimum",
-		maxlabel: "Maximum",
-		pct1label: "1st %-ile (CI)",
-		pct5label: "5th %-ile (CI)",
-		pct10label: "10th %-ile (CI)",
-		pct25label: "25th %-ile (CI)",
-		pct33label: "33 1/3 %-ile (CI)",
-		pct50label: "Median (CI)",
-		pct66label: "66 2/3 %-ile (CI)",
-		pct75label: "75th %-ile (CI)",
-		pct90label: "90th %-ile (CI)",
-		pct95label: "95th %-ile (CI)",
-		pct99label: "99th %-ile (CI)",
-		custquantlabel: "Custom %-ile (CI)",
-		custquantvaluelabel: "Specify %-ile",		
-		skewnesslabel: "Skewness",
-		kurtosislabel: "Kurtosis",
-		sumlabel: "Sum",
-		sdlabel: "SD",
-		varlabel: "Variance",
-		gsdlabel: "Geometric Mean SD",
-		cvlabel: "Coefficient of Variation",
-		freqlabel: "Frequency",
-		freqtotallabel: "Frequency/Total",
-		freqpctlabel: "Frequency (%)",
-		propcilabel: "Proportion (CI)",	
-        help: {
-            title: "Table, Advanced",
-            r_help: "help(tableby, package ='arsenal')",
-            body: `
-This creates a table of summary statistics within groups to compare and a stratification variable to do the comparisons within.  One column for each group 
-variable category will be created.  The stratification variable categories will form additional rows for the table.  Various summary statistics and statistical tests can be 
-specified.
-<br/><br/>
-Note: Dates of any class will be converted to the Date class for summarization purposes only.  Your original dataset will be unchanged.  This also means summarized dates will be accurate to the day only.
-<br/><br/>
-<b>Groups to Compare:</b> Variable that defines the categories to compare
-<br/><br/>
-<b>Variables for ANOVA Test:</b> Specify numeric or date variables for group comparisons using the Analysis of Variance (ANOVA) test
-<br/><br/>
-<b>Variables for Kruskal-Wallis Test:</b> Specify numeric, date, or ordinal factor variables for group comparisons using the Kruskal-Wallis test
-<br/><br/>
-<b>Variables for Median Test:</b> Specify numeric or date variables for group comparisons using a test of medians
-<br/><br/>
-<b>Variables for Pearson's Chi-Square Test:</b> Specify nominal factor or ordinal factor variables for group comparisons using Pearson's Chi-Square test
-<br/><br/>
-<b>Variables for Fisher's Exact Test:</b> Specify nominal factor or ordinal factor variables for group comparisons using Fisher's Exact test
-<br/><br/>
-<b>Variables for Ordinal Trend Test:</b> Specify nominal factor or ordinal factor variables for group comparisons using a trend test.  For two groups, this is essentially the Cochran-Armitage trend test.
-<br/><br/>
-<b>Variables for No Test:</b> Specify variables that you want to summarize only within groups.  No statistical tests will be computed for these variables.
-<br/><br/>
-Note: You must specify at least one variable to summarize for a table to be produced.
-<br/><br/>
-<b>Strata (optional):</b> Variable that defines the categories within which the comparisons will be made
-<br/><br/>
-<b>Table Title:</b> specify the table title
-<br/><br/>
-<b>Include total column:</b> whether or not a total column is included in the table
-<br/><br/>
-<b>Include group variable name:</b> whether or not to include the group variable name in the table
-<br/><br/>
-<b>Digits After Decimal:</b> specify how many digits to display after the decimal point for continuous values, percentages, and p-values
-<br/><br/>
-<b>Simplify Multi-Row Variable Summaries to One Row (if possible):</b> For two-category categorical (factor/ordinal) variables or single summaries of numeric or date variables, 
-you can collapse the rows to have all variable names and statistics appear in a single row.  The summaries for the last category for each categorical variable will be shown. 
-Any variable for which collapsing isn't possible will take up multiple rows.  Turning this option on/off can be done for each type of variable separately.
-<br/><br/>
-<b>Use Last Level in Label of Categorical Variables:</b> For simplified tables, this includes the last level of factor/ordinal variables in the row label.
-<br/><br/>
-<b>Confidence Level:</b> This sets the confidence level of the confidence intervals.
-<br/><br/>
-<b>Statistical Test Options</b>
-<br/><br/>
-<b>Statistical Tests:</b> Pearson and Fisher Simulations provides the ability to obtain simulated p-values for Pearson's chi-square tests and 
-Fisher's Exact tests.  This procedure creates Monte Carlo simulations the specified number of times (Number of Simulations).  This can be useful in cases where the standard 
-computations, especially for Fisher's Exact test, result in computer memory errors.
-<br/><br/>
-<b>Test Names Footnote:</b> whether or not to include p-value footnotes listing the statistical tests done for each variable
-<br/><br/>
-<b>Numerical Statistics Options:</b>
-<br/>statistics that will be shown for numerical variables
-<br/><br/>
-<b>Categorical Statistics Options:</b> 
-<br/>
-statistics that will be shown for both nominal and ordered factors
-<br/><br/>
-<b>Date Statistics:</b>
-<br/>statistics that will be shown for date variables
-<br/><br/>
-<b>Note:</b> If you want to summarize a variable of a specific type, it is recommended that you select at least one statistic in that category that is not "Number Missing, if any".  If "Number Missing, if any" is the only option selected and no variables have a missing value, then an error will result. 
-<br/><br/>
-<b>Required R Packages:</b> arsenal, lubridate, dplyr, DescTools
-			`}
-    }
-}
+
 
 
 
@@ -157,10 +10,13 @@ statistics that will be shown for both nominal and ordered factors
 
 
 class TableAdvanced extends baseModal {
+    static dialogId = 'TableAdvanced'
+    static t = baseModal.makeT(TableAdvanced.dialogId)
+
     constructor() {
         var config = {
-            id: "TableAdvanced",
-            label: localization.en.title,
+            id: TableAdvanced.dialogId,
+            label: TableAdvanced.t('title'),
 			splitProcessing: true,
             modalType: "two",
             RCode: `
@@ -280,14 +136,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
             content_var: { el: new srcVariableList(config, {action: "move", scroll: true}) },
 			note: {
 				el: new labelVar(config, {
-				label: localization.en.notelabel, 
+				label: TableAdvanced.t('notelabel'), 
 				style: "mb-3", 
 				h:5
 				})
 			},			
 			anovavars: {
 				el: new dstVariableList(config,{
-				label: localization.en.anovavarslabel,
+				label: TableAdvanced.t('anovavarslabel'),
 				no: "anovavars",
 				required: false,
 				filter:"Numeric|Date|Scale",
@@ -296,7 +152,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			kwvars: {
 				el: new dstVariableList(config,{
-				label: localization.en.kwvarslabel,
+				label: TableAdvanced.t('kwvarslabel'),
 				no: "kwvars",
 				required: false,
 				filter:"Numeric|Date|Ordinal|Scale",
@@ -305,7 +161,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			medvars: {
 				el: new dstVariableList(config,{
-				label: localization.en.medvarslabel,
+				label: TableAdvanced.t('medvarslabel'),
 				no: "medvars",
 				required: false,
 				filter:"Numeric|Date|Scale",
@@ -314,7 +170,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			chisqvars: {
 				el: new dstVariableList(config,{
-				label: localization.en.chisqvarslabel,
+				label: TableAdvanced.t('chisqvarslabel'),
 				no: "chisqvars",
 				required: false,
 				filter:"Numeric|Nominal|Ordinal",
@@ -323,7 +179,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			fishervars: {
 				el: new dstVariableList(config,{
-				label: localization.en.fishervarslabel,
+				label: TableAdvanced.t('fishervarslabel'),
 				no: "fishervars",
 				required: false,
 				filter:"Numeric|Nominal|Ordinal",
@@ -332,7 +188,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			ordvars: {
 				el: new dstVariableList(config,{
-				label: localization.en.ordvarslabel,
+				label: TableAdvanced.t('ordvarslabel'),
 				no: "ordvars",
 				required: false,
 				filter:"Numeric|Nominal|Ordinal",
@@ -341,7 +197,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			notestvars: {
 				el: new dstVariableList(config,{
-				label: localization.en.notestvarslabel,
+				label: TableAdvanced.t('notestvarslabel'),
 				no: "notestvars",
 				required: false,
 				filter:"Numeric|Date|Nominal|Ordinal|Scale",
@@ -350,7 +206,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			bygroupvar: {
 				el: new dstVariable(config, {
-				label: localization.en.bygroupvarlabel,
+				label: TableAdvanced.t('bygroupvarlabel'),
 				no: "bygroupvar",
 				filter: "String|Numeric|Ordinal|Nominal|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -359,7 +215,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			stratavar: {
 				el: new dstVariable(config, {
-				label: localization.en.stratavarlabel,
+				label: TableAdvanced.t('stratavarlabel'),
 				no: "stratavar",
 				filter: "String|Numeric|Ordinal|Nominal|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -370,7 +226,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			tabletitle: {
 				el: new input(config, {
 				no: 'tabletitle',
-				label: localization.en.tabletitlelabel,
+				label: TableAdvanced.t('tabletitlelabel'),
 				style: "mt-3 mb-3",
 				placeholder: "Variable Summaries",
 				value: "Variable Summaries",
@@ -382,14 +238,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			totalcolchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.totalcolchkboxlabel,
+				label: TableAdvanced.t('totalcolchkboxlabel'),
 				no: "totalcolchkbox",
 				extraction: "Boolean"
 				})
 			},
 			groupvarchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.groupvarchkboxlabel,
+				label: TableAdvanced.t('groupvarchkboxlabel'),
 				no: "groupvarchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -399,7 +255,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			digitslabel: {
 				el: new labelVar(config, {
-				label: localization.en.digitslabel, 
+				label: TableAdvanced.t('digitslabel'), 
 				style: "mt-4", 
 				h:5
 				})
@@ -407,7 +263,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			contdigits: {
 				el: new inputSpinner(config, {
 				no: 'contdigits',
-				label: localization.en.contdigitslabel,
+				label: TableAdvanced.t('contdigitslabel'),
 				style: "ml-3",
 				min: 0,
 				max: 1000,
@@ -419,7 +275,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			pctdigits: {
 				el: new inputSpinner(config, {
 				no: 'pctdigits',
-				label: localization.en.pctdigitslabel,
+				label: TableAdvanced.t('pctdigitslabel'),
 				style: "ml-3",
 				min: 1,
 				max: 1000,
@@ -431,7 +287,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			pvaluedigits: {
 				el: new inputSpinner(config, {
 				no: 'pvaluedigits',
-				label: localization.en.pvaluedigitslabel,
+				label: TableAdvanced.t('pvaluedigitslabel'),
 				style: "ml-3",
 				min: 1,
 				max: 1000,
@@ -442,14 +298,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			simplifylabel: {
 				el: new labelVar(config, {
-				label: localization.en.simplifylabel, 
+				label: TableAdvanced.t('simplifylabel'), 
 				style: "mt-4", 
 				h:5
 				})
 			},
 			numericsimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.numericsimplifylabel,
+				label: TableAdvanced.t('numericsimplifylabel'),
 				style: "ml-3",
 				no: "numericsimplifychkbox",
 				extraction: "Boolean"
@@ -457,21 +313,21 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			categorysimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.categorysimplifylabel,
+				label: TableAdvanced.t('categorysimplifylabel'),
 				no: "categorysimplifychkbox",
 				extraction: "Boolean"
 				})
 			},
 			datesimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.datesimplifylabel,
+				label: TableAdvanced.t('datesimplifylabel'),
 				no: "datesimplifychkbox",
 				extraction: "Boolean"
 				})
 			},
 			labelsimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.labelsimplifylabel,
+				label: TableAdvanced.t('labelsimplifylabel'),
 				no: "labelsimplifychkbox",
 				newline: true,
 				style: "ml-3",
@@ -481,7 +337,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			conflevel: {
 				el: new inputSpinner(config, {
 				no: 'conflevel',
-				label: localization.en.conflevellabel,
+				label: TableAdvanced.t('conflevellabel'),
 				style: "mt-4 mb-4",
 				min: 0,
 				max: 1,
@@ -492,7 +348,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			simchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.simchkboxlabel,
+				label: TableAdvanced.t('simchkboxlabel'),
 				no: "simchkbox",
 				style: "mt-2",
 				extraction: "Boolean"
@@ -501,7 +357,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			simnum: {
 				el: new inputSpinner(config, {
 				no: 'simnum',
-				label: localization.en.simnumlabel,
+				label: TableAdvanced.t('simnumlabel'),
 				style: "mt-2",
 				min: 100,
 				max: 1000000,
@@ -512,7 +368,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			footnotechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.footnotechkboxlabel,
+				label: TableAdvanced.t('footnotechkboxlabel'),
 				no: "footnotechkbox",
 				style: "mt-4",
 				extraction: "Boolean"
@@ -520,13 +376,13 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			sampsizelabel: {
 				el: new labelVar(config, {
-				label: localization.en.sampsizelabel,
+				label: TableAdvanced.t('sampsizelabel'),
 				h:5
 				})
 			},
 			numnchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sampsizelabel,
+				label: TableAdvanced.t('sampsizelabel'),
 				no: "numnchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -536,7 +392,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},				
 			numnmisschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissanylabel,
+				label: TableAdvanced.t('nmissanylabel'),
 				no: "numnmisschkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -547,7 +403,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numnmiss2chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissalwayslabel,
+				label: TableAdvanced.t('nmissalwayslabel'),
 				no: "numnmiss2chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -557,14 +413,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},						
 			meanlabel: {
 				el: new labelVar(config, {
-				label: localization.en.meanlabel,
+				label: TableAdvanced.t('meanlabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			nummeanchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanlabel,
+				label: TableAdvanced.t('meanlabel'),
 				no: "nummeanchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -574,7 +430,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			nummeansdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meansdlabel,
+				label: TableAdvanced.t('meansdlabel'),
 				no: "nummeansdchkbox",
 				state: "checked",
 				bs_type: "valuebox",
@@ -585,7 +441,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			nummeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meancilabel,
+				label: TableAdvanced.t('meancilabel'),
 				no: "nummeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -595,7 +451,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			nummeansechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanselabel,
+				label: TableAdvanced.t('meanselabel'),
 				no: "nummeansechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -605,7 +461,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numgmeanchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gmeanlabel,
+				label: TableAdvanced.t('gmeanlabel'),
 				no: "numgmeanchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -615,7 +471,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numgmeansdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gmeansdlabel,
+				label: TableAdvanced.t('gmeansdlabel'),
 				no: "numgmeansdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -625,7 +481,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numgmeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gmeancilabel,
+				label: TableAdvanced.t('gmeancilabel'),
 				no: "numgmeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -635,7 +491,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numtrimmeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.trimmeancilabel,
+				label: TableAdvanced.t('trimmeancilabel'),
 				no: "numtrimmeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -646,7 +502,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			trimpct: {
 				el: new input(config, {
 				no: 'trimpct',
-				label: localization.en.trimpctlabel,
+				label: TableAdvanced.t('trimpctlabel'),
 				value: "5",
 				extraction: "TextAsIs",
 				allow_spaces: true,
@@ -657,14 +513,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			quantileslabel: {
 				el: new labelVar(config, {
-				label: localization.en.quantileslabel,
+				label: TableAdvanced.t('quantileslabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			nummedianchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianlabel,
+				label: TableAdvanced.t('medianlabel'),
 				no: "nummedianchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -674,7 +530,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},				
 			nummedianq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianq1q3label,
+				label: TableAdvanced.t('medianq1q3label'),
 				no: "nummedianq1q3chkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -685,7 +541,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.q1q3label,
+				label: TableAdvanced.t('q1q3label'),
 				no: "numq1q3chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -695,7 +551,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numiqrchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.iqrlabel,
+				label: TableAdvanced.t('iqrlabel'),
 				no: "numiqrchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -705,7 +561,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			nummedianrangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianrangelabel,
+				label: TableAdvanced.t('medianrangelabel'),
 				no: "nummedianrangechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -715,7 +571,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			nummedianmadchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianmadlabel,
+				label: TableAdvanced.t('medianmadlabel'),
 				no: "nummedianmadchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -725,7 +581,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numrangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.rangelabel,
+				label: TableAdvanced.t('rangelabel'),
 				no: "numrangechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -735,7 +591,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numminchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.minlabel,
+				label: TableAdvanced.t('minlabel'),
 				no: "numminchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -745,7 +601,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			nummaxchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.maxlabel,
+				label: TableAdvanced.t('maxlabel'),
 				no: "nummaxchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -755,7 +611,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct1chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct1label,
+				label: TableAdvanced.t('pct1label'),
 				no: "numpct1chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -765,7 +621,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct5chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct5label,
+				label: TableAdvanced.t('pct5label'),
 				no: "numpct5chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -775,7 +631,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct10chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct10label,
+				label: TableAdvanced.t('pct10label'),
 				no: "numpct10chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -785,7 +641,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct25chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct25label,
+				label: TableAdvanced.t('pct25label'),
 				no: "numpct25chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -795,7 +651,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numpct33chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct33label,
+				label: TableAdvanced.t('pct33label'),
 				no: "numpct33chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -805,7 +661,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct50chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct50label,
+				label: TableAdvanced.t('pct50label'),
 				no: "numpct50chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -815,7 +671,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numpct66chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct66label,
+				label: TableAdvanced.t('pct66label'),
 				no: "numpct66chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -825,7 +681,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct75chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct75label,
+				label: TableAdvanced.t('pct75label'),
 				no: "numpct75chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -835,7 +691,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			numpct90chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct90label,
+				label: TableAdvanced.t('pct90label'),
 				no: "numpct90chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -845,7 +701,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct95chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct95label,
+				label: TableAdvanced.t('pct95label'),
 				no: "numpct95chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -855,7 +711,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numpct99chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct99label,
+				label: TableAdvanced.t('pct99label'),
 				no: "numpct99chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -865,7 +721,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numcustquantchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.custquantlabel,
+				label: TableAdvanced.t('custquantlabel'),
 				no: "numcustquantchkbox",
 				newline: true,
 				bs_type: "valuebox",
@@ -877,7 +733,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			custquantvalue: {
 				el: new input(config, {
 				no: 'custquantvalue',
-				label: localization.en.custquantvaluelabel,
+				label: TableAdvanced.t('custquantvaluelabel'),
 				value: "20",
 				extraction: "TextAsIs",
 				allow_spaces: true,
@@ -888,14 +744,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			otherlabel: {
 				el: new labelVar(config, {
-				label: localization.en.otherlabel,
+				label: TableAdvanced.t('otherlabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			numsumchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sumlabel,
+				label: TableAdvanced.t('sumlabel'),
 				no: "numsumchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -905,7 +761,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numsdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sdlabel,
+				label: TableAdvanced.t('sdlabel'),
 				no: "numsdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -915,7 +771,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numvarchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.varlabel,
+				label: TableAdvanced.t('varlabel'),
 				no: "numvarchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -925,7 +781,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numgsdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gsdlabel,
+				label: TableAdvanced.t('gsdlabel'),
 				no: "numgsdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -935,7 +791,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numcvchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.cvlabel,
+				label: TableAdvanced.t('cvlabel'),
 				no: "numcvchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -945,7 +801,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numskewnesschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.skewnesslabel,
+				label: TableAdvanced.t('skewnesslabel'),
 				no: "numskewnesschkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -955,7 +811,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			numkurtosischkbox: {
 				el: new checkbox(config, {
-				label: localization.en.kurtosislabel,
+				label: TableAdvanced.t('kurtosislabel'),
 				no: "numkurtosischkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -965,7 +821,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			catnchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sampsizelabel,
+				label: TableAdvanced.t('sampsizelabel'),
 				no: "catnchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -975,7 +831,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},				
 			catnmisschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissanylabel,
+				label: TableAdvanced.t('nmissanylabel'),
 				no: "catnmisschkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -986,7 +842,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			catnmiss2chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissalwayslabel,
+				label: TableAdvanced.t('nmissalwayslabel'),
 				no: "catnmiss2chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -996,14 +852,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			freqlabel: {
 				el: new labelVar(config, {
-				label: localization.en.freqlabel,
+				label: TableAdvanced.t('freqlabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			catfreqchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.freqlabel,
+				label: TableAdvanced.t('freqlabel'),
 				no: "catfreqchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1013,7 +869,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			catfreqtotalchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.freqtotallabel,
+				label: TableAdvanced.t('freqtotallabel'),
 				no: "catfreqtotalchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1023,7 +879,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			catfreqpctchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.freqpctlabel,
+				label: TableAdvanced.t('freqpctlabel'),
 				no: "catfreqpctchkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1034,7 +890,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			catpropcichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.propcilabel,
+				label: TableAdvanced.t('propcilabel'),
 				no: "catpropcichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1044,7 +900,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datenchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sampsizelabel,
+				label: TableAdvanced.t('sampsizelabel'),
 				no: "datenchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1054,7 +910,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},				
 			datenmisschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissanylabel,
+				label: TableAdvanced.t('nmissanylabel'),
 				no: "datenmisschkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1065,7 +921,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datenmiss2chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissalwayslabel,
+				label: TableAdvanced.t('nmissalwayslabel'),
 				no: "datenmiss2chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1075,7 +931,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datemeanchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanlabel,
+				label: TableAdvanced.t('meanlabel'),
 				no: "datemeanchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1085,7 +941,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datemeansdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meansdlabel,
+				label: TableAdvanced.t('meansdlabel'),
 				no: "datemeansdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1095,7 +951,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datemeansechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanselabel,
+				label: TableAdvanced.t('meanselabel'),
 				no: "datemeansechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1105,7 +961,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			datemeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meancilabel,
+				label: TableAdvanced.t('meancilabel'),
 				no: "datemeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1115,7 +971,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datemedianchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianlabel,
+				label: TableAdvanced.t('medianlabel'),
 				no: "datemedianchkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1126,7 +982,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},				
 			datemedianq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianq1q3label,
+				label: TableAdvanced.t('medianq1q3label'),
 				no: "datemedianq1q3chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1136,7 +992,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			dateq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.q1q3label,
+				label: TableAdvanced.t('q1q3label'),
 				no: "dateq1q3chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1146,7 +1002,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},			
 			dateiqrchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.iqrlabel,
+				label: TableAdvanced.t('iqrlabel'),
 				no: "dateiqrchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1156,7 +1012,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datemedianrangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianrangelabel,
+				label: TableAdvanced.t('medianrangelabel'),
 				no: "datemedianrangechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1166,7 +1022,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			daterangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.rangelabel,
+				label: TableAdvanced.t('rangelabel'),
 				no: "daterangechkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1177,7 +1033,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			dateminchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.minlabel,
+				label: TableAdvanced.t('minlabel'),
 				no: "dateminchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1187,7 +1043,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datemaxchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.maxlabel,
+				label: TableAdvanced.t('maxlabel'),
 				no: "datemaxchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1197,7 +1053,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datesdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sdlabel,
+				label: TableAdvanced.t('sdlabel'),
 				no: "datesdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1207,7 +1063,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 			},
 			datevarchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.varlabel,
+				label: TableAdvanced.t('varlabel'),
 				no: "datevarchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1274,13 +1130,19 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 					objects.datesimplifychkbox.el.content, objects.labelsimplifychkbox.el.content, objects.conflevel.el.content],
 			bottom: [stattestspanel.el.content, numstatspanel.el.content, catstatspanel.el.content, datestatspanel.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: TableAdvanced.t('navigation'),
                 icon: "icon-tableadvanced",
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: TableAdvanced.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: TableAdvanced.t('help.body')
+        }
+;
     }	
 
 
@@ -1402,4 +1264,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 
 	
 }
-module.exports.item = new TableAdvanced().render()
+
+module.exports = {
+    render: () => new TableAdvanced().render()
+}

@@ -1,35 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Precision of a Correlation",
-        navigation: "Correlation",
-		howtouse: "Specify either the sample size or the confidence interval width and the other will be computed",
-		n: "Sample Size",
-		width: "Confidence Interval Width",
-		corr: "Correlation (-1 to 1)",
-		conflevel: "Confidence Level (0-1)",
-		corrtype: "Correlation Type",
-        help: {
-            title: "Sample Size, Precision of a Correlation",
-            r_help: "help(prec_cor, package ='presize')",
-            body: `
-This is an assessment of sample size for a Pearson, Spearman, or Kendall correlation based on confidence interval width.  It computes the sample size or the confidence interval width when the user 
-specifies the other.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Confidence Interval Width:</b> Specify the confidence interval width desired.  The width of a confidence interval is a measure of precision of an estimate and is the upper bound minus the lower bound.
-<br/><br/>
-<b>Correlation:</b> Specify the expected correlation value
-<br/><br/>
-<b>Confidence Level:</b> Specify the desired level of the confidence interval
-<br/><br/>
-<b>Correlation Type:</b> Specify the type of correlation being computed
-<br/><br/>
-<b>Required R Packages:</b> presize
-			`}
-    }
-}
+
 
 
 
@@ -40,10 +10,13 @@ specifies the other.
 
 
 class PrecisionCorrelation extends baseModal {
+    static dialogId = 'PrecisionCorrelation'
+    static t = baseModal.makeT(PrecisionCorrelation.dialogId)
+
     constructor() {
         var config = {
-            id: "PrecisionCorrelation",
-            label: localization.en.title,
+            id: PrecisionCorrelation.dialogId,
+            label: PrecisionCorrelation.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -57,7 +30,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         var objects = {
 			howtouse: {
 				el: new labelVar(config, {
-					label: localization.en.howtouse, 
+					label: PrecisionCorrelation.t('howtouse'), 
 					style: "mb-3", 
 					h:8
 				})
@@ -65,7 +38,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: PrecisionCorrelation.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -78,7 +51,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			width: {
 				el: new input(config, {
 					no: 'width',
-					label: localization.en.width,
+					label: PrecisionCorrelation.t('width'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -91,7 +64,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			corr: {
 				el: new input(config, {
 					no: 'corr',
-					label: localization.en.corr,
+					label: PrecisionCorrelation.t('corr'),
 					style: "mt-5",
 					required: true,
 					extraction: "TextAsIs",
@@ -104,7 +77,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			conflevel: {
 				el: new input(config, {
 					no: 'conflevel',
-					label: localization.en.conflevel,
+					label: PrecisionCorrelation.t('conflevel'),
 					placeholder: ".95",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -117,7 +90,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			corrtype: {
 				el: new comboBox(config, {
 					no: "corrtype",
-					label: localization.en.corrtype,
+					label: PrecisionCorrelation.t('corrtype'),
 					multiple: false,
 					extraction: "NoPrefix|UseComma",
 					options: ["pearson", "spearman", "kendall"],
@@ -130,16 +103,25 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 					objects.corr.el.content, objects.conflevel.el.content, objects.corrtype.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: PrecisionCorrelation.t('navigation'),
                 icon: "icon-link",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: PrecisionCorrelation.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: PrecisionCorrelation.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new PrecisionCorrelation().render()
+
+module.exports = {
+    render: () => new PrecisionCorrelation().render()
+}

@@ -1,83 +1,14 @@
 
-var localization = {
-    en: {
-        title: "Cox, Advanced",
-        navigation: "Cox, Advanced",
-		helplabel: "Click on the ? button on the top right of the dialog for details on sample datasets and the data format supported.",		
-        modelname:"Enter model name",
-        timevar: "Time to event or censor",
-        eventvar: "Events (1 = event 1, 0 = censor)",
-        modelterms:"Model expression builder for independent variables",
-        weightvar: "Weights (optional)",
 
-        tiemethod: "Tied Time Method",
-        forestplotbox : "Forest Plot",
-        diagnosticsbox: "Model Diagnostics",
-        martscalebox:"Null Model Martingale Residual Axis Minimum Value (-Inf to 1):",
-        devbox:"Analysis of Deviance (Type II)",
-        devtype:"Test Statistic",
-
-        help: {
-            title: "Cox, Advanced",
-            r_help: "help(coxph, package = 'survival')",
-            body: `
-			See sample dataset in the install directory, the default location is at drive letter:&bsol;program files&bsol;BlueSky Statistics&bsol;10&bsol;Samples_and_Documents&bsol;Datasets_and_Demos&bsol;Regression_Cox&bsol;mockstudy_upd.RData. The variable Followup_time should be entered as the time to event or censor and the variable Event should be entered as the Events (1 = event, 0 = censor). Sex, age and bmi can be the independent variables. 
-			<br/>
-			This dataset is an updated version of the mockstudy dataset in the arsenal package.
-			<br/><br/>
-            <b>Cox Proportional Hazards Model</b>
-            <br/>
-            <br/>
-            Fits a Cox proportional hazards model for time-to-event data with censored observations.  Model fitting statistics, parameter estimates, and hazard ratios are provided.  Options available include the tied time method, model diagnostics such as proportional hazards and covariate functional form assessments, and a forest plot of hazard ratios with confidence intervals.  The model is fit using the coxph function in the survival package.
-            <br/>
-            <br/>
-            <b>Time:</b> Time to event for those experiencing the event or time to last follow-up for those not experiencing the event
-            <br/><br/>
-            <b>Event:</b> Numerical event indicator; 1=event, 0=censor
-            <br/><br/>
-            <b>Independent Variables:</b> Independent variables to include in the model.  Factors, strings, and logical variables will be dummy coded.
-            <br/><br/>
-            <b>Weights:</b> Numeric variable for observation weights. Useful in situations where each record should not be counted as one observation. 
-            <br/>
-            <br/>
-            <b>Required packages:</b> survival, broom, survminer, car, BlueSky
-            <br/>
-            <br/>
-            Click the Get R Help button to get detailed R help about the coxph function.
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <b>Options</b>
-            <br/>
-            <br/>
-            <b>Tied Time Method:</b>
-            <br/>
-            Method of breaking tied observed times.  Efron is usually the better choice when there aren't many tied times.  The exact method can be beneficial if there are many tied times, as in discrete time situations, but can take a little longer for the model to be fit. 
-            <br/>
-            <br/>
-            <b>Forest Plot:</b>
-            <br/>
-            Plot of hazard ratios and confidence intervals for each predictor in the model.
-            <br/>
-            <br/>
-            <b>Model Diagnostics:</b>
-            <br/>
-            If selected, proportional hazards tests and plots will be provided, in addition to assessments of functional form for each covariate in the model.  The null model Martingale residual axis minimum value option might need to be changed so that all residuals appear in the plot. To get functional form assessments, you must specify only numeric predictors and have no missing data. See Variables > Missing Values > Remove NAs.
-            <br/>
-            <br/>
-            <b>Analysis of Deviance (Type II):</b>
-            Global test of each predictor in the model.  Multi-degree of freedom tests will be provided for effects with more than 2 levels.  Wald and Likelihood ratio tests can be obtained, with likelihood ratios tests having better small sample properties.
-            
-`}
-    }
-}
 
 class CoxWithFormula extends baseModal {
+    static dialogId = 'CoxWithFormula'
+    static t = baseModal.makeT(CoxWithFormula.dialogId)
+
     constructor() {
         var config = {
-            id: "CoxWithFormula",
-            label: localization.en.title,
+            id: CoxWithFormula.dialogId,
+            label: CoxWithFormula.t('title'),
             modalType: "two",
             RCode: `
 require(survival)
@@ -137,7 +68,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             },
 			helplabel: {
 				el: new labelVar(config, {
-				label: localization.en.helplabel, 
+				label: CoxWithFormula.t('helplabel'), 
 				style: "mt-3", 
 				h:5
 				})
@@ -145,7 +76,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             modelname: {
                 el: new input(config, {
                     no: 'modelname',
-                    label: localization.en.modelname,
+                    label: CoxWithFormula.t('modelname'),
                     placeholder: "CoxRegModel1",
                     required: true,
                     type: "character",
@@ -155,7 +86,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             },            
             timevar: {
                 el: new dstVariable(config, {
-                    label: localization.en.timevar,
+                    label: CoxWithFormula.t('timevar'),
                     no: "timevar",
                     filter: "Numeric|Scale",
                     extraction: "NoPrefix|UseComma",
@@ -164,7 +95,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             },
             eventvar: {
                 el: new dstVariable(config, {
-                    label: localization.en.eventvar,
+                    label: CoxWithFormula.t('eventvar'),
                     no: "eventvar",
                     filter: "Numeric|Scale",
                     required: true,
@@ -174,13 +105,13 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             modelterms: {
                 el: new formulaBuilder(config, {
                     no: "modelterms",
-                    label: localization.en.modelterms,
+                    label: CoxWithFormula.t('modelterms'),
 					required: true
                 })
             }, 
             weightvar: {
                 el: new dstVariable(config, {
-                    label: localization.en.weightvar,
+                    label: CoxWithFormula.t('weightvar'),
                     no: "weightvar",
                     filter: "Numeric|Scale",
                     required: false,
@@ -192,7 +123,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             tiemethod: {
                 el: new comboBox(config, {
                     no: 'tiemethod',
-                    label: localization.en.tiemethod,
+                    label: CoxWithFormula.t('tiemethod'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["efron", "breslow", "exact"],
@@ -201,7 +132,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             }, 
             forestplotbox: {
                 el: new checkbox(config, {
-                    label: localization.en.forestplotbox,
+                    label: CoxWithFormula.t('forestplotbox'),
                     no: "forestplotbox",
                     extraction: "Boolean",
                     newline: true,
@@ -210,7 +141,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             },
             diagnosticsbox: {
                 el: new checkbox(config, {
-                    label: localization.en.diagnosticsbox,
+                    label: CoxWithFormula.t('diagnosticsbox'),
                     no: "diagnosticsbox",
                     extraction: "Boolean",
                     newline: true,
@@ -220,7 +151,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             martscalebox: {
                 el: new input(config, {
                     no: 'martscalebox',
-                    label: localization.en.martscalebox,
+                    label: CoxWithFormula.t('martscalebox'),
                     placeholder: "-1",
                     ml: 4,
                     extraction: "TextAsIs",
@@ -231,7 +162,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             }, 
             devbox: {
                 el: new checkbox(config, {
-                    label: localization.en.devbox,
+                    label: CoxWithFormula.t('devbox'),
                     no: "devbox",
                     extraction: "Boolean",
                     newline: true,
@@ -241,7 +172,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             devtype: {
                 el: new comboBox(config, {
                     no: 'devtype',
-                    label: localization.en.devtype,
+                    label: CoxWithFormula.t('devtype'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["Wald", "LR"],
@@ -254,7 +185,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
         var options = {
             el: new optionsVar(config, {
                 no: "options",
-                name: localization.en.options,
+                name: CoxWithFormula.t('options'),
                 content: [
                     objects.tiemethod.el,
                     objects.forestplotbox.el, 
@@ -278,14 +209,23 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             ],
             bottom: [options.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: CoxWithFormula.t('navigation'),
                 icon: "icon-cox-advanced",
 				positionInNav: 0,
                 modal: config.id
             }
         }
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: CoxWithFormula.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: CoxWithFormula.t('help.body')
+        }
+;
     }
 }
-module.exports.item = new CoxWithFormula().render()
+
+module.exports = {
+    render: () => new CoxWithFormula().render()
+}

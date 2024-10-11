@@ -1,44 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Test Two Proportions",
-        navigation: "Two Proportions",
-		howtouse: "To compute sample size: specify both group proportions and power\nTo compute power: specify both group proportions and sample size\nTo compute detectable proportion difference: specify sample size, power, and group 2 proportion",
-		n: "Sample Size",
-		power: "Power (0-1)",
-		propgrp1: "Group 1 Proportion",
-		propgrp2: "Group 2 Proportion",
 
-		ratio: "Group 1 vs Group 2 Sample Size Ratio",
-		siglevel: "Significance Level (0-1)",
-		alternativeopt: "Alternative Hypothesis",
-		twosided: "Two-Sided",
-		onesided: "One-Sided",
-        help: {
-            title: "Sample Size, Test Two Proportions",
-            r_help: "help(epi.sscohortc, package ='epiR')",
-            body: `
-This is an assessment of sample size for a two-sample test of proportions.  It computes the sample size, power, or effect size (difference in proportions, rate ratio, odds ratio) when the user 
-specifies the other two.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Power:</b> Specify the desired power of the study, i.e. the probability that the test will reject the null hypothesis if the alternative hypothesis was true.
-<br/><br/>
-<b>Group 1 Proportion:</b> Specify the proportion in group 1
-<br/><br/>
-<b>Group 2 Proportion:</b> Specify the proportion in group 2
-<br/><br/>
-<b>Group 1 vs Group 2 Sample Size Ratio:</b> Specify the desired ratio of the sample sizes (group 1 N divided by group 2 N). A ratio of 1 means equal sample sizes.
-<br/><br/>
-<b>Significance Level:</b> Specify the desired significance level (i.e. type I error) of the test
-<br/><br/>
-<b>Alternative Hypothesis:</b> Specify whether the test is two-sided or one-sided
-<br/><br/>
-<b>Required R Packages:</b> epiR
-			`}
-    }
-}
 
 
 
@@ -49,10 +10,13 @@ specifies the other two.
 
 
 class SampleSizeTwoProp extends baseModal {
+    static dialogId = 'SampleSizeTwoProp'
+    static t = baseModal.makeT(SampleSizeTwoProp.dialogId)
+
     constructor() {
         var config = {
-            id: "SampleSizeTwoProp",
-            label: localization.en.title,
+            id: SampleSizeTwoProp.dialogId,
+            label: SampleSizeTwoProp.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -83,14 +47,14 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			howtouse: {
 				el: new preVar(config, {
 					no: "howtouse",
-					label: localization.en.howtouse, 
+					label: SampleSizeTwoProp.t('howtouse'), 
 					h:5
 				})
 			},
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: SampleSizeTwoProp.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -101,7 +65,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			power: {
 				el: new input(config, {
 					no: 'power',
-					label: localization.en.power,
+					label: SampleSizeTwoProp.t('power'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces:true,
@@ -112,7 +76,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			propgrp1: {
 				el: new input(config, {
 					no: 'propgrp1',
-					label: localization.en.propgrp1,
+					label: SampleSizeTwoProp.t('propgrp1'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -124,7 +88,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			propgrp2: {
 				el: new input(config, {
 					no: 'propgrp2',
-					label: localization.en.propgrp2,
+					label: SampleSizeTwoProp.t('propgrp2'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -136,7 +100,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			ratio: {
 				el: new input(config, {
 					no: 'ratio',
-					label: localization.en.ratio,
+					label: SampleSizeTwoProp.t('ratio'),
 					style: "mt-5",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -149,7 +113,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			siglevel: {
 				el: new input(config, {
 					no: 'siglevel',
-					label: localization.en.siglevel,
+					label: SampleSizeTwoProp.t('siglevel'),
 					placeholder: ".05",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -161,14 +125,14 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			},
 			alternativeopt: {
 				el: new labelVar(config, {
-					label: localization.en.alternativeopt, 
+					label: SampleSizeTwoProp.t('alternativeopt'), 
 					style: "mt-5", 
 					h:5
 				})
 			},
 			twosided: {
 				el: new radioButton(config, {
-					label: localization.en.twosided,
+					label: SampleSizeTwoProp.t('twosided'),
 					no: "altgrp",
 					increment: "twosided",
 					value: "2",
@@ -178,7 +142,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 			}, 
 			onesided: {
 				el: new radioButton(config, {
-					label: localization.en.onesided,
+					label: SampleSizeTwoProp.t('onesided'),
 					no: "altgrp",
 					increment: "onesided",
 					value: "1",
@@ -192,14 +156,20 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 					objects.ratio.el.content, objects.siglevel.el.content, objects.alternativeopt.el.content, objects.twosided.el.content, objects.onesided.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: SampleSizeTwoProp.t('navigation'),
                 icon: "icon-p2",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SampleSizeTwoProp.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SampleSizeTwoProp.t('help.body')
+        }
+;
     }
 
 
@@ -266,4 +236,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
 		
 	
 }
-module.exports.item = new SampleSizeTwoProp().render()
+
+module.exports = {
+    render: () => new SampleSizeTwoProp().render()
+}

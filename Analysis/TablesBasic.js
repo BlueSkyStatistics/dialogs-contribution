@@ -1,142 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Table, Basic",
-        navigation: "Table, Basic",
-        sumvarslabel: "Variables to Summarize",
-		bygroupvarlabel: "Groups to Compare (optional)",
-		stratavarlabel: "Strata (optional)",
-		tabletitlelabel: "Table Title",
-		totalcolchkboxlabel: "Include total column",
-		groupvarchkboxlabel: "Include group variable name",
-		digitslabel: "Digits After Decimal",
-		contdigitslabel: "Continuous Values",
-		pctdigitslabel: "Percentages",
-		pvaluedigitslabel: "P-Values",
-		simplifylabel: "Simplify Multi-Row Variable Summaries to One Row (if possible)",
-		numericsimplifylabel: "Numeric Variables",
-		categorysimplifylabel: "Categorical Variables",
-		ordinalsimplifylabel: "Ordinal Variables",
-		datesimplifylabel: "Date Variables",
-		labelsimplifylabel: "Use Last Level in Label of Categorical Variables",
-		conflevellabel: "Confidence Level",
-		stattestschkboxlabel: "Statistical Tests",
-		numtestlabel: "Numerical Tests",
-		anovaoptlabel: "ANOVA",
-		kwoptlabel: "Kruskal-Wallis",
-		medoptlabel: "Median Test",
-		cattestlabel: "Categorical Nominal Tests",
-		chisqoptlabel: "Pearson's Chi-Square",
-		fisheroptlabel: "Fisher's Exact",
-		simchkboxlabel: "Simulate p-values for Pearson and Fisher",
-		simnumlabel: "Number of Simulations",
-		ordtestlabel: "Categorical Ordinal Tests",
-		trendoptlabel: "Trend",
-		footnotechkboxlabel: "Test Names Footnote",
-		sampsizelabel: "Sample Size",
-		meanlabel: "Mean",
-		quantileslabel: "Quantiles",
-		otherlabel: "Other",
-		nmissanylabel: "Number Missing, if any",
-		nmissalwayslabel: "Number Missing, always",
-		meansdlabel: "Mean (SD)",
-		meancilabel: "Mean (CI)",
-		meanselabel: "Mean (SE)",
-		gmeanlabel: "Geometric Mean",
-		gmeansdlabel: "Geometric Mean (SD)",
-		gmeancilabel: "Geometric Mean (CI)",
-		trimmeancilabel: "Trimmed Mean (CI)",
-		trimpctlabel: "Specify Trimmed Mean Percent",
-		medianlabel: "Median",
-		medianq1q3label: "Median (25th %-ile, 75th %-ile)",
-		q1q3label: "(25th %-ile, 75th %-ile)",
-		iqrlabel: "Interquartile Range",
-		medianrangelabel: "Median (Range)",
-		medianmadlabel: "Median (Median Absolute Deviation)",
-		rangelabel: "Range",
-		minlabel: "Minimum",
-		maxlabel: "Maximum",
-		pct1label: "1st %-ile (CI)",
-		pct5label: "5th %-ile (CI)",
-		pct10label: "10th %-ile (CI)",
-		pct25label: "25th %-ile (CI)",
-		pct33label: "33 1/3 %-ile (CI)",
-		pct50label: "Median (CI)",		
-		pct66label: "66 2/3 %-ile (CI)",
-		pct75label: "75th %-ile (CI)",
-		pct90label: "90th %-ile (CI)",
-		pct95label: "95th %-ile (CI)",
-		pct99label: "99th %-ile (CI)",
-		custquantlabel: "Custom %-ile (CI)",
-		custquantvaluelabel: "Specify %-ile",
-		sumlabel: "Sum",
-		sdlabel: "SD",
-		varlabel: "Variance",
-		gsdlabel: "Geometric Mean SD",
-		cvlabel: "Coefficient of Variation",
-		skewnesslabel: "Skewness",
-		kurtosislabel: "Kurtosis",
-		freqlabel: "Frequency",
-		freqtotallabel: "Frequency/Total",
-		freqpctlabel: "Frequency (%)",
-		propcilabel: "Proportion (CI)",	
-        help: {
-            title: "Table, Basic",
-            r_help: "help(tableby, package ='arsenal')",
-            body: `
-This creates a table of summary statistics with options to specify groups to compare and a stratification variable to do the comparisons within.  One column for each group 
-variable category will be created.  The stratification variable categories will form additional rows for the table.  Various summary statistics and statistical tests can be 
-specified.
-<br/><br/>
-<b>Variables to Summarize:</b> Variables for which summary statistics will be computed.  Variables can be numeric, nominal factors, ordered factors, or dates.  Dates of any class 
-will be converted to the Date class for summarization purposes only.  Your original dataset will be unchanged.  This also means summarized dates will be accurate to the day only.
-<br/><br/>
-<b>Groups to Compare (optional):</b> Variable that defines the categories to compare
-<br/><br/>
-<b>Strata (optional):</b> Variable that defines the categories within which the comparisons will be made
-<br/><br/>
-<b>Table Title:</b> specify the table title
-<br/><br/>
-<b>Include total column:</b> whether or not a total column is included in the table
-<br/><br/>
-<b>Include group variable name:</b> whether or not to include the group variable name in the table
-<br/><br/>
-<b>Digits After Decimal:</b> specify how many digits to display after the decimal point for continuous values, percentages, and p-values
-<br/><br/>
-<b>Simplify Multi-Row Variable Summaries to One Row (if possible):</b> For two-category categorical (factor/ordinal) variables or single summaries of numeric or date variables, 
-you can collapse the rows to have all variable names and statistics appear in a single row.  The summaries for the last category for each categorical variable will be shown. 
-Any variable for which collapsing isn't possible will take up multiple rows.  Turning this option on/off can be done for each type of variable separately.
-<br/><br/>
-<b>Use Last Level in Label of Categorical Variables:</b> For simplified tables, this includes the last level of factor/ordinal variables in the row label.
-<br/><br/>
-<b>Confidence Level:</b> This sets the confidence level of the confidence intervals.
-<br/><br/>
-<b>Statistical Test Options</b>
-<br/><br/>
-<b>Statistical Tests:</b> Whether or not statistical tests comparing groups are desired and which tests to use.  All numerical variables (continuous values and dates) will use 
-the test specified in the Numerical Tests section.  All nominal factors will use the test specified in the Categorical Nominal Tests section.  All ordinal factors will use the 
-test specified in the Categorical Ordinal Tests section.  Pearson and Fisher Simulations provides the ability to obtain simulated p-values for Pearson's chi-square tests and 
-Fisher's Exact tests.  This procedure creates Monte Carlo simulations the specified number of times (Number of Simulations).  This can be useful in cases where the standard 
-computations, especially for Fisher's Exact test, result in computer memory errors.
-<br/><br/>
-<b>Test Names Footnote:</b> whether or not to include p-value footnotes listing the statistical tests done for each variable
-<br/><br/>
-<b>Numerical Statistics Options:</b>
-<br/>statistics that will be shown for numerical variables
-<br/><br/>
-<b>Categorical Statistics Options:</b> 
-<br/>
-statistics that will be shown for both nominal and ordered factors
-<br/><br/>
-<b>Date Statistics:</b>
-<br/>statistics that will be shown for date variables
-<br/><br/>
-<b>Note:</b> If you want to summarize a variable of a specific type, it is recommended that you select at least one statistic in that category that is not "Number Missing, if any".  If "Number Missing, if any" is the only option selected and no variables have a missing value, then an error will result. 
-<br/><br/>
-<b>Required R Packages:</b> arsenal, lubridate, dplyr, DescTools
-			`}
-    }
-}
+
 
 
 
@@ -147,10 +10,13 @@ statistics that will be shown for both nominal and ordered factors
 
 
 class TableBasic extends baseModal {
+    static dialogId = 'TableBasic'
+    static t = baseModal.makeT(TableBasic.dialogId)
+
     constructor() {
         var config = {
-            id: "TableBasic",
-            label: localization.en.title,
+            id: TableBasic.dialogId,
+            label: TableBasic.t('title'),
 			splitProcessing: true,
             modalType: "two",
             RCode: `
@@ -269,7 +135,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
             content_var: { el: new srcVariableList(config, {action: "move"}) },
 			sumvars: {
 				el: new dstVariableList(config,{
-				label: localization.en.sumvarslabel,
+				label: TableBasic.t('sumvarslabel'),
 				no: "sumvars",
 				required: true,
 				filter:"Numeric|Date|Ordinal|Nominal|Scale",
@@ -278,7 +144,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			bygroupvar: {
 				el: new dstVariable(config, {
-				label: localization.en.bygroupvarlabel,
+				label: TableBasic.t('bygroupvarlabel'),
 				no: "bygroupvar",
 				filter: "String|Numeric|Ordinal|Nominal|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -287,7 +153,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			stratavar: {
 				el: new dstVariable(config, {
-				label: localization.en.stratavarlabel,
+				label: TableBasic.t('stratavarlabel'),
 				no: "stratavar",
 				filter: "String|Numeric|Ordinal|Nominal|Scale",
 				extraction: "NoPrefix|UseComma",
@@ -298,7 +164,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			tabletitle: {
 				el: new input(config, {
 				no: 'tabletitle',
-				label: localization.en.tabletitlelabel,
+				label: TableBasic.t('tabletitlelabel'),
 				style: "mt-3 mb-3",
 				placeholder: "Variable Summaries",
 				value: "Variable Summaries",
@@ -310,14 +176,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			totalcolchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.totalcolchkboxlabel,
+				label: TableBasic.t('totalcolchkboxlabel'),
 				no: "totalcolchkbox",
 				extraction: "Boolean"
 				})
 			},
 			groupvarchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.groupvarchkboxlabel,
+				label: TableBasic.t('groupvarchkboxlabel'),
 				no: "groupvarchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -327,7 +193,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			digitslabel: {
 				el: new labelVar(config, {
-				label: localization.en.digitslabel, 
+				label: TableBasic.t('digitslabel'), 
 				style: "mt-4", 
 				h:5
 				})
@@ -335,7 +201,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			contdigits: {
 				el: new inputSpinner(config, {
 				no: 'contdigits',
-				label: localization.en.contdigitslabel,
+				label: TableBasic.t('contdigitslabel'),
 				style: "ml-3",
 				min: 0,
 				max: 1000,
@@ -347,7 +213,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			pctdigits: {
 				el: new inputSpinner(config, {
 				no: 'pctdigits',
-				label: localization.en.pctdigitslabel,
+				label: TableBasic.t('pctdigitslabel'),
 				style: "ml-3",
 				min: 1,
 				max: 1000,
@@ -359,7 +225,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			pvaluedigits: {
 				el: new inputSpinner(config, {
 				no: 'pvaluedigits',
-				label: localization.en.pvaluedigitslabel,
+				label: TableBasic.t('pvaluedigitslabel'),
 				style: "ml-3",
 				min: 1,
 				max: 1000,
@@ -370,14 +236,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			simplifylabel: {
 				el: new labelVar(config, {
-				label: localization.en.simplifylabel, 
+				label: TableBasic.t('simplifylabel'), 
 				style: "mt-4", 
 				h:5
 				})
 			},
 			numericsimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.numericsimplifylabel,
+				label: TableBasic.t('numericsimplifylabel'),
 				style: "ml-3",
 				no: "numericsimplifychkbox",
 				extraction: "Boolean"
@@ -385,21 +251,21 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			categorysimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.categorysimplifylabel,
+				label: TableBasic.t('categorysimplifylabel'),
 				no: "categorysimplifychkbox",
 				extraction: "Boolean"
 				})
 			},
 			datesimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.datesimplifylabel,
+				label: TableBasic.t('datesimplifylabel'),
 				no: "datesimplifychkbox",
 				extraction: "Boolean"
 				})
 			},
 			labelsimplifychkbox: {
 				el: new checkbox(config, {
-				label: localization.en.labelsimplifylabel,
+				label: TableBasic.t('labelsimplifylabel'),
 				no: "labelsimplifychkbox",
 				newline: true,
 				style: "ml-3",
@@ -409,7 +275,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			conflevel: {
 				el: new inputSpinner(config, {
 				no: 'conflevel',
-				label: localization.en.conflevellabel,
+				label: TableBasic.t('conflevellabel'),
 				style: "mt-4 mb-4",
 				min: 0,
 				max: 1,
@@ -420,7 +286,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			stattestschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.stattestschkboxlabel,
+				label: TableBasic.t('stattestschkboxlabel'),
 				no: "stattestschkbox",
 				style: "mb-2",
 				extraction: "Boolean"
@@ -428,14 +294,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numtestlabel: {
 				el: new labelVar(config, {
-				label: localization.en.numtestlabel,
+				label: TableBasic.t('numtestlabel'),
 				style: "ml-5 mt-3",
 				h:5
 				})
 			},
 			numanovaopt: {
 				el: new radioButton(config, {
-				  label: localization.en.anovaoptlabel,
+				  label: TableBasic.t('anovaoptlabel'),
 				  style: "ml-5",
 				  no: "numtestgrp",
 				  increment: "anova",
@@ -446,7 +312,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			  
 			numkwopt: {
 				el: new radioButton(config, {
-				  label: localization.en.kwoptlabel,
+				  label: TableBasic.t('kwoptlabel'),
 				  style: "ml-5",
 				  no: "numtestgrp",
 				  increment: "kwt",
@@ -457,7 +323,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			nummedopt: {
 				el: new radioButton(config, {
-				  label: localization.en.medoptlabel,
+				  label: TableBasic.t('medoptlabel'),
 				  style: "ml-5",
 				  no: "numtestgrp",
 				  increment: "medtest",
@@ -468,14 +334,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			cattestlabel: {
 				el: new labelVar(config, {
-				label: localization.en.cattestlabel,
+				label: TableBasic.t('cattestlabel'),
 				style: "ml-5 mt-3",
 				h:5
 				})
 			},
 			catchisqopt: {
 				el: new radioButton(config, {
-				  label: localization.en.chisqoptlabel,
+				  label: TableBasic.t('chisqoptlabel'),
 				  style: "ml-5",
 				  no: "cattestgrp",
 				  increment: "chisq",
@@ -486,7 +352,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			  
 			catfisheropt: {
 				el: new radioButton(config, {
-				  label: localization.en.fisheroptlabel,
+				  label: TableBasic.t('fisheroptlabel'),
 				  style: "ml-5",
 				  no: "cattestgrp",
 				  increment: "fe",
@@ -497,7 +363,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			simchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.simchkboxlabel,
+				label: TableBasic.t('simchkboxlabel'),
 				no: "simchkbox",
 				style: "mt-2 ml-5",
 				extraction: "Boolean"
@@ -506,7 +372,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			simnum: {
 				el: new inputSpinner(config, {
 				no: 'simnum',
-				label: localization.en.simnumlabel,
+				label: TableBasic.t('simnumlabel'),
 				style: "mt-2 ml-5",
 				min: 100,
 				max: 1000000,
@@ -517,14 +383,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			ordtestlabel: {
 				el: new labelVar(config, {
-				label: localization.en.ordtestlabel,
+				label: TableBasic.t('ordtestlabel'),
 				style: "ml-5 mt-3",
 				h:5
 				})
 			},
 			ordtrendopt: {
 				el: new radioButton(config, {
-				  label: localization.en.trendoptlabel,
+				  label: TableBasic.t('trendoptlabel'),
 				  style: "ml-5",
 				  no: "ordtestgrp",
 				  increment: "trend",
@@ -535,7 +401,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			  
 			ordkwopt: {
 				el: new radioButton(config, {
-				  label: localization.en.kwoptlabel,
+				  label: TableBasic.t('kwoptlabel'),
 				  style: "ml-5",
 				  no: "ordtestgrp",
 				  increment: "kwt",
@@ -546,7 +412,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			footnotechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.footnotechkboxlabel,
+				label: TableBasic.t('footnotechkboxlabel'),
 				no: "footnotechkbox",
 				style: "mt-4",
 				extraction: "Boolean"
@@ -554,13 +420,13 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			sampsizelabel: {
 				el: new labelVar(config, {
-				label: localization.en.sampsizelabel,
+				label: TableBasic.t('sampsizelabel'),
 				h:5
 				})
 			},
 			numnchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sampsizelabel,
+				label: TableBasic.t('sampsizelabel'),
 				no: "numnchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -570,7 +436,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},				
 			numnmisschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissanylabel,
+				label: TableBasic.t('nmissanylabel'),
 				no: "numnmisschkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -581,7 +447,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numnmiss2chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissalwayslabel,
+				label: TableBasic.t('nmissalwayslabel'),
 				no: "numnmiss2chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -591,14 +457,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},						
 			meanlabel: {
 				el: new labelVar(config, {
-				label: localization.en.meanlabel,
+				label: TableBasic.t('meanlabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			nummeanchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanlabel,
+				label: TableBasic.t('meanlabel'),
 				no: "nummeanchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -608,7 +474,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			nummeansdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meansdlabel,
+				label: TableBasic.t('meansdlabel'),
 				no: "nummeansdchkbox",
 				state: "checked",
 				bs_type: "valuebox",
@@ -619,7 +485,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			nummeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meancilabel,
+				label: TableBasic.t('meancilabel'),
 				no: "nummeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -629,7 +495,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			nummeansechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanselabel,
+				label: TableBasic.t('meanselabel'),
 				no: "nummeansechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -639,7 +505,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numgmeanchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gmeanlabel,
+				label: TableBasic.t('gmeanlabel'),
 				no: "numgmeanchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -649,7 +515,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numgmeansdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gmeansdlabel,
+				label: TableBasic.t('gmeansdlabel'),
 				no: "numgmeansdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -659,7 +525,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numgmeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gmeancilabel,
+				label: TableBasic.t('gmeancilabel'),
 				no: "numgmeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -669,7 +535,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numtrimmeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.trimmeancilabel,
+				label: TableBasic.t('trimmeancilabel'),
 				no: "numtrimmeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -680,7 +546,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			trimpct: {
 				el: new input(config, {
 				no: 'trimpct',
-				label: localization.en.trimpctlabel,
+				label: TableBasic.t('trimpctlabel'),
 				value: "5",
 				extraction: "TextAsIs",
 				allow_spaces: true,
@@ -691,14 +557,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			quantileslabel: {
 				el: new labelVar(config, {
-				label: localization.en.quantileslabel,
+				label: TableBasic.t('quantileslabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			nummedianchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianlabel,
+				label: TableBasic.t('medianlabel'),
 				no: "nummedianchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -708,7 +574,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},				
 			nummedianq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianq1q3label,
+				label: TableBasic.t('medianq1q3label'),
 				no: "nummedianq1q3chkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -719,7 +585,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.q1q3label,
+				label: TableBasic.t('q1q3label'),
 				no: "numq1q3chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -729,7 +595,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numiqrchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.iqrlabel,
+				label: TableBasic.t('iqrlabel'),
 				no: "numiqrchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -739,7 +605,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			nummedianrangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianrangelabel,
+				label: TableBasic.t('medianrangelabel'),
 				no: "nummedianrangechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -749,7 +615,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			nummedianmadchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianmadlabel,
+				label: TableBasic.t('medianmadlabel'),
 				no: "nummedianmadchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -759,7 +625,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numrangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.rangelabel,
+				label: TableBasic.t('rangelabel'),
 				no: "numrangechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -769,7 +635,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numminchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.minlabel,
+				label: TableBasic.t('minlabel'),
 				no: "numminchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -779,7 +645,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			nummaxchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.maxlabel,
+				label: TableBasic.t('maxlabel'),
 				no: "nummaxchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -789,7 +655,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct1chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct1label,
+				label: TableBasic.t('pct1label'),
 				no: "numpct1chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -799,7 +665,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct5chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct5label,
+				label: TableBasic.t('pct5label'),
 				no: "numpct5chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -809,7 +675,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct10chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct10label,
+				label: TableBasic.t('pct10label'),
 				no: "numpct10chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -819,7 +685,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct25chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct25label,
+				label: TableBasic.t('pct25label'),
 				no: "numpct25chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -829,7 +695,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numpct33chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct33label,
+				label: TableBasic.t('pct33label'),
 				no: "numpct33chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -839,7 +705,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct50chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct50label,
+				label: TableBasic.t('pct50label'),
 				no: "numpct50chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -849,7 +715,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numpct66chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct66label,
+				label: TableBasic.t('pct66label'),
 				no: "numpct66chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -859,7 +725,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct75chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct75label,
+				label: TableBasic.t('pct75label'),
 				no: "numpct75chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -869,7 +735,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct90chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct90label,
+				label: TableBasic.t('pct90label'),
 				no: "numpct90chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -879,7 +745,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct95chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct95label,
+				label: TableBasic.t('pct95label'),
 				no: "numpct95chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -889,7 +755,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numpct99chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.pct99label,
+				label: TableBasic.t('pct99label'),
 				no: "numpct99chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -899,7 +765,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numcustquantchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.custquantlabel,
+				label: TableBasic.t('custquantlabel'),
 				no: "numcustquantchkbox",
 				newline: true,
 				bs_type: "valuebox",
@@ -911,7 +777,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			custquantvalue: {
 				el: new input(config, {
 				no: 'custquantvalue',
-				label: localization.en.custquantvaluelabel,
+				label: TableBasic.t('custquantvaluelabel'),
 				value: "20",
 				extraction: "TextAsIs",
 				allow_spaces: true,
@@ -922,7 +788,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			numskewnesschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.skewnesslabel,
+				label: TableBasic.t('skewnesslabel'),
 				no: "numskewnesschkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -932,7 +798,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numkurtosischkbox: {
 				el: new checkbox(config, {
-				label: localization.en.kurtosislabel,
+				label: TableBasic.t('kurtosislabel'),
 				no: "numkurtosischkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -942,14 +808,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			otherlabel: {
 				el: new labelVar(config, {
-				label: localization.en.otherlabel,
+				label: TableBasic.t('otherlabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			numsumchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sumlabel,
+				label: TableBasic.t('sumlabel'),
 				no: "numsumchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -959,7 +825,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numsdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sdlabel,
+				label: TableBasic.t('sdlabel'),
 				no: "numsdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -969,7 +835,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numvarchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.varlabel,
+				label: TableBasic.t('varlabel'),
 				no: "numvarchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -979,7 +845,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numgsdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.gsdlabel,
+				label: TableBasic.t('gsdlabel'),
 				no: "numgsdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -989,7 +855,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			numcvchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.cvlabel,
+				label: TableBasic.t('cvlabel'),
 				no: "numcvchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -999,7 +865,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			catnchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sampsizelabel,
+				label: TableBasic.t('sampsizelabel'),
 				no: "catnchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1009,7 +875,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},				
 			catnmisschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissanylabel,
+				label: TableBasic.t('nmissanylabel'),
 				no: "catnmisschkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1020,7 +886,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			catnmiss2chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissalwayslabel,
+				label: TableBasic.t('nmissalwayslabel'),
 				no: "catnmiss2chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1030,14 +896,14 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			freqlabel: {
 				el: new labelVar(config, {
-				label: localization.en.freqlabel,
+				label: TableBasic.t('freqlabel'),
 				style: "mt-3",
 				h:5
 				})
 			},
 			catfreqchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.freqlabel,
+				label: TableBasic.t('freqlabel'),
 				no: "catfreqchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1047,7 +913,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			catfreqtotalchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.freqtotallabel,
+				label: TableBasic.t('freqtotallabel'),
 				no: "catfreqtotalchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1057,7 +923,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			catfreqpctchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.freqpctlabel,
+				label: TableBasic.t('freqpctlabel'),
 				no: "catfreqpctchkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1068,7 +934,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			catpropcichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.propcilabel,
+				label: TableBasic.t('propcilabel'),
 				no: "catpropcichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1078,7 +944,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datenchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sampsizelabel,
+				label: TableBasic.t('sampsizelabel'),
 				no: "datenchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1088,7 +954,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},				
 			datenmisschkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissanylabel,
+				label: TableBasic.t('nmissanylabel'),
 				no: "datenmisschkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1099,7 +965,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datenmiss2chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.nmissalwayslabel,
+				label: TableBasic.t('nmissalwayslabel'),
 				no: "datenmiss2chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1109,7 +975,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datemeanchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanlabel,
+				label: TableBasic.t('meanlabel'),
 				no: "datemeanchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1119,7 +985,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datemeansdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meansdlabel,
+				label: TableBasic.t('meansdlabel'),
 				no: "datemeansdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1129,7 +995,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datemeansechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meanselabel,
+				label: TableBasic.t('meanselabel'),
 				no: "datemeansechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1139,7 +1005,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			datemeancichkbox: {
 				el: new checkbox(config, {
-				label: localization.en.meancilabel,
+				label: TableBasic.t('meancilabel'),
 				no: "datemeancichkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1149,7 +1015,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datemedianchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianlabel,
+				label: TableBasic.t('medianlabel'),
 				no: "datemedianchkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1160,7 +1026,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},				
 			datemedianq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianq1q3label,
+				label: TableBasic.t('medianq1q3label'),
 				no: "datemedianq1q3chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1170,7 +1036,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			dateq1q3chkbox: {
 				el: new checkbox(config, {
-				label: localization.en.q1q3label,
+				label: TableBasic.t('q1q3label'),
 				no: "dateq1q3chkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1180,7 +1046,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},			
 			dateiqrchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.iqrlabel,
+				label: TableBasic.t('iqrlabel'),
 				no: "dateiqrchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1190,7 +1056,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datemedianrangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.medianrangelabel,
+				label: TableBasic.t('medianrangelabel'),
 				no: "datemedianrangechkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1200,7 +1066,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			daterangechkbox: {
 				el: new checkbox(config, {
-				label: localization.en.rangelabel,
+				label: TableBasic.t('rangelabel'),
 				no: "daterangechkbox",
 				bs_type: "valuebox",
 				state: "checked",
@@ -1211,7 +1077,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			dateminchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.minlabel,
+				label: TableBasic.t('minlabel'),
 				no: "dateminchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1221,7 +1087,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datemaxchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.maxlabel,
+				label: TableBasic.t('maxlabel'),
 				no: "datemaxchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1231,7 +1097,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datesdchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.sdlabel,
+				label: TableBasic.t('sdlabel'),
 				no: "datesdchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1241,7 +1107,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 			},
 			datevarchkbox: {
 				el: new checkbox(config, {
-				label: localization.en.varlabel,
+				label: TableBasic.t('varlabel'),
 				no: "datevarchkbox",
 				bs_type: "valuebox",
 				extraction: "TextAsIs",
@@ -1310,13 +1176,19 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 					objects.datesimplifychkbox.el.content, objects.labelsimplifychkbox.el.content, objects.conflevel.el.content],
 			bottom: [stattestspanel.el.content, numstatspanel.el.content, catstatspanel.el.content, datestatspanel.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: TableBasic.t('navigation'),
                 icon: "icon-table_basic",
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: TableBasic.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: TableBasic.t('help.body')
+        }
+;
     }	
 
 
@@ -1373,4 +1245,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval = {{selected.confleve
 
 	
 }
-module.exports.item = new TableBasic().render()
+
+module.exports = {
+    render: () => new TableBasic().render()
+}

@@ -1,35 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Precision of the AUC",
-        navigation: "AUC",
-		howtouse: "Specify either the sample size or the confidence interval width and the other will be computed",
-		n: "Sample Size",
-		width: "Confidence Interval Width",
-		auc: "AUC (area under ROC curve, 0.5-1)",
-		conflevel: "Confidence Level (0-1)",
-		prev: "Outcome Prevalence (0-1)",
-        help: {
-            title: "Sample Size, Precision of the AUC",
-            r_help: "help(prec_auc, package ='presize')",
-            body: `
-This is an assessment of sample size for the area under a receiver operating characteristic curve based on confidence interval width.  It computes the sample size or the confidence interval width when the user 
-specifies the other.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Confidence Interval Width:</b> Specify the confidence interval width desired.  The width of a confidence interval is a measure of precision of an estimate and is the upper bound minus the lower bound.
-<br/><br/>
-<b>AUC:</b> Specify the expected AUC value
-<br/><br/>
-<b>Confidence Level:</b> Specify the desired level of the confidence interval
-<br/><br/>
-<b>Outcome Prevalence:</b> Specify the proportion of subjects with the 'positive' outcome.  This corresponds to the level being modelled with the candidate statistical model.
-<br/><br/>
-<b>Required R Packages:</b> presize
-			`}
-    }
-}
+
 
 
 
@@ -40,10 +10,13 @@ specifies the other.
 
 
 class PrecisionAUC extends baseModal {
+    static dialogId = 'PrecisionAUC'
+    static t = baseModal.makeT(PrecisionAUC.dialogId)
+
     constructor() {
         var config = {
-            id: "PrecisionAUC",
-            label: localization.en.title,
+            id: PrecisionAUC.dialogId,
+            label: PrecisionAUC.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -57,7 +30,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         var objects = {
 			howtouse: {
 				el: new labelVar(config, {
-					label: localization.en.howtouse, 
+					label: PrecisionAUC.t('howtouse'), 
 					style: "mb-3", 
 					h:8
 				})
@@ -65,7 +38,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: PrecisionAUC.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -78,7 +51,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			width: {
 				el: new input(config, {
 					no: 'width',
-					label: localization.en.width,
+					label: PrecisionAUC.t('width'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -91,7 +64,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			auc: {
 				el: new input(config, {
 					no: 'auc',
-					label: localization.en.auc,
+					label: PrecisionAUC.t('auc'),
 					style: "mt-5",
 					required: true,
 					extraction: "TextAsIs",
@@ -104,7 +77,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			conflevel: {
 				el: new input(config, {
 					no: 'conflevel',
-					label: localization.en.conflevel,
+					label: PrecisionAUC.t('conflevel'),
 					placeholder: ".95",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -117,7 +90,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			prev: {
 				el: new input(config, {
 					no: 'prev',
-					label: localization.en.prev,
+					label: PrecisionAUC.t('prev'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -133,16 +106,25 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 					objects.auc.el.content, objects.conflevel.el.content, objects.prev.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: PrecisionAUC.t('navigation'),
                 icon: "icon-auc",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: PrecisionAUC.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: PrecisionAUC.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new PrecisionAUC().render()
+
+module.exports = {
+    render: () => new PrecisionAUC().render()
+}

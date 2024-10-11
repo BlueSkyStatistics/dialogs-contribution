@@ -1,42 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Precision of Cohen's Kappa",
-        navigation: "Cohen's Kappa",
-		howtouse: "Specify either the sample size or the confidence interval width and the other will be computed",
-		n: "Sample Size",
-		width: "Confidence Interval Width",
-		kappa: "Kappa (0-1)",
-		conflevel: "Confidence Level (0-1)",
-		raters: "Number of Raters (2-6)",
-		categories: "Number of Categories (2-5)",
-		props: "Proportions in Each Category; separate with commas, e.g. .3, .7; must match the number of categories and sum to 1",
-        help: {
-            title: "Sample Size, Precision of Cohen's Kappa",
-            r_help: "help(prec_kappa, package ='presize')",
-            body: `
-This is an assessment of sample size for Cohen's kappa based on confidence interval width.  It computes the sample size or the confidence interval width when the user 
-specifies the other.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Confidence Interval Width:</b> Specify the confidence interval width desired.  The width of a confidence interval is a measure of precision of an estimate and is the upper bound minus the lower bound.
-<br/><br/>
-<b>Kappa:</b> Specify the expected kappa value
-<br/><br/>
-<b>Confidence Level:</b> Specify the desired level of the confidence interval
-<br/><br/>
-<b>Number of Raters:</b> Specify the number of raters that will provide values for each subject.
-<br/><br/>
-<b>Number of Categories:</b> Specify the number of categories in the outcome variable
-<br/><br/>
-<b>Proportions in Each Category:</b> Specify the expected proportion of subjects in each category, separated by commas.  Note that the number of specified values must match the
-the number of specified categories and sum to 1.
-<br/><br/>
-<b>Required R Packages:</b> presize
-			`}
-    }
-}
+
 
 
 
@@ -47,10 +10,13 @@ the number of specified categories and sum to 1.
 
 
 class PrecisionKappa extends baseModal {
+    static dialogId = 'PrecisionKappa'
+    static t = baseModal.makeT(PrecisionKappa.dialogId)
+
     constructor() {
         var config = {
-            id: "PrecisionKappa",
-            label: localization.en.title,
+            id: PrecisionKappa.dialogId,
+            label: PrecisionKappa.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -66,7 +32,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         var objects = {
 			howtouse: {
 				el: new labelVar(config, {
-					label: localization.en.howtouse, 
+					label: PrecisionKappa.t('howtouse'), 
 					style: "mb-3", 
 					h:8
 				})
@@ -74,7 +40,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: PrecisionKappa.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -87,7 +53,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			width: {
 				el: new input(config, {
 					no: 'width',
-					label: localization.en.width,
+					label: PrecisionKappa.t('width'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -100,7 +66,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			kappa: {
 				el: new input(config, {
 					no: 'kappa',
-					label: localization.en.kappa,
+					label: PrecisionKappa.t('kappa'),
 					style: "mt-5",
 					required: true,
 					extraction: "TextAsIs",
@@ -113,7 +79,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			conflevel: {
 				el: new input(config, {
 					no: 'conflevel',
-					label: localization.en.conflevel,
+					label: PrecisionKappa.t('conflevel'),
 					placeholder: ".95",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -126,7 +92,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			raters: {
 				el: new inputSpinner(config, {
 					no: 'raters',
-					label: localization.en.raters,
+					label: PrecisionKappa.t('raters'),
 					min: 2,
 					max: 6,
 					step: 1,
@@ -137,7 +103,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			categories: {
 				el: new inputSpinner(config, {
 					no: 'categories',
-					label: localization.en.categories,
+					label: PrecisionKappa.t('categories'),
 					style: "mt-5",
 					min: 2,
 					max: 5,
@@ -149,7 +115,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 			props: {
 				el: new input(config, {
 					no: 'props',
-					label: localization.en.props,
+					label: PrecisionKappa.t('props'),
 					style: "ml-5",
 					placeholder: "",
 					extraction: "TextAsIs",
@@ -166,16 +132,25 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
 					objects.kappa.el.content, objects.conflevel.el.content, objects.raters.el.content, objects.categories.el.content, objects.props.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: PrecisionKappa.t('navigation'),
                 icon: "icon-kappa_cohen",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: PrecisionKappa.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: PrecisionKappa.t('help.body')
+        }
+;
     }
 		
 	
 }
-module.exports.item = new PrecisionKappa().render()
+
+module.exports = {
+    render: () => new PrecisionKappa().render()
+}

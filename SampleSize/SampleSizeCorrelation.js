@@ -1,39 +1,5 @@
 
-var localization = {
-    en: {
-        title: "Sample Size, Test Correlation",
-        navigation: "Correlation",
-		howtouse: "To compute sample size: specify correlation and power\nTo compute power: specify sample size and correlation\nTo compute detectable correlation: specify sample size and power",
-		n: "Sample Size",
-		corr: "Correlation (-1 to 1)",
-		power: "Power (0-1)",
 
-		siglevel: "Significance Level (0-1)",
-		alternativeopt: "Alternative Hypothesis",
-		twosided: "Two-Sided",
-		greater: "Greater Than",
-		less: "Less Than",
-        help: {
-            title: "Sample Size, Test Correlation",
-            r_help: "help(pwr.r.test, package ='pwr')",
-            body: `
-This is an assessment of sample size for a Pearson correlation coefficient.  It computes the sample size, power, or correlation when the user 
-specifies the other two.  The null hypothesis correlation is 0.
-<br/><br/>
-<b>Sample Size:</b> Specify the number of subjects in the study
-<br/><br/>
-<b>Correlation:</b> Specify the correlation to detect
-<br/><br/>
-<b>Power:</b> Specify the desired power of the study, i.e. the probability that the test will reject the null hypothesis if the alternative hypothesis was true.
-<br/><br/>
-<b>Significance Level:</b> Specify the desired significance level (i.e. type I error) of the test
-<br/><br/>
-<b>Alternative Hypothesis:</b> Specify whether the test is two-sided, greater than (one-sided), or less than (one-sided)
-<br/><br/>
-<b>Required R Packages:</b> pwr
-			`}
-    }
-}
 
 
 
@@ -44,10 +10,13 @@ specifies the other two.  The null hypothesis correlation is 0.
 
 
 class SampleSizeCorrelation extends baseModal {
+    static dialogId = 'SampleSizeCorrelation'
+    static t = baseModal.makeT(SampleSizeCorrelation.dialogId)
+
     constructor() {
         var config = {
-            id: "SampleSizeCorrelation",
-            label: localization.en.title,
+            id: SampleSizeCorrelation.dialogId,
+            label: SampleSizeCorrelation.t('title'),
 			splitProcessing: false,
             modalType: "one",
             RCode: `
@@ -61,14 +30,14 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			howtouse: {
 				el: new preVar(config, {
 					no: "howtouse",
-					label: localization.en.howtouse, 
+					label: SampleSizeCorrelation.t('howtouse'), 
 					h:5
 				})
 			},
 			n: {
 				el: new input(config, {
 					no: 'n',
-					label: localization.en.n,
+					label: SampleSizeCorrelation.t('n'),
 					placeholder: "",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -80,7 +49,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			corr: {
 				el: new input(config, {
 					no: 'corr',
-					label: localization.en.corr,
+					label: SampleSizeCorrelation.t('corr'),
 					value: ".3",
 					extraction: "TextAsIs",
 					type: "numeric",
@@ -92,7 +61,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			power: {
 				el: new input(config, {
 					no: 'power',
-					label: localization.en.power,
+					label: SampleSizeCorrelation.t('power'),
 					extraction: "TextAsIs",
 					type: "numeric",
 					allow_spaces:true,
@@ -104,7 +73,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			siglevel: {
 				el: new input(config, {
 					no: 'siglevel',
-					label: localization.en.siglevel,
+					label: SampleSizeCorrelation.t('siglevel'),
 					style: "mt-5",
 					placeholder: ".05",
 					extraction: "TextAsIs",
@@ -117,14 +86,14 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			},
 			alternativeopt: {
 				el: new labelVar(config, {
-					label: localization.en.alternativeopt, 
+					label: SampleSizeCorrelation.t('alternativeopt'), 
 					style: "mt-5", 
 					h:5
 				})
 			},
 			twosided: {
 				el: new radioButton(config, {
-					label: localization.en.twosided,
+					label: SampleSizeCorrelation.t('twosided'),
 					no: "altgrp",
 					increment: "twosided",
 					value: "two.sided",
@@ -134,7 +103,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			}, 
 			greater: {
 				el: new radioButton(config, {
-					label: localization.en.greater,
+					label: SampleSizeCorrelation.t('greater'),
 					no: "altgrp",
 					increment: "greater",
 					value: "greater",
@@ -144,7 +113,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 			},
 			less: {
 				el: new radioButton(config, {
-					label: localization.en.less,
+					label: SampleSizeCorrelation.t('less'),
 					no: "altgrp",
 					increment: "less",
 					value: "less",
@@ -158,15 +127,24 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
 					objects.siglevel.el.content, objects.alternativeopt.el.content, objects.twosided.el.content, objects.greater.el.content, objects.less.el.content
 					],
             nav: {
-                name: localization.en.navigation,
+                name: SampleSizeCorrelation.t('navigation'),
                 icon: "icon-link",
 				datasetRequired: false,
                 modal: config.id
             }
         };
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: SampleSizeCorrelation.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: SampleSizeCorrelation.t('help.body')
+        }
+;
     }
 	
 }
-module.exports.item = new SampleSizeCorrelation().render()
+
+module.exports = {
+    render: () => new SampleSizeCorrelation().render()
+}

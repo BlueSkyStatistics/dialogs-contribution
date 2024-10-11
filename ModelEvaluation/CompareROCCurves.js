@@ -1,100 +1,14 @@
 
-var localization = {
-    en: {
-        title: "Compare ROC Curves",
-        navigation: "Compare ROC Curves",
-		outcomevar: "Binary Outcome Variable (numeric/factor)",
-		predprobvars: "Predicted Probability Variables from Each Model, specify at least 2",
-		outcomeorderlabel: "Outcome 'Positive' Value",
-		outcomeorderhigh: "Higher ordered value",
-		outcomeorderlow: "Lower ordered value",
-		specopt: "Plot specificity instead of 1-specificity",
-		cilevel: "Confidence Level",
-		multcompopt: "Multiple Comparison Adjustment",
-		multcompmethod: "Multiple Comparison Method",
-		
-		plotoptions: "Plot Options",
-		plottitle: "Plot Title",
-		plottitlesize: "Plot Title Size (5-50)",
-		themedropdown: "Plot Theme",
-		
-		lineoptionslabel: "Line Options",
-		linesize: "Line Size (0-5)",
-		colorpalette: "Color Palette",
-		
-		axisoptionslabel: "Axis Options",
-		axislabelsize: "Axis Label Size (5-50)",
-		ticklabelsize: "Axis Tick Mark Label Size (5-50)",
-		
-		legendoptionslabel: "Legend Options",
-		legendtitle: "Title",
-        legendpos : "Position",
-		curvelabels: "Curve Labels, specify as 'Label 1', 'Label 2', 'Label 3'; use \\n within a label for a line break",
-		legendfontsize: "Legend Labels Size (5-50)",
 
-        help: {
-            title: "Compare ROC Curves",
-            r_help: "help(roc.test, package = 'pROC')",
-            body: `
-This dialog compares receiver operating characteristic (ROC) curves given a set of predicted probabilities from a model (e.g. logistic regression).  Each model must have
-been fit using the same ordering of the outcome variabe.  It provides a table of individual areas under the ROC curves with confidence intervals, a table of pairwise comparisons 
-using DeLong's test, and an overlaid set of ROC curves.  Subjects with missing values for the outcome or the predicted probabilities are removed so that every model is assessed 
-on the same set of subjects.  See Model Evaluation > Predict > Model Scoring to obtain predicted probablities from candidate models. 
-<br/><br/><br/>
-<b>Binary Outcome Variable:</b> The binary outcome used for predictions.  Must be numeric or factor.
-<br/><br/>
-<b>Predicted Probability Variables from Each Model:</b> Specify predicted probability columns from each fitted model you want to compare.
-<br/><br/>
-<b>Outcome 'Positive' Value:</b> Specify whether the higher or lower ordered value of the specified binary outcome variable should be considered the 'positive' value.  This is the 
-level that the predicted proabilities pertain to.  For example, if the binary outcome was coded as 0/1, the higher ordered value would mean that 1 is the 'positive' response and
-the lower ordered value would mean that 0 is the 'positive' response. 
-<br/><br/>
-<b>Plot specificity instead of 1-specificity:</b> This changes the x-axis of the ROC curve plot to use specificity instead.  The axis will be decreasing from 1 to 0, as you go
-left to right.
-<br/><br/> 
-<b>Confidence Level:</b> Confidence level for ROC curve area intervals
-<br/><br/>
-<b>Multiple Comparison Adjustment:</b> Apply a multiple comparison adjustment to the pairwise comparisons of ROC curve areas.
-<br/><br/><br/>
-<b>Plot Options:</b>
-<br/><br/>
-<b>Plot Title:</b> Specify the title for the plot.  Can be removed.
-<br/><br/>
-<b>Plot Theme:</b> Specify the general theme for the plot
-<br/><br/>
-<b>Line Options:</b>
-<br/><br/>
-<b>Line Size:</b> Specify the size of the lines on the ROC curve plot
-<br/><br/>
-<b>Color Palette:</b> Specify the color palette used for the ROC curve lines
-<br/><br/>
-<b>Axis Options:</b>
-<br/><br/>
-<b>Axis Label Size:</b> Specify the size of the axis labels used on the plot.
-<br/><br/>
-<b>Axis Tick Mark Label Size:</b> Specify the size of the axis tick mark labels.
-<br/><br/>
-<b>Legend Options:</b>
-<br/><br/>
-<b>Position:</b> Specify the position of the legend in the plot.  Can be right, top, bottom, or left.
-<br/><br/>
-<b>Title:</b> Specify the title for the legend.  Can be removed.
-<br/><br/>
-<b>Curve Labels:</b> Specify the curve labels used in the legend corresponding to the order of the curves (curve 1, curve 2, curve 3, etc.).  Specifying nothing will yield curve 
-labels of 1, 2, 3, etc.  If you specify any labels, you must specify labels for all curves.  The order of the curves is the same as the specified order of the predicted probabilities.
-<br/><br/>
-<b>Legend Labels Size:</b> Size of all text in the legend.
-<br/><br/>
-<b>Required R Packages:</b> pROC, ggthemes, RColorBrewer, ggsci, ggplot2
-`}
-    }
-}
 
 class CompareROCCurves extends baseModal {
+    static dialogId = 'CompareROCCurves'
+    static t = baseModal.makeT(CompareROCCurves.dialogId)
+
     constructor() {
         var config = {
-            id: "CompareROCCurves",
-            label: localization.en.title,
+            id: CompareROCCurves.dialogId,
+            label: CompareROCCurves.t('title'),
             modalType: "two",
             RCode: `
 library(pROC)
@@ -237,7 +151,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             },
             outcomevar: {
                 el: new dstVariable(config, {
-                    label: localization.en.outcomevar,
+                    label: CompareROCCurves.t('outcomevar'),
                     no: "outcomevar",
                     filter: "Numeric|Nominal|Scale",
                     extraction: "NoPrefix|UseComma",
@@ -246,7 +160,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             },
             predprobvars: {
                 el: new dstVariableList(config, {
-                    label: localization.en.predprobvars,
+                    label: CompareROCCurves.t('predprobvars'),
                     no: "predprobvars",
                     required: true,
                     filter: "Numeric|Scale",
@@ -255,14 +169,14 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             },
 			outcomeorderlabel: {
 				el: new labelVar(config, {
-					label: localization.en.outcomeorderlabel, 
+					label: CompareROCCurves.t('outcomeorderlabel'), 
 					style: "mt-3", 
 					h:5
 				})
 			},
 			outcomeorderhigh: {
 				el: new radioButton(config, {
-					label: localization.en.outcomeorderhigh,
+					label: CompareROCCurves.t('outcomeorderhigh'),
 					no: "outcomeordergrp",
 					increment: "outcomeorderhigh",
 					value: "<",
@@ -272,7 +186,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			},		
 			outcomeorderlow: {
 				el: new radioButton(config, {
-					label: localization.en.outcomeorderlow,
+					label: CompareROCCurves.t('outcomeorderlow'),
 					no: "outcomeordergrp",
 					increment: "outcomeorderlow",
 					value: ">",
@@ -282,7 +196,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			},
 			specopt: {
 				el: new checkbox(config, {
-				label: localization.en.specopt,
+				label: CompareROCCurves.t('specopt'),
 				no: "specopt",
 				style: "mt-4",
 				bs_type: "valuebox",
@@ -294,7 +208,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			cilevel: {
 				el: new advancedSlider(config,{
 					no: 'cilevel',
-					label: localization.en.cilevel,
+					label: CompareROCCurves.t('cilevel'),
 					style: "mt-4",
 					min: 0,
 					max: 1,
@@ -305,7 +219,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			},
 			multcompopt: {
 				el: new checkbox(config, {
-				label: localization.en.multcompopt,
+				label: CompareROCCurves.t('multcompopt'),
 				no: "multcompopt",
 				extraction: "Boolean"
 				})
@@ -313,7 +227,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             multcompmethod: {
                 el: new comboBox(config, {
                     no: 'multcompmethod',
-                    label: localization.en.multcompmethod,
+                    label: CompareROCCurves.t('multcompmethod'),
 					style: "ml-3",
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
@@ -324,7 +238,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			plottitle: {
 				el: new input(config, {
 					no: 'plottitle',
-					label: localization.en.plottitle,
+					label: CompareROCCurves.t('plottitle'),
 					placeholder: "ROC Curve Comparison",
 					extraction: "TextAsIs",
 					type: "character",
@@ -336,7 +250,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			plottitlesize: {
 				el: new inputSpinner(config,{
 				no: 'plottitlesize',
-				label: localization.en.plottitlesize,
+				label: CompareROCCurves.t('plottitlesize'),
 				style: "mt-3",
 				min: 5,
 				max: 50,
@@ -348,7 +262,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             themedropdown: {
                 el: new comboBox(config, {
                     no: 'themedropdown',
-                    label: localization.en.themedropdown,
+                    label: CompareROCCurves.t('themedropdown'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["theme_base()", "theme_bw()", "theme_calc()",
@@ -362,11 +276,11 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
                     default: "theme_grey()"
                 })
             },
-			lineoptionslabel: { el: new labelVar(config, { label: localization.en.lineoptionslabel, h: 5, style: "mt-4" }) },
+			lineoptionslabel: { el: new labelVar(config, { label: CompareROCCurves.t('lineoptionslabel'), h: 5, style: "mt-4" }) },
 			linesize: {
 				el: new inputSpinner(config, {
 					no: 'linesize',
-					label: localization.en.linesize,
+					label: CompareROCCurves.t('linesize'),
 					style: "ml-1",
 					min: 0,
 					max: 5,
@@ -378,7 +292,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             colorpalette: {
                 el: new comboBox(config, {
                     no: 'colorpalette',
-                    label: localization.en.colorpalette,
+                    label: CompareROCCurves.t('colorpalette'),
 					style: "ml-3",
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
@@ -386,11 +300,11 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
                     default: "hue"
                 })
             },
-			axisoptionslabel: { el: new labelVar(config, { label: localization.en.axisoptionslabel, h: 5, style: "mt-4" }) },
+			axisoptionslabel: { el: new labelVar(config, { label: CompareROCCurves.t('axisoptionslabel'), h: 5, style: "mt-4" }) },
 			axislabelsize: {
 				el: new inputSpinner(config,{
 				no: 'axislabelsize',
-				label: localization.en.axislabelsize,
+				label: CompareROCCurves.t('axislabelsize'),
 				style: "ml-1",
 				min: 5,
 				max: 50,
@@ -402,7 +316,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			ticklabelsize: {
 				el: new inputSpinner(config,{
 				no: 'ticklabelsize',
-				label: localization.en.ticklabelsize,
+				label: CompareROCCurves.t('ticklabelsize'),
 				style: "ml-1",
 				min: 5,
 				max: 50,
@@ -411,11 +325,11 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 				extraction: "NoPrefix|UseComma"
 				})
 			},
-			legendoptionslabel: { el: new labelVar(config, { label: localization.en.legendoptionslabel, h: 5, style: "mt-4" }) },
+			legendoptionslabel: { el: new labelVar(config, { label: CompareROCCurves.t('legendoptionslabel'), h: 5, style: "mt-4" }) },
             legendpos: {
                 el: new comboBox(config, {
                     no: 'legendpos',
-                    label: localization.en.legendpos,
+                    label: CompareROCCurves.t('legendpos'),
                     multiple: false,
                     extraction: "NoPrefix|UseComma",
                     options: ["top", "bottom", "left", "right"],
@@ -426,7 +340,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             legendtitle: {
                 el: new input(config, {
                     no: 'legendtitle',
-                    label: localization.en.legendtitle,
+                    label: CompareROCCurves.t('legendtitle'),
                     placeholder: "Model",
                     ml: 3,
                     extraction: "TextAsIs",
@@ -438,7 +352,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             curvelabels: {
                 el: new input(config, {
                     no: 'curvelabels',
-                    label: localization.en.curvelabels,
+                    label: CompareROCCurves.t('curvelabels'),
                     placeholder: "",
                     ml: 3,
                     extraction: "TextAsIs",
@@ -452,7 +366,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 			legendfontsize: {
 				el: new inputSpinner(config,{
 				no: 'legendfontsize',
-				label: localization.en.legendfontsize,
+				label: CompareROCCurves.t('legendfontsize'),
 				style: "ml-1",
 				min: 5,
 				max: 50,
@@ -465,7 +379,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
         var plotoptions = {
             el: new optionsVar(config, {
                 no: "plotoptions",
-                name: localization.en.plotoptions,
+                name: CompareROCCurves.t('plotoptions'),
                 content: [
                     objects.plottitle.el, objects.plottitlesize.el, objects.themedropdown.el,
 					objects.lineoptionslabel.el, objects.linesize.el, objects.colorpalette.el,
@@ -484,14 +398,20 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             ],
             bottom: [plotoptions.el.content],
             nav: {
-                name: localization.en.navigation,
+                name: CompareROCCurves.t('navigation'),
                 icon: "icon-icc",
 				positionInNav: 3,
                 modal: config.id
             }
         }
         super(config, objects, content);
-        this.help = localization.en.help;
+        
+        this.help = {
+            title: CompareROCCurves.t('help.title'),
+            r_help: "help(data,package='utils')",
+            body: CompareROCCurves.t('help.body')
+        }
+;
     }
 	
 	
@@ -519,4 +439,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
 	
 	
 }
-module.exports.item = new CompareROCCurves().render()
+
+module.exports = {
+    render: () => new CompareROCCurves().render()
+}
