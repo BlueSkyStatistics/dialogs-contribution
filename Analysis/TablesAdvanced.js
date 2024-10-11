@@ -121,13 +121,29 @@ tab1.final <- as.data.frame(summary(tab1, text=TRUE, {{selected.groupvarchkbox |
 	pct75_func="75th %-ile (CI)", pct90_func="90th %-ile", pct95_func="95th %-ile", pct99_func="99th %-ile", custquant_func="{{selected.custquantvalue | safe}} %-ile (CI)",
 	cv_func="CV", skewness_func="Skewness", kurtosis_func="Kurtosis")))
 
-{{if (options.selected.footnotechkbox=="TRUE")}}
-# if want statistical test footnotes
+{{if ((options.selected.footnotechkbox=="TRUE") && (options.selected.ciFootNote!="TRUE"))}}
+# You want statistical tests, and footnotes but not confidence interval footnotes
+#Get count of unique p values
 pval.tests <- unique(tests(tab1)$Method)
-pval.tests <- pval.tests[pval.tests != "No test"]
 pval.foot <- paste(paste0("(", 1:length(pval.tests), ")"), pval.tests, collapse="\n")
 BSkyFormat(tab1.final, perTableFooter=pval.foot, decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
-{{#else}}
+{{/if}}
+
+{{if ((options.selected.footnotechkbox=="TRUE") && (options.selected.ciFootNote=="TRUE"))}}
+#You want statistical tests, and footnotes and confidence interval footnotes
+#Get count of unique p values
+pval.tests <- unique(tests(tab1)$Method)
+pval.foot <- paste(paste0("(", 1:length(pval.tests), ")"), pval.tests, collapse="\n")
+pval.foot <- paste(pval.foot, "Confidence interval level = {{selected.conflevel | safe}}", sep ="\n")
+BSkyFormat(tab1.final, perTableFooter=pval.foot, decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
+{{/if}}
+
+
+{{if ( (options.selected.footnotechkbox=="FALSE") && (options.selected.ciFootNote=="TRUE"))}}
+BSkyFormat(tab1.final, perTableFooter="Confidence interval level = {{selected.conflevel | safe}}", decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
+{{/if}}
+
+{{if ((options.selected.footnotechkbox=="FALSE") && (options.selected.ciFootNote=="FALSE"))}}
 BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{selected.tabletitle | safe}} ")
 {{/if}}
 `
@@ -371,6 +387,14 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 				label: TableAdvanced.t('footnotechkboxlabel'),
 				no: "footnotechkbox",
 				style: "mt-4",
+				extraction: "Boolean"
+				})
+			},
+			ciFootNote: {
+				el: new checkbox(config, {
+				label: TableAdvanced.t('ciFootNote'),
+				no: "ciFootNote",
+				style: "mb-2",
 				extraction: "Boolean"
 				})
 			},
@@ -1127,7 +1151,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 					objects.stratavar.el.content, objects.tabletitle.el.content, objects.totalcolchkbox.el.content,
 					objects.groupvarchkbox.el.content, objects.digitslabel.el.content, objects.contdigits.el.content, objects.pctdigits.el.content, objects.pvaluedigits.el.content,
 					objects.simplifylabel.el.content, objects.numericsimplifychkbox.el.content, objects.categorysimplifychkbox.el.content, 
-					objects.datesimplifychkbox.el.content, objects.labelsimplifychkbox.el.content, objects.conflevel.el.content],
+					objects.datesimplifychkbox.el.content, objects.labelsimplifychkbox.el.content, objects.conflevel.el.content, objects.ciFootNote.el.content],
 			bottom: [stattestspanel.el.content, numstatspanel.el.content, catstatspanel.el.content, datestatspanel.el.content],
             nav: {
                 name: TableAdvanced.t('navigation'),
