@@ -185,7 +185,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
         var options = {
             el: new optionsVar(config, {
                 no: "options",
-                name: CoxWithFormula.t('options'),
+                /*name: CoxWithFormula.t('options'),*/
                 content: [
                     objects.tiemethod.el,
                     objects.forestplotbox.el, 
