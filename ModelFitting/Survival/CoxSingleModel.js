@@ -265,7 +265,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
         var options = {
             el: new optionsVar(config, {
                 no: "options",
-                name: localization.en.options,
+                /* name: localization.en.options, */
                 content: [
                     objects.tiemethod.el,
                     objects.forestplotbox.el, 
