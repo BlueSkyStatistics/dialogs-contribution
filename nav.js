@@ -15,7 +15,7 @@ const nav = [
                     "./SampleSize/PrecisionOneMean",
                     "./SampleSize/PrecisionOneProp",
                     "./SampleSize/PrecisionOR",
-                    "./SampleSize/PrecisionRiskDifference",
+                    "./SampleSize/PrecisionRiskDiff",
                     "./SampleSize/PrecisionRiskRatio"
                 ]
             },
@@ -30,7 +30,7 @@ const nav = [
 					"./SampleSize/SampleSizeOneProp",
                     "./SampleSize/SampleSizeSurvivalTwoGroup",
 					"./SampleSize/SampleSizeTwoMeans",					
-					"./SampleSize/SampleSizePairedProp",                    
+					"./SampleSize/SampleSizeTwoPairedProp",                    
 					"./SampleSize/SampleSizeTwoProp"                    
                 ]
             }        
@@ -69,8 +69,8 @@ const nav = [
 				"name": "Tables",
 				"icon": "icon-table_basic",
 				"children": [
-					"./Analysis/TablesAdvanced",
-					"./Analysis/TablesBasic"
+					"./Analysis/TableAdvanced",
+					"./Analysis/TableBasic"
 				]
 			},                   
 		]
