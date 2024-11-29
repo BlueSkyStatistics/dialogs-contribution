@@ -591,4 +591,8 @@ km_plot
 ;
     }
 }
-module.exports.item = new KaplanMeierEstimationOneGroup().render()
+
+module.exports = {
+    render: () => new KaplanMeierEstimationOneGroup().render()
+}
+

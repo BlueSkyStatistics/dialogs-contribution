@@ -799,4 +799,8 @@ km_plot
 ;
     }
 }
-module.exports.item = new KaplanMeierEstimationCompareGroups().render()
+
+module.exports = {
+    render: () => new KaplanMeierEstimationCompareGroups().render()
+}
+
