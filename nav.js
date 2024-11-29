@@ -1,10 +1,11 @@
-const nav = [
+let t = getT('menutoolbar')
+const nav = () => ([
     {
-        "name": "Sample Size",
+        "name": t('contribution_Sample_Size_Menu'),// {ns: 'menutoolbar'}),
         "tab": "sample_size",
         "buttons": [
             {
-                "name": "Precision",
+                "name": t('contribution_Precision'),// {ns: 'menutoolbar'}),
                 "icon": "icon-confidence_interval",
                 "children": [
                     "./SampleSize/PrecisionAUC",
@@ -15,12 +16,12 @@ const nav = [
                     "./SampleSize/PrecisionOneMean",
                     "./SampleSize/PrecisionOneProp",
                     "./SampleSize/PrecisionOR",
-                    "./SampleSize/PrecisionRiskDifference",
+                    "./SampleSize/PrecisionRiskDiff",
                     "./SampleSize/PrecisionRiskRatio"
                 ]
             },
             {
-                "name": "Tests",
+                "name": t('contribution_Tests'),// {ns: 'menutoolbar'}),
                 "icon": "icon-sigma",
                 "children": [
                     "./SampleSize/SampleSizeANOVA",
@@ -30,20 +31,20 @@ const nav = [
 					"./SampleSize/SampleSizeOneProp",
                     "./SampleSize/SampleSizeSurvivalTwoGroup",
 					"./SampleSize/SampleSizeTwoMeans",					
-					"./SampleSize/SampleSizePairedProp",                    
+					"./SampleSize/SampleSizeTwoPairedProp",                    
 					"./SampleSize/SampleSizeTwoProp"                    
                 ]
             }        
         ]
     },
     {
-		"name": "Datasets",
+		"name": t('contribution_Datasets_Menu'),// {ns: 'menutoolbar'}),
 		"tab": "Datasets",
 		"buttons": [
 			"./Datasets/CompareDatasets",
 			"./Datasets/FindDuplicates",
 			{
-				"name": "Subset",
+				"name": t('contribution_Subset'),// {ns: 'menutoolbar'}),
 				"icon": "icon-funnel",
 				"children": [
 					"./Datasets/SubsetByPosition"
@@ -52,11 +53,11 @@ const nav = [
 		]
 	},
 	{
-		"name": "Analysis",
+		"name": t('contribution_Analysis_Menu'),// {ns: 'menutoolbar'}),
 		"tab": "analysis",    
 		"buttons":[
 			{
-				"name": "Survival",
+				"name": t('contribution_Survival'),// {ns: 'menutoolbar'}),
 				"icon": "icon-survival",
 				"children": [
 					"./Analysis/Survival/competingRisksOneGroup",
@@ -66,21 +67,21 @@ const nav = [
 				]
 			}, 	
 			{
-				"name": "Tables",
+				"name": t('contribution_Tables'),// {ns: 'menutoolbar'}),
 				"icon": "icon-table_basic",
 				"children": [
-					"./Analysis/TablesAdvanced",
-					"./Analysis/TablesBasic"
+					"./Analysis/TableAdvanced",
+					"./Analysis/TableBasic"
 				]
 			},                   
 		]
 	},
 	{
-		"name": "Variables",
+		"name": t('contribution_Variables_Menu'),// {ns: 'menutoolbar'}),
 		"tab": "Variables",
 		"buttons": [
 			{
-				"name": "Compute",
+				"name": t('contribution_Compute'),// {ns: 'menutoolbar'}),
 				"icon": "icon-calculator",
 				"children": [
 					"./Variables/CumulativeStatisticVariable"
@@ -89,7 +90,7 @@ const nav = [
 			},      
 
 			{
-				"name": "Factor Levels",
+				"name": t('contribution_Factor_Levels'),// {ns: 'menutoolbar'}),
 				"icon": "icon-shapes",
 				"children": [
 					"./Variables/FactorLevelManualReorder"
@@ -102,11 +103,11 @@ const nav = [
 		]
 	},
 	{
-		"name": "Model Fitting",
+		"name": t('contribution_Model_Fitting_Menu'),// {ns: 'menutoolbar'}),
 		"tab": "model_fitting",
 		"buttons": [
 		  {
-				"name": "Regression",
+				"name": t('contribution_Regression'),// {ns: 'menutoolbar'}),
 				"icon": "icon-linear_regression_white_comp",
 				"children": [
 					"./ModelFitting/Survival/CoxWithFormula",
@@ -116,13 +117,16 @@ const nav = [
 		]
 	},
 	{
-		"name": "Model Evaluation",
+		"name": t('contribution_Model_Evaluation_Menu'),// {ns: 'menutoolbar'}),
 		"tab": "model_statistics",
 		"buttons": [
 					"./ModelEvaluation/CompareROCCurves"
 		]
 	}
 
-]
+])
 
-module.exports.nav = nav
+module.exports = {
+    nav: nav(),
+    render: () => nav()
+}
