@@ -27,6 +27,10 @@ var localization = {
 		datesimplifylabel: "Date Variables",
 		labelsimplifylabel: "Use Last Level in Label of Categorical Variables",
 		conflevellabel: "Confidence Level",
+		optvarStatistical : "Statistical Test Options",
+		optvarNumerical : "Numerical Statistics Options",
+		optvarCategorical : "Categorical Statistics Options",
+		optvarDate : "Date Statistics Options",
 		simchkboxlabel: "Simulate p-values for Pearson and Fisher",
 		simnumlabel: "Number of Simulations",
 		footnotechkboxlabel: "Test Names Footnote",
@@ -1245,7 +1249,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 		var stattestspanel = {
             el: new optionsVar(config, {
                 no: "stattestspanel",
-                name: "Statistical Test Options",
+                name: localization.en.optvarStatistical,
                 content: [ 
 					objects.simchkbox.el, objects.simnum.el,
 					objects.footnotechkbox.el
@@ -1256,7 +1260,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 		var numstatspanel = {
             el: new optionsVar(config, {
                 no: "numstatspanel",
-                name: "Numerical Statistics Options",
+                name: localization.en.optvarNumerical,
                 content: [objects.sampsizelabel.el, objects.numnchkbox.el, objects.numnmisschkbox.el, objects.numnmiss2chkbox.el, 
 					objects.meanlabel.el, objects.nummeanchkbox.el, objects.nummeansdchkbox.el, objects.nummeancichkbox.el, objects.nummeansechkbox.el, objects.numgmeanchkbox.el, objects.numgmeansdchkbox.el, objects.numgmeancichkbox.el, objects.numtrimmeancichkbox.el, objects.trimpct.el,
 					objects.quantileslabel.el, objects.nummedianchkbox.el, objects.nummedianq1q3chkbox.el, objects.numq1q3chkbox.el, objects.numiqrchkbox.el, objects.nummedianrangechkbox.el, objects.nummedianmadchkbox.el, objects.numrangechkbox.el, objects.numminchkbox.el, 
@@ -1270,7 +1274,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 		var catstatspanel = {
             el: new optionsVar(config, {
                 no: "catstatspanel",
-                name: "Categorical Statistics Options",
+                name: localization.en.optvarCategorical,
                 content: [objects.sampsizelabel.el, objects.catnchkbox.el, objects.catnmisschkbox.el, objects.catnmiss2chkbox.el,
 					objects.freqlabel.el, objects.catfreqchkbox.el, objects.catfreqtotalchkbox.el, objects.catfreqpctchkbox.el, objects.catpropcichkbox.el                  
 					]
@@ -1280,7 +1284,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 		var datestatspanel = {
             el: new optionsVar(config, {
                 no: "datestatspanel",
-                name: "Date Statistics Options",
+                name: localization.en.optvarDate,
                 content: [objects.sampsizelabel.el, objects.datenchkbox.el, objects.datenmisschkbox.el, objects.datenmiss2chkbox.el,
 					objects.meanlabel.el, objects.datemeanchkbox.el, objects.datemeansdchkbox.el, objects.datemeancichkbox.el, objects.datemeansechkbox.el,
 					objects.quantileslabel.el, objects.datemedianchkbox.el, objects.datemedianq1q3chkbox.el, objects.dateq1q3chkbox.el, objects.dateiqrchkbox.el, objects.datemedianrangechkbox.el, 
