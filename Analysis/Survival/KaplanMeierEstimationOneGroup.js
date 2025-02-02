@@ -585,7 +585,7 @@ km_plot
         
         this.help = {
             title: KaplanMeierEstimationOneGroup.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: KaplanMeierEstimationOneGroup.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: KaplanMeierEstimationOneGroup.t('help.body')
         }
 ;

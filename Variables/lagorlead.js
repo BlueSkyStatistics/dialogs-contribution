@@ -118,7 +118,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
         
         this.help = {
             title: lagorlead.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: lagorlead.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: lagorlead.t('help.body')
         }
 ;

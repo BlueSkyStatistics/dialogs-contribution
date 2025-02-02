@@ -142,7 +142,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         
         this.help = {
             title: PrecisionKappa.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: PrecisionKappa.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: PrecisionKappa.t('help.body')
         }
 ;

@@ -174,7 +174,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
         
         this.help = {
             title: SampleSizeSurvivalTwoGroup.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SampleSizeSurvivalTwoGroup.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SampleSizeSurvivalTwoGroup.t('help.body')
         }
 ;

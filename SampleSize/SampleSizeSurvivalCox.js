@@ -173,7 +173,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results")
         
         this.help = {
             title: SampleSizeSurvivalCox.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SampleSizeSurvivalCox.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SampleSizeSurvivalCox.t('help.body')
         }
 ;

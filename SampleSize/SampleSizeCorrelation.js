@@ -137,7 +137,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
         
         this.help = {
             title: SampleSizeCorrelation.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SampleSizeCorrelation.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SampleSizeCorrelation.t('help.body')
         }
 ;

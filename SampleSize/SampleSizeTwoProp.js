@@ -166,7 +166,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Power Results{{if (options.sele
         
         this.help = {
             title: SampleSizeTwoProp.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SampleSizeTwoProp.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SampleSizeTwoProp.t('help.body')
         }
 ;

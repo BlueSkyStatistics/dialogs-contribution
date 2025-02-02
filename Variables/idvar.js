@@ -125,7 +125,7 @@ BSkyLoadRefreshDataframe("{{selected.newdatasetname | safe}}{{selected.datagrp |
         
         this.help = {
             title: idvar.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: idvar.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: idvar.t('help.body')
         }
 ;

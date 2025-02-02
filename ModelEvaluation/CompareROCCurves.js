@@ -408,7 +408,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
         
         this.help = {
             title: CompareROCCurves.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: CompareROCCurves.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: CompareROCCurves.t('help.body')
         }
 ;

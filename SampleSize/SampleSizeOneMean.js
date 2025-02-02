@@ -144,7 +144,7 @@ BSkyFormat(power_table, singleTableOutputHeader="Sample Size Results")
         
         this.help = {
             title: SampleSizeOneMean.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SampleSizeOneMean.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SampleSizeOneMean.t('help.body')
         }
 ;

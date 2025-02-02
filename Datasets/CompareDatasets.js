@@ -376,7 +376,7 @@ print.summary.comparedf.bsky(temp.out.summary)
         
         this.help = {
             title: CompareDatasets.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: CompareDatasets.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: CompareDatasets.t('help.body')
         }
 ;

@@ -793,7 +793,7 @@ km_plot
         
         this.help = {
             title: KaplanMeierEstimationCompareGroups.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: KaplanMeierEstimationCompareGroups.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: KaplanMeierEstimationCompareGroups.t('help.body')
         }
 ;

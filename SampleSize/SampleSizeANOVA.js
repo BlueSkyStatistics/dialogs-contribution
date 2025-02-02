@@ -125,7 +125,7 @@ BSkyFormat(unlist(power_result), singleTableOutputHeader="Power Results")
         
         this.help = {
             title: SampleSizeANOVA.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SampleSizeANOVA.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SampleSizeANOVA.t('help.body')
         }
 ;

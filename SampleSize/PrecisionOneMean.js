@@ -115,7 +115,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         
         this.help = {
             title: PrecisionOneMean.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: PrecisionOneMean.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: PrecisionOneMean.t('help.body')
         }
 ;

@@ -229,7 +229,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
         
         this.help = {
             title: CoxSingleModel.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: CoxSingleModel.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: CoxSingleModel.t('help.body')
         }
 ;

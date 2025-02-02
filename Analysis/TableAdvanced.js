@@ -1163,7 +1163,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
         
         this.help = {
             title: TableAdvanced.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: TableAdvanced.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: TableAdvanced.t('help.body')
         }
 ;

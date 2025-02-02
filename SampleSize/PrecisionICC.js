@@ -117,7 +117,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         
         this.help = {
             title: PrecisionICC.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: PrecisionICC.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: PrecisionICC.t('help.body')
         }
 ;

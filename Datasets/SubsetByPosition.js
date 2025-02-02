@@ -428,7 +428,7 @@ BSkyLoadRefresh("{{selected.newdataset | safe}}")
         
         this.help = {
             title: SubsetByPosition.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SubsetByPosition.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SubsetByPosition.t('help.body')
         }
 ;

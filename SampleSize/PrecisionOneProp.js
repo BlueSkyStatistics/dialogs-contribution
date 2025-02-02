@@ -113,7 +113,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         
         this.help = {
             title: PrecisionOneProp.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: PrecisionOneProp.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: PrecisionOneProp.t('help.body')
         }
 ;

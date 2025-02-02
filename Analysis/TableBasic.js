@@ -1227,7 +1227,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval level = {{selected.co
         
         this.help = {
             title: TableBasic.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: TableBasic.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: TableBasic.t('help.body')
         }
 ;

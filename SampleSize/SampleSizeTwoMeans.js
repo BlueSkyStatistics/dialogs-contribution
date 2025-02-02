@@ -164,7 +164,7 @@ BSkyFormat(as.data.frame(result), singleTableOutputHeader="Power Results")
         
         this.help = {
             title: SampleSizeTwoMeans.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: SampleSizeTwoMeans.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: SampleSizeTwoMeans.t('help.body')
         }
 ;

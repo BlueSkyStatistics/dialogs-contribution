@@ -137,7 +137,7 @@ BSkyFormat(unlist(precision_result), singleTableOutputHeader="Precision Results"
         
         this.help = {
             title: PrecisionRiskRatio.t('help.title'),
-            r_help: "help(data,package='utils')",
+            r_help: PrecisionRiskRatio.t('help.r_help'), //r_help: "help(data,package='utils')",
             body: PrecisionRiskRatio.t('help.body')
         }
 ;
