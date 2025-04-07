@@ -29,7 +29,7 @@ compare.out <- comparedf( {{selected.in1 | safe}}, {{selected.in2 | safe}}{{sele
 temp.out.summary <- summary( compare.out )
 
 #### My own function for printing the object with BSkyFormat wrappers included
-print.summary.comparedf.bsky <- function (x, ..., format = "pandoc") {
+print.summary.comparedf.bsky <<- function (x, ..., format = "pandoc") {
   orig <- x
   sumdiffs <- sum(x$diffs.byvar.table$n)
   ctrl <- x$control
@@ -38,7 +38,7 @@ print.summary.comparedf.bsky <- function (x, ..., format = "pandoc") {
   if (is.null(ctrl$max.print.diffs.per.var) || is.na(ctrl$max.print.diffs.per.var)) { ctrl$max.print.diffs.per.var <- sumdiffs }
   if (nrow(x$diffs.table) > 0) {
     x$diffs.table <- do.call(rbind, by(x$diffs.table, factor(x$diffs.table$var.x, levels = unique(x$diffs.table$var.x)), utils::head, ctrl$max.print.diffs.per.var))
-    as_char <- function(x) { 
+    as_char <<- function(x) { 
   if (is.factor(x) || is.Date(x)) { x <- as.character(x) }
   else { x }
  }
