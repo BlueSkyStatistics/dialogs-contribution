@@ -49,7 +49,7 @@ print.summary.comparedf.bsky <<- function (x, ..., format = "pandoc") {
   else { x }
  }
  
- #### For BlueSky, coerce these values to vectors instead using unlist()
+ #### For BioStat, coerce these values to vectors instead using unlist()
  #### Per Ethan, to ensure dates work, coerce to a character instead of using unlist()
     #x$diffs.table$values.x <- unlist(lapply(x$diffs.table$values.x, as_char))
     #x$diffs.table$values.y <- unlist(lapply(x$diffs.table$values.y, as_char))

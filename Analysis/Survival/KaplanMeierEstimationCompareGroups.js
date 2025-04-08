@@ -41,7 +41,7 @@ pp_p <- surv_pvalue(fit,data={{dataset.name}},method="PP")
 mpp_p <- surv_pvalue(fit,data={{dataset.name}},method="mPP")
 fh_p <- surv_pvalue(fit,data={{dataset.name}},method="FH")
 
-# putting the p-values together and renaming for BlueSky formatting
+# putting the p-values together and renaming for BioStat formatting
 all_p <- bind_rows(lr_p,gb_p,tw_p,pp_p,mpp_p,fh_p)
 all_p <- all_p %>% dplyr::select(method,p.value=pval) 
 
