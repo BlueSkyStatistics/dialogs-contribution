@@ -4,7 +4,7 @@
   * allowed without the prior written permission from BlueSky Statistics, LLC.
  */
 
-const {getT} = require("../../../../localization");
+const {getT} = global.requireFromRoot("localization");
 let t = getT('menutoolbar')
 const nav = () => ([
     {
@@ -125,7 +125,7 @@ const nav = () => ([
 	},
 	{
 		"name": t('contribution_Model_Evaluation_Menu'),// {ns: 'menutoolbar'}),
-		"tab": "model_statistics",
+		"tab": "model_tuning",
 		"buttons": [
 					"./ModelEvaluation/CompareROCCurves"
 		]
