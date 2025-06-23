@@ -31,7 +31,7 @@ library(dplyr)
 
 {{dataset.name}} <- {{dataset.name}} %>% 
 	group_by({{selected.groupbyvars | safe}}) %>% 
-	mutate({{selected.varname | safe}}={{selected.func | safe}}({{selected.statvar | safe}}))
+	dplyr::mutate({{selected.varname | safe}}={{selected.func | safe}}({{selected.statvar | safe}}))
 
 BSkyLoadRefreshDataframe("{{dataset.name}}")
 `
