@@ -4,7 +4,7 @@
     "description": "Contributed dialogs",
     "keywords": [],
     "main": "nav.js",
-    "version": "1.0.6",
+    "version": "1.0.7",
 	"minBSkyVersion":"8.93",
     "author": "MC",
     "scripts": {},
