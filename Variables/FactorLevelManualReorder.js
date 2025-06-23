@@ -69,10 +69,10 @@ library(forcats)
 
 {{if (options.selected.vargrp=="new")}}
 {{dataset.name}} <- {{dataset.name}} %>% 
-	mutate({{selected.newvarname | safe}} = fct_relevel({{selected.reordervar | safe}},{{selected.levels | safe}}{{selected.placegrp | safe}}))
+	dplyr::mutate({{selected.newvarname | safe}} = fct_relevel({{selected.reordervar | safe}},{{selected.levels | safe}}{{selected.placegrp | safe}}))
 {{#else}}
 {{dataset.name}} <- {{dataset.name}} %>% 
-	mutate({{selected.reordervar | safe}} = fct_relevel({{selected.reordervar | safe}},{{selected.levels | safe}}{{selected.placegrp | safe}}))
+	dplyr::mutate({{selected.reordervar | safe}} = fct_relevel({{selected.reordervar | safe}},{{selected.levels | safe}}{{selected.placegrp | safe}}))
 {{/if}}
 
 BSkyLoadRefreshDataframe("{{dataset.name}}")

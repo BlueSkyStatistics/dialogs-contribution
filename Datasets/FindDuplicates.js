@@ -104,7 +104,7 @@ BSkyFormat(multiway_dups, singleTableOutputHeader="Frequency of Rows Associated 
 BSkyLoadRefresh("{{selected.allduprowsname | safe}}", load.dataframe={{selected.allduprowscheck | safe}})
 
 # if want a data set with an indicator variable for duplicate rows
-{{selected.alldataname | safe}} <- mutate({{dataset.name}}, {{selected.dupvarname | safe}}=as.numeric(dupvec))
+{{selected.alldataname | safe}} <- dplyr::mutate({{dataset.name}}, {{selected.dupvarname | safe}}=as.numeric(dupvec))
 BSkyLoadRefresh("{{selected.alldataname | safe}}", load.dataframe={{selected.alldatacheck | safe}})
 
 # if want a data set with duplicates removed

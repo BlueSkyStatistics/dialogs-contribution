@@ -213,7 +213,7 @@ BSkyFormat(surv_median(fit),singleTableOutputHeader="Median Survival Times and 9
 kmest <- surv_summary(fit,data={{dataset.name}})
 kmest <- kmest %>% dplyr::select(strata,time:std.err,lower,upper)
 
-kmest <- mutate(kmest,
+kmest <- dplyr::mutate(kmest,
 	prob.event=1-surv,
     prob.lower=1-upper,
     prob.upper=1-lower)
