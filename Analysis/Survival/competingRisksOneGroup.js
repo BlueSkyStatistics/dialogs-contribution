@@ -46,7 +46,7 @@ BSkyFormat(as.data.frame(summary(kmsummary,text=TRUE)),singleTableOutputHeader="
 
 # cumulative incidence estimates
 est1 <- as.data.frame(tidy(fit1))
-est1 <- est1 %>% filter(state!="(s0)") %>% dplyr::select(state, time, n.event:std.error, conf.low, conf.high) %>% rename(event_label=state)
+est1 <- est1 %>% filter(state!="(s0)") %>% dplyr::select(state, time, n.event:std.error, conf.low, conf.high) %>% dplyr::rename(event_label=state)
 
 # removing unused factor level for censor, assigning event labels, and a numeric event variable
 est1$event_label <- fct_drop(est1$event_label, only="(s0)")
