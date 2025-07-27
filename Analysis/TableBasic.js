@@ -388,7 +388,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval level = {{selected.co
 				no: 'pctdigits',
 				label: localization.en.pctdigitslabel,
 				style: "ml-3",
-				min: 1,
+				min: 0,
 				max: 1000,
 				step: 1,
 				value: 1,

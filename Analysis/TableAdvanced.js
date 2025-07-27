@@ -442,7 +442,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 				no: 'pctdigits',
 				label: localization.en.pctdigitslabel,
 				style: "ml-3",
-				min: 1,
+				min: 0,
 				max: 1000,
 				step: 1,
 				value: 1,
