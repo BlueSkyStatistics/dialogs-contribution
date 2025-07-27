@@ -1,3 +1,9 @@
+/**
+  * This file is protected by copyright (c) 2023-2025 by BlueSky Statistics, LLC.
+  * All rights reserved. The copy, modification, or distribution of this file is not
+  * allowed without the prior written permission from BlueSky Statistics, LLC.
+ */
+
 
 var localization = {
     en: {
@@ -54,7 +60,7 @@ library(dplyr)
 
 {{dataset.name}} <- {{dataset.name}} %>%
 	group_by({{selected.groupbyvars | safe}}) %>% 
-	mutate({{selected.varname | safe}}={{selected.lagleadgrp | safe}}({{selected.lagleadvar | safe}}, n={{selected.position | safe}}))
+	dplyr::mutate({{selected.varname | safe}}={{selected.lagleadgrp | safe}}({{selected.lagleadvar | safe}}, n={{selected.position | safe}}))
 
 BSkyLoadRefreshDataframe("{{dataset.name}}")
 `

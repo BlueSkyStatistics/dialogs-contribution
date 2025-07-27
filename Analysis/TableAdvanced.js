@@ -1,3 +1,9 @@
+/**
+  * This file is protected by copyright (c) 2023-2025 by BlueSky Statistics, LLC.
+  * All rights reserved. The copy, modification, or distribution of this file is not
+  * allowed without the prior written permission from BlueSky Statistics, LLC.
+ */
+
 
 var localization = {
     en: {
@@ -174,80 +180,80 @@ library(lubridate)
 library(dplyr)
 
 # defining custom statistic functions
-trimmean_func <- function(x, weights=rep(1,length(x)),...) {
+trimmean_func <<- function(x, weights=rep(1,length(x)),...) {
   meanest <- DescTools::MeanCI(x, trim={{selected.trimpct | safe}}/100, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(meanest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct1_func <- function(x, weights=rep(1,length(x)),...) {
+pct1_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.01, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct5_func <- function(x, weights=rep(1,length(x)),...) {
+pct5_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.05, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct10_func <- function(x, weights=rep(1,length(x)),...) {
+pct10_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.1, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct25_func <- function(x, weights=rep(1,length(x)),...) {
+pct25_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.25, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct33_func <- function(x, weights=rep(1,length(x)),...) {
+pct33_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=1/3, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct50_func <- function(x, weights=rep(1,length(x)),...) {
+pct50_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.5, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct66_func <- function(x, weights=rep(1,length(x)),...) {
+pct66_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=2/3, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct75_func <- function(x, weights=rep(1,length(x)),...) {
+pct75_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.75, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct90_func <- function(x, weights=rep(1,length(x)),...) {
+pct90_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.9, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct95_func <- function(x, weights=rep(1,length(x)),...) {
+pct95_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.95, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-pct99_func <- function(x, weights=rep(1,length(x)),...) {
+pct99_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob=.99, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-custquant_func <- function(x, weights=rep(1,length(x)),...) {
+custquant_func <<- function(x, weights=rep(1,length(x)),...) {
   quantest <- DescTools::QuantileCI(x, prob={{selected.custquantvalue | safe}}/100, na.rm=TRUE, conf.level={{selected.conflevel | safe}})
   as.tbstat(quantest, sep=" ", parens=c("(", ")"), sep2=", ")
 }
 
-cv_func <- function(x, weights=rep(1,length(x)),...) {
+cv_func <<- function(x, weights=rep(1,length(x)),...) {
   sd(x, na.rm=TRUE)/mean(x, na.rm=TRUE)
 }
 
-skewness_func <- function(x, weights=rep(1,length(x)),...) {
+skewness_func <<- function(x, weights=rep(1,length(x)),...) {
 	DescTools::Skew(x, na.rm=TRUE)
 }
 
-kurtosis_func <- function(x, weights=rep(1,length(x)),...) {
+kurtosis_func <<- function(x, weights=rep(1,length(x)),...) {
 	DescTools::Kurt(x, na.rm=TRUE)
 }
 

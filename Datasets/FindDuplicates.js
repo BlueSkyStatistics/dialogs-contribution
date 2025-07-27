@@ -1,3 +1,9 @@
+/**
+  * This file is protected by copyright (c) 2023-2025 by BlueSky Statistics, LLC.
+  * All rights reserved. The copy, modification, or distribution of this file is not
+  * allowed without the prior written permission from BlueSky Statistics, LLC.
+ */
+
 
 var localization = {
     en: {
@@ -98,7 +104,7 @@ BSkyFormat(multiway_dups, singleTableOutputHeader="Frequency of Rows Associated 
 BSkyLoadRefresh("{{selected.allduprowsname | safe}}", load.dataframe={{selected.allduprowscheck | safe}})
 
 # if want a data set with an indicator variable for duplicate rows
-{{selected.alldataname | safe}} <- mutate({{dataset.name}}, {{selected.dupvarname | safe}}=as.numeric(dupvec))
+{{selected.alldataname | safe}} <- dplyr::mutate({{dataset.name}}, {{selected.dupvarname | safe}}=as.numeric(dupvec))
 BSkyLoadRefresh("{{selected.alldataname | safe}}", load.dataframe={{selected.alldatacheck | safe}})
 
 # if want a data set with duplicates removed
