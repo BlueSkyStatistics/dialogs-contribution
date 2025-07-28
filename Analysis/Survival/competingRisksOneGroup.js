@@ -40,22 +40,22 @@ meanmaxtime <- data.frame(max.time=summary(fit1)$rmean.endtime)
 BSkyFormat(meanmaxtime, singleTableOutputHeader="Maximum Time")      
 
 # median follow-up times and total events
-dataforfup <- {{dataset.name}} %>% mutate(allevents=ifelse({{selected.eventvar | safe}} != 0, 1, 0))
+dataforfup <- {{dataset.name}} %>% dplyr::mutate(allevents=ifelse({{selected.eventvar | safe}} != 0, 1, 0))
 kmsummary <- tableby(~Surv({{selected.timevar | safe}},allevents),data=dataforfup,surv.stats=c("N","Nmiss","Nevents","medTime"))
 BSkyFormat(as.data.frame(summary(kmsummary,text=TRUE)),singleTableOutputHeader="Overall Events and Follow-Up Time")    
 
 # cumulative incidence estimates
 est1 <- as.data.frame(tidy(fit1))
-est1 <- est1 %>% filter(state!="(s0)") %>% dplyr::select(state, time, n.event:std.error, conf.low, conf.high) %>% rename(event_label=state)
+est1 <- est1 %>% filter(state!="(s0)") %>% dplyr::select(state, time, n.event:std.error, conf.low, conf.high) %>% dplyr::rename(event_label=state)
 
 # removing unused factor level for censor, assigning event labels, and a numeric event variable
 est1$event_label <- fct_drop(est1$event_label, only="(s0)")
-est1 <- mutate(est1, {{selected.eventvar | safe}}=as.numeric(event_label))
+est1 <- dplyr::mutate(est1, {{selected.eventvar | safe}}=as.numeric(event_label))
 est1 <- dplyr::select(est1, {{selected.eventvar | safe}}, everything())
 {{selected.eventlabels | safe}}			
 
 # filling in estimates of 0 so curves start at 0
-firstobs_event <- est1 %>% group_by({{selected.eventvar | safe}}) %>% slice_head() %>% mutate(time=0,n.event=0,n.censor=0,estimate=0,std.error=0,conf.low=NA_real_,conf.high=NA_real_)
+firstobs_event <- est1 %>% group_by({{selected.eventvar | safe}}) %>% slice_head() %>% dplyr::mutate(time=0,n.event=0,n.censor=0,estimate=0,std.error=0,conf.low=NA_real_,conf.high=NA_real_)
 est1 <- bind_rows(est1,firstobs_event)
 est1 <- arrange(est1,{{selected.eventvar | safe}},time)     
 

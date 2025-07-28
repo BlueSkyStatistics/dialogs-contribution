@@ -30,7 +30,7 @@ library(dplyr)
 
 {{dataset.name}} <- {{dataset.name}} %>%
 	group_by({{selected.groupbyvars | safe}}) %>% 
-	mutate({{selected.varname | safe}}={{selected.lagleadgrp | safe}}({{selected.lagleadvar | safe}}, n={{selected.position | safe}}))
+	dplyr::mutate({{selected.varname | safe}}={{selected.lagleadgrp | safe}}({{selected.lagleadvar | safe}}, n={{selected.position | safe}}))
 
 BSkyLoadRefreshDataframe("{{dataset.name}}")
 `

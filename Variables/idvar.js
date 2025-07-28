@@ -32,7 +32,7 @@ library(tidyverse)
 {{selected.newdatasetname | safe}}{{selected.datagrp | safe}} <- {{dataset.name}} %>% 
 	arrange({{selected.sortbyvars | safe}}) %>% 
 	group_by({{selected.groupbyvars | safe}}) %>% 
-	mutate({{selected.varname | safe}}=row_number())
+	dplyr::mutate({{selected.varname | safe}}=row_number())
 
 BSkyLoadRefreshDataframe("{{selected.newdatasetname | safe}}{{selected.datagrp | safe}}")
 `
