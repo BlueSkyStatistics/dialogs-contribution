@@ -299,7 +299,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
 				no: 'pctdigits',
 				label: TableAdvanced.t('pctdigitslabel'),
 				style: "ml-3",
-				min: 1,
+				min: 0,
 				max: 1000,
 				step: 1,
 				value: 1,
@@ -1169,7 +1169,7 @@ BSkyFormat(tab1.final, decimalDigitsRounding=-1, singleTableOutputHeader="{{sele
         
         this.help = {
             title: TableAdvanced.t('help.title'),
-            r_help: TableAdvanced.t('help.r_help'), //r_help: "help(data,package='utils')",
+            r_help: TableAdvanced.t('help.r_help'), //Fix by Anil //r_help: "help(data,package='utils')",
             body: TableAdvanced.t('help.body')
         }
 ;
