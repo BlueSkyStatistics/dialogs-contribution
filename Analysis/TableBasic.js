@@ -255,7 +255,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval level = {{selected.co
 				no: 'pctdigits',
 				label: TableBasic.t('pctdigitslabel'),
 				style: "ml-3",
-				min: 1,
+				min: 0,
 				max: 1000,
 				step: 1,
 				value: 1,
@@ -1233,7 +1233,7 @@ BSkyFormat(tab1.final, perTableFooter="Confidence interval level = {{selected.co
         
         this.help = {
             title: TableBasic.t('help.title'),
-            r_help: TableBasic.t('help.r_help'), //r_help: "help(data,package='utils')",
+            r_help: TableBasic.t('help.r_help'), //Fix by Anil //r_help: "help(data,package='utils')",
             body: TableBasic.t('help.body')
         }
 ;
