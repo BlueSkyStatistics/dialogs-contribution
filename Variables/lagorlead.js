@@ -29,7 +29,7 @@ class lagorlead extends baseModal {
 library(dplyr)
 
 {{dataset.name}} <- {{dataset.name}} %>%
-	group_by({{selected.groupbyvars | safe}}) %>% 
+	dplyr::group_by({{selected.groupbyvars | safe}}) %>% 
 	dplyr::mutate({{selected.varname | safe}}={{selected.lagleadgrp | safe}}({{selected.lagleadvar | safe}}, n={{selected.position | safe}}))
 
 BSkyLoadRefreshDataframe("{{dataset.name}}")
