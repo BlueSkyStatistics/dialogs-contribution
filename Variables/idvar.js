@@ -30,8 +30,8 @@ library(tidyverse)
 
 # sorts, then groups, then creates row number within groups
 {{selected.newdatasetname | safe}}{{selected.datagrp | safe}} <- {{dataset.name}} %>% 
-	arrange({{selected.sortbyvars | safe}}) %>% 
-	group_by({{selected.groupbyvars | safe}}) %>% 
+	dplyr::arrange({{selected.sortbyvars | safe}}) %>% 
+	dplyr::group_by({{selected.groupbyvars | safe}}) %>% 
 	dplyr::mutate({{selected.varname | safe}}=row_number())
 
 BSkyLoadRefreshDataframe("{{selected.newdatasetname | safe}}{{selected.datagrp | safe}}")

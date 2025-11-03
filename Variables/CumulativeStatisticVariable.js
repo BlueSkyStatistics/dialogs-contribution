@@ -30,7 +30,7 @@ library(cumstats)
 library(dplyr)
 
 {{dataset.name}} <- {{dataset.name}} %>% 
-	group_by({{selected.groupbyvars | safe}}) %>% 
+	dplyr::group_by({{selected.groupbyvars | safe}}) %>% 
 	dplyr::mutate({{selected.varname | safe}}={{selected.func | safe}}({{selected.statvar | safe}}))
 
 BSkyLoadRefreshDataframe("{{dataset.name}}")
