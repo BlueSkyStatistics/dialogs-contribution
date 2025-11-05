@@ -100,64 +100,64 @@ library(dplyr)
 {{if (options.selected.subsettypegrp=="A")}}
 # first N rows
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_head(n={{selected.firstnn | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="B")}}
 # last N rows
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_tail(n={{selected.lastnn | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="C")}}
 # rows with lowest N values for a variable
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_min({{selected.lowestnvar | safe}}, n={{selected.lowestnn | safe}}, with_ties={{selected.lowestnties | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="D")}}
 # rows with highest N values for a variable
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_max({{selected.highestnvar | safe}}, n={{selected.highestnn | safe}}, with_ties={{selected.highestnties | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="E")}}
 # first proportion of rows
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_head(prop={{selected.firstpropprop | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="F")}}
 # last proportion of rows
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_tail(prop={{selected.lastpropprop | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="G")}}
 # rows within lowest percentile for a variable
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_min({{selected.lowestpropvar | safe}}, prop={{selected.lowestpropprop | safe}}, with_ties={{selected.lowestpropties | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="H")}}
 # rows within highest percentile for a variable
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice_max({{selected.highestpropvar | safe}}, prop={{selected.highestpropprop | safe}}, with_ties={{selected.highestpropties | safe}})
 {{/if}}
 {{if (options.selected.subsettypegrp=="I")}}
 # specific row numbers
 {{selected.newdataset | safe}} <- {{dataset.name}} %>%
-	arrange({{selected.sortbyvars | safe }}) %>%
-	group_by({{selected.groupbyvars | safe }}) %>%
+	dplyr::arrange({{selected.sortbyvars | safe }}) %>%
+	dplyr::group_by({{selected.groupbyvars | safe }}) %>%
 	slice({{selected.rownumbox | safe}})
 {{/if}}
 	
