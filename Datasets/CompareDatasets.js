@@ -374,7 +374,7 @@ print.summary.comparedf.bsky(temp.out.summary)
             nav: {
                 name: CompareDatasets.t('navigation'),
                 icon: "icon-compare",
-				positionInNav: 1,
+				positionInNav: 2,
                 modal: config.id
             }
         };

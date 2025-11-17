@@ -87,6 +87,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             nav: {
                 name: CumulativeStatisticVariable.t('navigation'),
                 icon: "icon-signal-1",
+                positionInNav : 4,
                 modal: config.id
             }
         };
