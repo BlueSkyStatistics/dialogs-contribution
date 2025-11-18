@@ -182,7 +182,7 @@ BSkyLoadRefresh("{{selected.nodupdataname | safe}}", load.dataframe={{selected.n
             nav: {
                 name: FindDuplicates.t('navigation'),
                 icon: "icon-paired",
-				positionInNav: 4,
+				positionInNav: 3,
                 modal: config.id
             }
         }
