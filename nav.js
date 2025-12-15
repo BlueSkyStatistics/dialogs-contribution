@@ -125,9 +125,15 @@ const nav = () => ([
 	},
 	{
 		"name": t('contribution_Model_Evaluation_Menu'),// {ns: 'menutoolbar'}),
-		"tab": "model_tuning",
+		"tab": "model_statistics",
 		"buttons": [
+        	{
+				"name": t('modelevaluation_Compare'),// {ns: 'menutoolbar'}),
+				"icon": "icon-compare",
+				"children": [
 					"./ModelEvaluation/CompareROCCurves"
+				]
+        	}					
 		]
 	}
 
