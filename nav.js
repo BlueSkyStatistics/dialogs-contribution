@@ -1,24 +1,15 @@
-/**
-  * This file is protected by copyright (c) 2023-2025 by BlueSky Statistics, LLC.
-  * All rights reserved. The copy, modification, or distribution of this file is not
-  * allowed without the prior written permission from BlueSky Statistics, LLC.
- */
-
-const {getT} = global.requireFromRoot("localization");
-let t = getT('menutoolbar')
-const nav = () => ([
+const nav = [
     {
-        "name": t('contribution_Sample_Size_Menu'),// {ns: 'menutoolbar'}),
-        "tab": "sample_size",
+        "id": "menu-samplesize",
         "buttons": [
             {
-                "name": t('contribution_Precision'),// {ns: 'menutoolbar'}),
+                "id": "menu-samplesize-precision",
                 "icon": "icon-confidence_interval",
                 "children": [
                     "./SampleSize/PrecisionAUC",
-					"./SampleSize/PrecisionKappa",
+                    "./SampleSize/PrecisionKappa",
                     "./SampleSize/PrecisionCorrelation",
-					"./SampleSize/PrecisionMeanDiff",
+                    "./SampleSize/PrecisionMeanDiff",
                     "./SampleSize/PrecisionICC",
                     "./SampleSize/PrecisionOneMean",
                     "./SampleSize/PrecisionOneProp",
@@ -28,118 +19,104 @@ const nav = () => ([
                 ]
             },
             {
-                "name": t('contribution_Tests'),// {ns: 'menutoolbar'}),
+                "id": "menu-samplesize-tests",
                 "icon": "icon-sigma",
                 "children": [
                     "./SampleSize/SampleSizeANOVA",
                     "./SampleSize/SampleSizeCorrelation",
-					"./SampleSize/SampleSizeSurvivalCox",
-					"./SampleSize/SampleSizeOneMean",
-					"./SampleSize/SampleSizeOneProp",
+                    "./SampleSize/SampleSizeSurvivalCox",
+                    "./SampleSize/SampleSizeOneMean",
+                    "./SampleSize/SampleSizeOneProp",
                     "./SampleSize/SampleSizeSurvivalTwoGroup",
-					"./SampleSize/SampleSizeTwoMeans",					
-					"./SampleSize/SampleSizeTwoPairedProp",                    
-					"./SampleSize/SampleSizeTwoProp"                    
+                    "./SampleSize/SampleSizeTwoMeans",					
+                    "./SampleSize/SampleSizeTwoPairedProp",                    
+                    "./SampleSize/SampleSizeTwoProp"                    
                 ]
             }        
         ]
     },
     {
-		"name": t('contribution_Datasets_Menu'),// {ns: 'menutoolbar'}),
-		"tab": "Datasets",
-		"buttons": [
-			"./Datasets/CompareDatasets",
-			"./Datasets/FindDuplicates",
-			{
-				"name": t('contribution_Subset'),// {ns: 'menutoolbar'}),
-				"icon": "icon-funnel",
-				"children": [
-					"./Datasets/SubsetByPosition"
-				   ]
-			},        
-		]
-	},
-	{
-		"name": t('contribution_Analysis_Menu'),// {ns: 'menutoolbar'}),
-		"tab": "analysis",    
-		"buttons":[
-			{
-				"name": t('contribution_Survival'),// {ns: 'menutoolbar'}),
-				"icon": "icon-survival",
-				"children": [
-					"./Analysis/Survival/competingRisksOneGroup",
-					"./Analysis/Survival/KaplanMeierEstimationCompareGroups",
-					"./Analysis/Survival/KaplanMeierEstimationOneGroup"
+         "id": "menu-datasets",
+         "buttons": [
+             "./Datasets/CompareDatasets",
+             "./Datasets/FindDuplicates",
+             {
+                 "id": "menu-datasets-subset",
+                 "icon": "icon-funnel",
+                 "children": [
+                     "./Datasets/SubsetByPosition"
+                    ]
+             },        
+         ]
+     },
+     {
+         "id": "menu-analysis",
+         "buttons":[
+             {
+                 "id": "menu-analysis-survival",
+                 "icon": "icon-survival",
+                 "children": [
+                     "./Analysis/Survival/competingRisksOneGroup",
+                     "./Analysis/Survival/KaplanMeierEstimationCompareGroups",
+                     "./Analysis/Survival/KaplanMeierEstimationOneGroup"
 
-				]
-			}, 	
-			{
-				"name": t('contribution_Tables'),// {ns: 'menutoolbar'}),
-				"icon": "icon-table_basic",
-				"children": [
-					"./Analysis/TableAdvanced",
-					"./Analysis/TableBasic"
-				]
-			},                   
-		]
-	},
-	{
-		"name": t('contribution_Variables_Menu'),// {ns: 'menutoolbar'}),
-		"tab": "Variables",
-		"buttons": [
-			{
-				"name": t('contribution_Compute'),// {ns: 'menutoolbar'}),
-				"icon": "icon-calculator",
-				"children": [
-					"./Variables/CumulativeStatisticVariable"
-					
-				]
-			},      
+                 ]
+             },      
+             {
+                 "id": "menu-analysis-tables",
+                 "icon": "icon-table_basic",
+                 "children": [
+                     "./Analysis/TableAdvanced",
+                     "./Analysis/TableBasic"
+                 ]
+             },                   
+         ]
+     },
+     {
+         "id": "menu-variables",
+         "buttons": [
+             {
+                 "id": "menu-variables-compute",
+                 "icon": "icon-calculator",
+                 "children": [
+                     "./Variables/CumulativeStatisticVariable"
+                     
+                 ]
+             },      
 
-			{
-				"name": t('contribution_Factor_Levels'),// {ns: 'menutoolbar'}),
-				"icon": "icon-shapes",
-				"children": [
-					"./Variables/FactorLevelManualReorder"
+             {
+                 "id": "menu-variables-factorlevels",
+                 "icon": "icon-shapes",
+                 "children": [
+                     "./Variables/FactorLevelManualReorder"
 
-				]
-			},      
-			"./Variables/idvar",    
-			"./Variables/lagorlead"
-		
-		]
-	},
-	{
-		"name": t('contribution_Model_Fitting_Menu'),// {ns: 'menutoolbar'}),
-		"tab": "model_fitting",
-		"buttons": [
-		  {
-				"name": t('contribution_Regression'),// {ns: 'menutoolbar'}),
-				"icon": "icon-linear_regression_white_comp",
-				"children": [
-					"./ModelFitting/Survival/CoxWithFormula",
-					"./ModelFitting/Survival/CoxSingleModel"
-				]
-			},       
-		]
-	},
-	{
-		"name": t('contribution_Model_Evaluation_Menu'),// {ns: 'menutoolbar'}),
-		"tab": "model_statistics",
-		"buttons": [
-        	{
-				"name": t('modelevaluation_Compare'),// {ns: 'menutoolbar'}),
-				"icon": "icon-compare",
-				"children": [
-					"./ModelEvaluation/CompareROCCurves"
-				]
-        	}					
-		]
-	}
+                 ]
+             },      
+             "./Variables/idvar",    
+             "./Variables/lagorlead"
+         
+         ]
+     },
+     {
+         "id": "menu-modelfitting",
+         "buttons": [
+           {
+                 "id": "menu-modelfitting-regression",
+                 "icon": "icon-linear_regression_white_comp",
+                 "children": [
+                     "./ModelFitting/Survival/CoxWithFormula",
+                     "./ModelFitting/Survival/CoxSingleModel"
+                 ]
+             },       
+         ]
+     },
+     {
+         "id": "menu-modelevaluation",
+         "buttons": [
+                     "./ModelEvaluation/CompareROCCurves"
+         ]
+     }
 
-])
+]
 
-module.exports = {
-    nav: nav(),
-    render: () => nav()
-}
+module.exports.nav = nav
