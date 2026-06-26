@@ -113,7 +113,13 @@ const nav = [
      {
          "id": "menu-modelevaluation",
          "buttons": [
-                     "./ModelEvaluation/CompareROCCurves"
+			 {
+					 "id": "menu-modelevaluation-compare",
+					 "icon": "icon-compare",
+					 "children": [
+						 "./ModelEvaluation/CompareROCCurves"
+					 ]			 
+			 }
          ]
      }
 
