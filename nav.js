@@ -34,7 +34,7 @@ const nav = [
                 ]
             },
             {
-                "name": t('contribution_Tests_New'),// {ns: 'menutoolbar'}),
+                "id": "menu-samplesize-tests-multi-values",// {ns: 'menutoolbar'}),
                 "icon": "icon-sigma",
                 "children": [
                     "./SampleSize/SampleSizeANOVANew",
