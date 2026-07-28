@@ -39,7 +39,22 @@ const nav = [
 					"./SampleSize/SampleSizeTwoPairedProp",                    
 					"./SampleSize/SampleSizeTwoProp"                    
                 ]
-            }        
+            },
+            {
+                "name": "Tests (Multi-values)",
+                "icon": "icon-sigma",
+                "children": [
+                    "./SampleSize/SampleSizeANOVANew",
+                    "./SampleSize/SampleSizeCorrelationNew",
+					"./SampleSize/SampleSizeSurvivalCoxNew",
+					"./SampleSize/SampleSizeOneMeanNew",
+					"./SampleSize/SampleSizeOnePropNew",
+                    "./SampleSize/SampleSizeSurvivalTwoGroupNew",
+					"./SampleSize/SampleSizeTwoMeansNew",					
+					"./SampleSize/SampleSizeTwoPairedPropNew",                    
+					"./SampleSize/SampleSizeTwoPropNew"                    
+                ]
+            }         
         ]
     },
     {
@@ -125,7 +140,13 @@ const nav = [
 		"name": "Model Evaluation",
 		"tab": "model_statistics",
 		"buttons": [
+        	{
+				"name": t('modelevaluation_Compare'),// {ns: 'menutoolbar'}),
+				"icon": "icon-compare",
+				"children": [
 					"./ModelEvaluation/CompareROCCurves"
+				]
+        	}					
 		]
 	}
 
