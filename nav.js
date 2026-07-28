@@ -41,7 +41,23 @@ const nav = () => ([
 					"./SampleSize/SampleSizeTwoPairedProp",                    
 					"./SampleSize/SampleSizeTwoProp"                    
                 ]
-            }        
+            },
+            {
+                "name": t('contribution_Tests_New'),// {ns: 'menutoolbar'}),
+                "icon": "icon-sigma",
+                "children": [
+                    "./SampleSize/SampleSizeANOVANew",
+                    "./SampleSize/SampleSizeCorrelationNew",
+					"./SampleSize/SampleSizeSurvivalCoxNew",
+					"./SampleSize/SampleSizeOneMeanNew",
+					"./SampleSize/SampleSizeOnePropNew",
+                    "./SampleSize/SampleSizeSurvivalTwoGroupNew",
+					"./SampleSize/SampleSizeTwoMeansNew",					
+					"./SampleSize/SampleSizeTwoPairedPropNew",                    
+					"./SampleSize/SampleSizeTwoPropNew"                    
+                ]
+            }
+			
         ]
     },
     {
