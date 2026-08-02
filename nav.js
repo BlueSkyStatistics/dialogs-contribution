@@ -131,7 +131,9 @@ const nav = [
 				"icon": "icon-linear_regression_white_comp",
 				"children": [
 					"./ModelFitting/Survival/CoxWithFormula",
-					"./ModelFitting/Survival/CoxSingleModel"
+					"./ModelFitting/Survival/CoxSingleModel",
+					"./ModelFitting/Regression/CoxFirth",
+					"./ModelFitting/Regression/LogisticFirth"
 				]
 			},       
 		]
