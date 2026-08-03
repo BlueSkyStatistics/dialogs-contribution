@@ -406,7 +406,7 @@ ggroc(data=roc_list, legacy.axes={{selected.specopt | safe}}) +
             nav: {
                 name: CompareROCCurves.t('navigation'),
                 icon: "icon-icc",
-				positionInNav: 3,
+				positionInNav: 0,
                 modal: config.id
             }
         }

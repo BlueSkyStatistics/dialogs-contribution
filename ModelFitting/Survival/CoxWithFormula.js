@@ -217,7 +217,7 @@ attr(.GlobalEnv\${{selected.modelname | safe}},"depVarSample") = sample({{datase
             nav: {
                 name: CoxWithFormula.t('navigation'),
                 icon: "icon-cox-advanced",
-				positionInNav: 0,
+				positionInNav: 1,
                 modal: config.id
             }
         }

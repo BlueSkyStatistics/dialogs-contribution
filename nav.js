@@ -121,7 +121,9 @@ const nav = [
                  "icon": "icon-linear_regression_white_comp",
                  "children": [
                      "./ModelFitting/Survival/CoxWithFormula",
-                     "./ModelFitting/Survival/CoxSingleModel"
+                     "./ModelFitting/Survival/CoxSingleModel",
+					 "./ModelFitting/Regression/CoxFirth",
+					 "./ModelFitting/Regression/LogisticFirth"
                  ]
              },       
          ]
@@ -130,11 +132,11 @@ const nav = [
          "id": "menu-modelevaluation",
          "buttons": [
 			 {
-					 "id": "menu-modelevaluation-compare",
-					 "icon": "icon-compare",
-					 "children": [
-						 "./ModelEvaluation/CompareROCCurves"
-					 ]			 
+				"id": "menu-modelevaluation-ROC-Curves",
+				"icon": "icon-icc",
+				 "children": [
+					 "./ModelEvaluation/CompareROCCurves"
+				 ]			 
 			 }
          ]
      }
