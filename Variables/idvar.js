@@ -123,7 +123,7 @@ BSkyLoadRefreshDataframe("{{selected.newdatasetname | safe}}{{selected.datagrp |
             nav: {
                 name: idvar.t('navigation'),
                 icon: "icon-idvar",
-				positionInNav: 7,
+				positionInNav: 10,
                 modal: config.id
             }
         };

@@ -116,7 +116,7 @@ BSkyLoadRefreshDataframe("{{dataset.name}}")
             nav: {
                 name: lagorlead.t('navigation'),
                 icon: "icon-lag",
-				positionInNav: 8,
+				positionInNav: 11,
                 modal: config.id
             }
         };
